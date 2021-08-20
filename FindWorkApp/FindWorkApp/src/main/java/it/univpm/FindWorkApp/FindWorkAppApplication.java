@@ -8,7 +8,6 @@ public class FindWorkAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FindWorkAppApplication.class, args);
-		//prova
 	}
 
 }
