@@ -48,7 +48,6 @@ public class APICall {
 			}
 
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(data_filter);
-			System.out.println("ok");
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
