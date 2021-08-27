@@ -31,7 +31,7 @@ public class APICall {
 		try {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(api).openConnection();
 			openConnection.setRequestMethod("GET");
-			openConnection.setRequestProperty("Authorization", "Token 838d2cb24efd24d35d81f7cc6846cd6ec54cd4dd");
+			openConnection.setRequestProperty("Authorization", "Token 838d2cb24efd24d35d81f7cc6846cd6ec54cd4dd ");
 			openConnection.setRequestProperty("Accept", "application/json");
 
 			InputStream in = openConnection.getInputStream();
