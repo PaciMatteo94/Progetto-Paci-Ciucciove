@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"it.univpm.FindWorkApp.controller","l":"StatsController"}];updateSearchResults();

@@ -7,22 +7,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class APICall {
 
 	private String url;
 
+	public APICall(String location) {
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" ;
+	}
 	public APICall(String location, String search, boolean remote) {
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=" + search + "&remote=" + remote;
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&remote=" + remote;
 	}
 
-	public void getData() {
+	public JSONArray getData() {
+		JSONObject obj = null;
 
 		String api = this.url;
 		String data_filter ="";
@@ -47,7 +49,7 @@ public class APICall {
 				in.close();
 			}
 
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(data_filter);
+			 obj = (JSONObject) JSONValue.parseWithException(data_filter);
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -56,7 +58,8 @@ public class APICall {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return (JSONArray) obj.get("results");
 
 	}
-
+	
 }

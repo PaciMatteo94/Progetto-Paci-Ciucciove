@@ -1,5 +1,5 @@
 package it.univpm.FindWorkApp.model;
-
+//Probabilmente provvisoria
 public class Pref {
 private String city[];
 
