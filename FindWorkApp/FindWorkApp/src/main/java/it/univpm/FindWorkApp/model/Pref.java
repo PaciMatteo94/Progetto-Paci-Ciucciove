@@ -1,9 +1,9 @@
 package it.univpm.FindWorkApp.model;
 //Probabilmente provvisoria
 public class Pref {
-private String city[];
+private String[] city;
 
-public Pref(String city[]) {
+public Pref(String[] city) {
 	this.city=city;
 	
 }
