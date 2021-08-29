@@ -19,7 +19,8 @@ public class APICall {
 	private String url;
 
 	public APICall(String location, String search, boolean remote) {
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=" + search + "&remote=" + remote;
+		this.url = "https://findwork.dev/api/jobs";
+				//?location=" + location + "&search=" + search + "&remote=" + remote;
 	}
 
 	public void getData() {
@@ -31,6 +32,7 @@ public class APICall {
 		try {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(api).openConnection();
 			openConnection.setRequestMethod("GET");
+			openConnection.addRequestProperty("User-Agent", "default");
 			openConnection.setRequestProperty("Authorization", "Token 838d2cb24efd24d35d81f7cc6846cd6ec54cd4dd ");
 			openConnection.setRequestProperty("Accept", "application/json");
 
