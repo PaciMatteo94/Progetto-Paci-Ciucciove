@@ -11,27 +11,18 @@ public class City {
 	private StatsProgrammingLenguage lenguageStats;
 	private JSONArray work;
 	
-	public StatsProgrammingLenguage getLenguageStats() {
-		return lenguageStats;
+	public City(String location) {
+		this.location = location;
 	}
 
-	public void setLenguageStats(StatsProgrammingLenguage lenguageStats) {
-		this.lenguageStats = lenguageStats;
-	}
-
-	public JSONArray getWorkArray() {
-		return WorkArray;
-	}
-
-	public void setWorkArray(JSONArray workArray) {
-		WorkArray = workArray;
+	public String getLocation() {
+		return location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
-	private JSONArray WorkArray;
 	public int getFullTimeAmount() {
 		return fullTimeAmount;
 	}
@@ -64,13 +55,23 @@ public class City {
 		this.partTimePerc = partTimePerc;
 	}
 
-	public  City(String location) {
-		this.location = location;
+	public StatsProgrammingLenguage getLenguageStats() {
+		return lenguageStats;
 	}
 
-	public String getLocation() {
-		return location;
+	public void setLenguageStats(StatsProgrammingLenguage lenguageStats) {
+		this.lenguageStats = lenguageStats;
 	}
+
+	public JSONArray getWork() {
+		return work;
+	}
+
+	public void setWork(JSONArray work) {
+		this.work = work;
+	}
+	
+
 
 
 }

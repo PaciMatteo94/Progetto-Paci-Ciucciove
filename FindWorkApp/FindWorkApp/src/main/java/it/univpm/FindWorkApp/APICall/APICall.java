@@ -13,16 +13,32 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
 public class APICall {
-
 	private String url;
+	private static APICall instance=null;
+	private APICall() {}
+	public static APICall getInstance() {
+		if(instance ==null) {
+			instance = new APICall();
+		}
+		return instance;
+	}
 
-	public APICall(String location) {
+	
+
+	public void setAPICall(String location) {
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" ;
 	}
-	public APICall(String location, String search, boolean remote) {
+	public void setAPICall(String location,  boolean remote) {
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&remote=" + remote;
 
 	}
+	public void setAPICall(String location, String employment_type) {
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&employment_type=" + employment_type;
+	}
+	public void setAPICall(String location, String employment_type, boolean remote) {
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&remote=" + remote+"&employment_type=" + employment_type;
+	}
+	
 
 	public JSONArray getData() {
 		JSONObject obj = null;
