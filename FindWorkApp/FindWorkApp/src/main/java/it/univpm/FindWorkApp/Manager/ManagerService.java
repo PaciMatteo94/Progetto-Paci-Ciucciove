@@ -3,7 +3,6 @@ package it.univpm.FindWorkApp.Manager;
 import org.json.simple.JSONObject;
 
 public interface ManagerService {
-	public JSONObject getCities(String[] location);
 	public JSONObject getCities(String[] location, String employment_type);
 	public JSONObject getCities(String[] location,boolean remote);
 	public JSONObject getCities(String[] location,boolean remote, String employment_type);

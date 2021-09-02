@@ -2,7 +2,7 @@ package it.univpm.FindWorkApp.model;
 
 import java.util.ArrayList;
 //non è sicuro che sia necessaria
-public class WorkInformation extends City{
+public class WorkInformation {
 	private String role;
 	private String companyName;
 	private String employementType;
@@ -10,9 +10,7 @@ public class WorkInformation extends City{
 	private ArrayList<String> keywords;
 	private String dataPosted;
 	private String text;
-	public WorkInformation (String location) {
-		super(location);
-	}
+
 	public String getRole() {
 		return role;
 	}

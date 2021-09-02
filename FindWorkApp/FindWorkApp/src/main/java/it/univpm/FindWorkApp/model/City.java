@@ -1,6 +1,8 @@
 package it.univpm.FindWorkApp.model;
 
-import org.json.simple.JSONArray;
+import java.util.ArrayList;
+
+
 
 public class City {
 	private String location;
@@ -9,7 +11,7 @@ public class City {
 	private double fullTimePerc;
 	private double partTimePerc;
 	private StatsProgrammingLenguage lenguageStats;
-	private JSONArray work;
+	private ArrayList<WorkInformation> work;
 	
 	public City(String location) {
 		this.location = location;
@@ -63,11 +65,11 @@ public class City {
 		this.lenguageStats = lenguageStats;
 	}
 
-	public JSONArray getWork() {
+	public ArrayList<WorkInformation> getWork() {
 		return work;
 	}
 
-	public void setWork(JSONArray work) {
+	public void setWork(ArrayList<WorkInformation> work) {
 		this.work = work;
 	}
 	

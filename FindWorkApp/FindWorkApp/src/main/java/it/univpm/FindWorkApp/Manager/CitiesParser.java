@@ -17,7 +17,15 @@ public class CitiesParser {
 	}
 	public JSONObject getJSON(ArrayList<City> cities) {
 		
-		
+		JSONObject jsObj = new JSONObject();
+
+		for (int i = 0; i < cities.size(); i++) {
+
+			jsObj.put("Location", cities.get(i).getLocation());
+
+		}
+
+		//return jsObj;
 		
 		return new JSONObject();
 		

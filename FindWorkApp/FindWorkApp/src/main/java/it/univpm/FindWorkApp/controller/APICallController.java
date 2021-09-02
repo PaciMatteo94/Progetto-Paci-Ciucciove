@@ -73,7 +73,7 @@ public class APICallController {
 			} else {
 				cities = Arrays.copyOfRange(cityArray, 0, 5);
 			}
-			return manager.getCities(cities); //return manager.getCities(sCityArray)
+			return manager.getCities(cities, null); //return manager.getCities(sCityArray)
 		
 	}
 	/**
@@ -89,7 +89,7 @@ public class APICallController {
 	 */
 	@GetMapping("/cities/filter")
 	public JSONObject cityFilter(@RequestParam(name = "location") String location,
-			@RequestParam(name = "emplyment_type", required=false) String employment_type) {
+			@RequestParam(name = "employment_type", required=false) String employment_type) {
 		if (location == "") {
 			// qui ci va un throw che indica che non sono state inserite città su cui fare
 			// la ricerca;
@@ -118,7 +118,7 @@ public class APICallController {
 			}
 		}
 
-		return manager.getCities(cities); // return manager.getCities(sCityArray2);
+		return manager.getCities(cities,employment_type); // return manager.getCities(sCityArray2);
 
 	}
 	
@@ -135,7 +135,7 @@ public class APICallController {
 	@GetMapping("/cities/filter/remote")
 	public JSONObject cityFilterRemote(@RequestParam(name = "location") String location,
 			@RequestParam(name = "emplyment_type", required = false) String employment_type,
-			@RequestParam(name="remote") boolean remote) {
+			@RequestParam(name="remote",  required = false) boolean remote) {
 		if (location == "") {
 			// qui ci va un throw che indica che non sono state inserite città su cui fare
 			// la ricerca;
