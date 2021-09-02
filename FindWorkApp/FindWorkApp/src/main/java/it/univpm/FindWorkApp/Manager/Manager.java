@@ -34,12 +34,12 @@ public class Manager implements ManagerService{
 				if (city.getWork().size() != 0) {
 					// chiamata al metodo che genera le stats della città passandogli la città
 					cities.add(city);
-					
+
 				}
 			}
 			JSONObject test = new JSONObject();
 			test.put("results", city.getWork());
-			return  test;// return JsonParser.getCitiesJO(cities);
+			return test;// return JsonParser.getCitiesJO(cities);
 		} else {
 			for (String name : location) {
 
@@ -58,41 +58,38 @@ public class Manager implements ManagerService{
 	}
 
 	@Override
-	public JSONObject getCities(String[] location, boolean remote) {
-		City city=null;
+	public JSONObject getCities(String[] location, String employment_type, boolean remote) {
+		City city = null;
 		this.location = location;
 		cities = new ArrayList<City>();
-		for (String name : location) {
-			call.setAPICall(name,remote);
-			city = call.getData();
-			if (city.getWork().size() != 0) {
-				// chiamata al metodo che genera le stats della città passandogli la città
-				cities.add(city);
-				
-			}
-		}
-		JSONObject test = new JSONObject();
-		test.put("results", city.getWork());
-		return  test;// return JsonParser.getCitiesJO(cities);
-	}
+		if (employment_type != null) {
+			for (String name : location) {
+				call.setAPICall(name, employment_type, remote);
+				city = call.getData();
+				if (city.getWork().size() != 0) {
+					// chiamata al metodo che genera le stats della città passandogli la città
+					cities.add(city);
 
-	@Override
-	public JSONObject getCities(String[] location, boolean remote, String employment_type) {
-		City city=null;
-		this.location = location;
-		cities = new ArrayList<City>();
-		for (String name : location) {
-			call.setAPICall(name,employment_type,remote);
-			city = call.getData();
-			if (city.getWork().size() != 0) {
-				// chiamata al metodo che genera le stats della città passandogli la città
-				cities.add(city);
-				
+				}
 			}
+			JSONObject test = new JSONObject();
+			test.put("results", city.getWork());
+			return test;// return JsonParser.getCitiesJO(cities);
+		} else {
+			for (String name : location) {
+				call.setAPICall(name, remote);
+				city = call.getData();
+				if (city.getWork().size() != 0) {
+					// chiamata al metodo che genera le stats della città passandogli la città
+					cities.add(city);
+
+				}
+			}
+			JSONObject test = new JSONObject();
+			test.put("results", city.getWork());
+			return test;// return JsonParser.getCitiesJO(cities);
+
 		}
-		JSONObject test = new JSONObject();
-		test.put("results", city.getWork());
-		return  test;// return JsonParser.getCitiesJO(cities);
 	}
 	@Override
 	public JSONObject getStats() {
@@ -110,29 +107,16 @@ public class Manager implements ManagerService{
 		return null;
 	}
 	@Override
-	public JSONObject getStats(boolean remote) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public JSONObject getStats(String[] location, String date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public JSONObject getStats(String[] location, boolean remote) {
+	public JSONObject getStats(String[] location,  String date,boolean remote) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public JSONObject getStats(boolean remote, String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public JSONObject getStats(String[] location, boolean remote, String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	
 
 }
