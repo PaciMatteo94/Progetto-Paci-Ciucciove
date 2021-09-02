@@ -91,9 +91,9 @@ public class StatsController {
 						if (remote != null) {
 							switch (remote) {
 							case yes:
-								return manager.getCities(locationArray, date, true);
+								return manager.getStats(locationArray, date, true);
 							case no:
-								return manager.getCities(locationArray, date, false);
+								return manager.getStats(locationArray, date, false);
 							}
 
 						}
@@ -102,9 +102,9 @@ public class StatsController {
 					if (remote != null) {
 						switch (remote) {
 						case yes:
-							return manager.getCities(locationArray, null, true);
+							return manager.getStats(locationArray, null, true);
 						case no:
-							return manager.getCities(locationArray, null, false);
+							return manager.getStats(locationArray, null, false);
 						}
 
 					}
@@ -120,9 +120,9 @@ public class StatsController {
 			if (remote != null) {
 				switch (remote) {
 				case yes:
-					return manager.getCities(null, date, true);
+					return manager.getStats(null, date, true);
 				case no:
-					return manager.getCities(null, date, false);
+					return manager.getStats(null, date, false);
 				}
 
 			}
