@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
-import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.Model.City;
 
 public class CitiesParser {
 	private static CitiesParser instance=null;

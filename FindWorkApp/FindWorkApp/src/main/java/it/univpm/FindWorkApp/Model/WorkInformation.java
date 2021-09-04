@@ -1,7 +1,7 @@
-package it.univpm.FindWorkApp.model;
+package it.univpm.FindWorkApp.Model;
 
 import java.util.ArrayList;
-//non è sicuro che sia necessaria
+
 public class WorkInformation {
 	private String role;
 	private String companyName;

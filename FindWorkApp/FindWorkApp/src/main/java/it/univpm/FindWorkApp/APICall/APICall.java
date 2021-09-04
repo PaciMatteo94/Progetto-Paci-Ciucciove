@@ -14,47 +14,89 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-import it.univpm.FindWorkApp.model.City;
-import it.univpm.FindWorkApp.model.WorkInformation;
+import it.univpm.FindWorkApp.Model.City;
+import it.univpm.FindWorkApp.Model.WorkInformation;
 
-public class APICall {
+/**
+ * <p>
+ * La classe <b>APICall</b> implementa l'interfaccia <b>APICallService</b>.
+ * 
+ * @author Paci Matteo
+ * @author Ciucciovè Leonardo
+ *
+ */
+public class APICall implements APICallService {
+	/*
+	 * La classe è implementata come singleton, quindi verrà creata una singola
+	 * istanza di tale classe che poi verrà usata dagli altri metodi durante
+	 * l'esecuzione del programma.
+	 */
 	private String location;
 	private String url;
-	private static APICall instance=null;
-	private APICall() {}
+	private static APICall instance = null;
+
+	private APICall() {
+	}
+
 	public static APICall getInstance() {
-		if(instance ==null) {
+		if (instance == null) {
 			instance = new APICall();
 		}
 		return instance;
 	}
 
-	
+	/**
+	 * <p>
+	 * Il metodo <b>setAPICall</b> salva la location che gli viene passata e imposta
+	 * l'url con cui chiamare l'API.
+	 * 
+	 * @param location        nome della città in cui fare la ricerca
+	 * @param remote          parametro che indica il filtro che riguarda la
+	 *                        tipologia di lavoro in remoto o non
+	 * @param employment_type paremetro che indica il filtro che riguarda la
+	 *                        tipologia di lavoro full time o part time
+	 * 
+	 */
 
 	public void setAPICall(String location) {
 		this.location = location;
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" ;
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java";
 	}
-	public void setAPICall(String location,  boolean remote) {
+
+	public void setAPICall(String location, boolean remote) {
 		this.location = location;
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&remote=" + remote;
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote;
 
 	}
+
 	public void setAPICall(String location, String employment_type) {
 		this.location = location;
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&employment_type=" + employment_type;
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&employment_type="
+				+ employment_type;
 	}
+
 	public void setAPICall(String location, String employment_type, boolean remote) {
 		this.location = location;
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" +"&remote=" + remote+"&employment_type=" + employment_type;
+		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote
+				+ "&employment_type=" + employment_type;
 	}
-	
 
+	/**
+	 * <p>
+	 * Implementazione del metodo dell'interfaccia <b>APICallService</b>.
+	 * 
+	 * <p>
+	 * Il metodo setta i parametri per la chiamata all'API inserendo la tipologia di
+	 * metodo, l'autorizzazione e il tipo di dato che accettiamo. Dopo aver fatto la
+	 * chiamata all'API e salvato i dati in un oggetto JSON, invocherà il metodo
+	 * privato <b>workParser</b>.
+	 * 
+	 */
 	public City getData() {
 		JSONObject obj = null;
 
 		String api = this.url;
-		String data_filter ="";
+		String data_filter = "";
 		String line = "";
 
 		try {
@@ -71,12 +113,12 @@ public class APICall {
 				while ((line = buf.readLine()) != null) {
 					data_filter += line;
 				}
-				
-			}finally {
+
+			} finally {
 				in.close();
 			}
 
-			 obj = (JSONObject) JSONValue.parseWithException(data_filter);
+			obj = (JSONObject) JSONValue.parseWithException(data_filter);
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -85,12 +127,24 @@ public class APICall {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return workParser(obj,location);
+		return workParser(obj, location);
 
 	}
 
+	/**
+	 * <p>
+	 * Il metodo privato <b>workParser</b> ha l'obbiettivo di convertire l'oggetto
+	 * JSON che l'API restituisce in un oggetto di tipo <b>City</b> che contiene
+	 * tutte le informazioni di nostro interesse.
+	 * 
+	 * @param obj      oggetto che l'API restituisce
+	 * @param location nome della città sui cui abbiamo fatto la ricerca
+	 * @return <code>City</code> oggetto di tipo <b>City</b> dove sono salvate tutte
+	 *         le informazioni della ricerca.
+	 */
+
 	private static City workParser(JSONObject obj, String location) {
-	    WorkInformation work;
+		WorkInformation work;
 		City city = new City(location);
 		long count = (Long) obj.get("count");
 		int capacity = (int) count;
@@ -115,7 +169,7 @@ public class APICall {
 			work.setEmployementType((String) json.get("employment_type"));
 			work.setRemote((Boolean) json.get("remote"));
 			work.setDataPosted((String) json.get("date_posted"));
-			work.setText((String)json.get("text"));
+			work.setText((String) json.get("text"));
 			workArray.add(work);
 		}
 		city.setWork(workArray);

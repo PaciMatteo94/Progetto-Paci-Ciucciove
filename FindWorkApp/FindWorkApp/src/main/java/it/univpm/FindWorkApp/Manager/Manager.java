@@ -5,12 +5,27 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 
 import it.univpm.FindWorkApp.APICall.APICall;
-import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.Exception.NoCityException;
+import it.univpm.FindWorkApp.Model.City;
+
+/**
+ * <p>
+ * La classe <b>Manager</b> implementa l'interfaccia <b>ManagerService</b> e ha
+ * l'obbiettivo di gestire le chiamate all'api e restituire un oggetto JSON in
+ * cui sono salvati tutti i dati richiesti.
+ * 
+ * @author Paci Matteo
+ *
+ */
 
 public class Manager implements ManagerService {
 	private APICall call = APICall.getInstance();
-	private String[] location;
 	private ArrayList<City> cities;
+	/*
+	 * la classe è implementata come singleton semplice. Si creerà una singola
+	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
+	 * programma.
+	 */
 	private static Manager instance = null;
 
 	private Manager() {
@@ -23,10 +38,14 @@ public class Manager implements ManagerService {
 		return instance;
 	}
 
+	/**
+	 * <p>
+	 * Implementazione del metodo <b>getCities</b> dell'interfaccia
+	 * <b>ManagerService</b>
+	 */
 	@Override
 	public JSONObject getCities(String[] location, String employment_type) {
 		City city = null;
-		this.location = location;
 		cities = new ArrayList<City>();
 		if (employment_type == null) {
 			for (String name : location) {
@@ -34,6 +53,7 @@ public class Manager implements ManagerService {
 				city = call.getData();
 				if (city.getWork().size() != 0) {
 					// chiamata al metodo che genera le stats della città passandogli la città
+					// stats.statsCalculate(city);
 					cities.add(city);
 
 				}
@@ -61,7 +81,6 @@ public class Manager implements ManagerService {
 	@Override
 	public JSONObject getCities(String[] location, String employment_type, boolean remote) {
 		City city = null;
-		this.location = location;
 		cities = new ArrayList<City>();
 		if (employment_type != null) {
 			for (String name : location) {
@@ -94,33 +113,72 @@ public class Manager implements ManagerService {
 	}
 
 	@Override
-	public JSONObject getStats() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public JSONObject getStats(String[] location) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public JSONObject getStats(String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public JSONObject getStats(String[] location, String date) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (cities == null)
+				throw new NoCityException();
+		} catch (NoCityException e) {
+			JSONObject noCity = new JSONObject();
+			noCity.put("Errore 400", e.getMessage());
+			noCity.put("Descrizione",
+					"Prima di chiamare la rotta stats bisogna concludere con successo una richiesta /cities");
+			return noCity;
+
+		}
+
+		if (location != null) {
+			ArrayList<City> cityMatched = new ArrayList<City>(cities.size());
+			for (City city : cities) {
+				for (String name : location) {
+					if (name == city.getLocation()) {
+						cityMatched.add(city);
+					}
+				}
+			}
+			if (date != null) {
+				return new JSONObject(); // return jsonParser.getStats(cityMatched,date);
+			}
+			return new JSONObject(); // return jsonParser.getStats(cityMatched);
+		}
+		if (date != null) {
+			return new JSONObject();// return JsonParser.getStats(cities, date);
+		}
+
+		return new JSONObject();// return JsonParser.getStats(cities);
+
 	}
 
 	@Override
 	public JSONObject getStats(String[] location, String date, boolean remote) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (cities == null)
+				throw new NoCityException();
+		} catch (NoCityException e) {
+			JSONObject noCity = new JSONObject();
+			noCity.put("Errore 400", e.getMessage());
+			noCity.put("Descrizione",
+					"Prima di chiamare la rotta stats bisogna concludere con successo una richiesta /cities");
+			return noCity;
+
+		}
+		if (location != null) {
+			ArrayList<City> cityMatched = new ArrayList<City>(cities.size());
+			for (City city : cities) {
+				for (String name : location) {
+					if (name == city.getLocation()) {
+						cityMatched.add(city);
+					}
+				}
+			}
+			if (date != null) {
+				return new JSONObject(); // return jsonParser.getStats(cityMatched,date,remote);
+			}
+			return new JSONObject(); // return jsonParser.getStats(cityMatched,remote);
+		}
+		if (date != null) {
+			return new JSONObject();// return JsonParser.getStats(cities, date, remote);
+		}
+		return new JSONObject();// return JsonParser.getStats(cities, remote);
 	}
 
 }
