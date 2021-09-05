@@ -1,4 +1,4 @@
-package it.univpm.FindWorkApp.Model;
+package it.univpm.FindWorkApp.model;
 
 import java.util.ArrayList;
 

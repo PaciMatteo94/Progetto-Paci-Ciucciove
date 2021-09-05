@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
+import it.univpm.FindWork.Stats.stats;
 import it.univpm.FindWorkApp.APICall.APICall;
-import it.univpm.FindWorkApp.Exception.NoCityException;
-import it.univpm.FindWorkApp.Model.City;
+//import it.univpm.FindWorkApp.Exception.NoCityException;
+import it.univpm.FindWorkApp.model.City;
 
 /**
  * <p>
@@ -52,22 +53,22 @@ public class Manager implements ManagerService {
 				call.setAPICall(name);
 				city = call.getData();
 				if (city.getWork().size() != 0) {
-					// chiamata al metodo che genera le stats della città passandogli la città
-					// stats.statsCalculate(city);
+					stats.statsCalculate(city); // chiamata al metodo che genera le stats della città passandogli la città
+					
 					cities.add(city);
 
 				}
 			}
-			JSONObject test = new JSONObject();
-			test.put("results", city.getWork());
-			return test;// return JsonParser.getCitiesJO(cities);
+			//JSONObject test = new JSONObject();
+			//test.put("results", city.getWork());
+			return CitiesParser.getJSON(cities);// return JsonParser.getCitiesJO(cities);
 		} else {
 			for (String name : location) {
 
 				call.setAPICall(name, employment_type);
 				city = call.getData();
 				if (city.getWork().size() != 0) {
-					// chiamata al metodo che genera le stats della città passandogli la città
+					stats.statsCalculate(city); // chiamata al metodo che genera le stats della città passandogli la città
 					cities.add(city);
 
 				}

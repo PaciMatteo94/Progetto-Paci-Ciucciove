@@ -14,8 +14,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-import it.univpm.FindWorkApp.Model.City;
-import it.univpm.FindWorkApp.Model.WorkInformation;
+import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.model.WorkInformation;
 
 /**
  * <p>
@@ -172,7 +172,9 @@ public class APICall implements APICallService {
 			work.setText((String) json.get("text"));
 			workArray.add(work);
 		}
+		city.setCount((Long) obj.get("count"));
 		city.setWork(workArray);
+		
 		return city;
 	}
 }

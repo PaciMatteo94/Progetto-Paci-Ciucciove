@@ -9,31 +9,24 @@ import org.json.simple.JSONObject;
 
 import it.univpm.FindWorkApp.model.City;
 
-public class CitiesParser {
-	private static CitiesParser instance=null;
-	private CitiesParser() {}
-	public static CitiesParser getInstance() {
-		if(instance==null) {
-			instance = new CitiesParser();
-		}
-		return instance;
-	}
+public class StatParser {
 	public static JSONObject getJSON(ArrayList<City> cities) {
 		JSONObject JSON = new JSONObject();
 		JSONArray js = new JSONArray();
 		for(int i=0;i<cities.size();i++) {
-			Map<String,Object> json = new LinkedHashMap();
+			Map json = new LinkedHashMap();
 			json.put("Location",cities.get(i).getLocation());
 			json.put("Count",cities.get(i).getCount());
-			json.put("Works",cities.get(i).getWork());
+			json.put("FullTimeAmount",cities.get(i).getFullTimeAmount());
+			json.put("PartTimeAmount",cities.get(i).getFullTimeAmount());
+			json.put("FullTimePerc",cities.get(i).getFullTimeAmount());
+			json.put("PartTimePerc",cities.get(i).getFullTimeAmount());
+			//json.put("",cities.get(i).get...()); Statistiche per i linguaggi
 			
 			js.add(json);
-		
 		}
-			JSON.put("CityCount", cities.size());
-			JSON.put("Results", js);
-	           return JSON;
-		
+		JSON.put("CityEntered", cities.size());
+		JSON.put("Results", js);
+           return JSON;
 	}
-
 }

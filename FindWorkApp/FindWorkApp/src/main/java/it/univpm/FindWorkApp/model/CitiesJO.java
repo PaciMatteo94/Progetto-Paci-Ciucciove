@@ -1,4 +1,4 @@
-package it.univpm.FindWorkApp.Model;
+package it.univpm.FindWorkApp.model;
 
 public class CitiesJO {
 private String[] location;

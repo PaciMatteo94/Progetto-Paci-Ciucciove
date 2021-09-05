@@ -1,4 +1,4 @@
-package it.univpm.FindWorkApp.Model;
+package it.univpm.FindWorkApp.model;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class City {
 	private String location;
+	private Long count;
+	
+
 	private int fullTimeAmount;
 	private int partTimeAmount;
 	private double fullTimePerc;
@@ -23,6 +26,14 @@ public class City {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
 	}
 
 	public int getFullTimeAmount() {
