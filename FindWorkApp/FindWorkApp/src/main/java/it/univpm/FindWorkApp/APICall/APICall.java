@@ -14,8 +14,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-import it.univpm.FindWorkApp.model.City;
-import it.univpm.FindWorkApp.model.WorkInformation;
+import it.univpm.FindWorkApp.Model.City;
+import it.univpm.FindWorkApp.Model.WorkInformation;
 
 /**
  * <p>

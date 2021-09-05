@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import it.univpm.FindWork.Stats.stats;
 import it.univpm.FindWorkApp.APICall.APICall;
 //import it.univpm.FindWorkApp.Exception.NoCityException;
-import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.Model.City;
 
 /**
  * <p>

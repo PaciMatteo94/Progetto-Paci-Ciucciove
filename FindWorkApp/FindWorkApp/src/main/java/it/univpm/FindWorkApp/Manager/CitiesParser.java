@@ -7,7 +7,7 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.Model.City;
 
 public class CitiesParser {
 	private static CitiesParser instance=null;

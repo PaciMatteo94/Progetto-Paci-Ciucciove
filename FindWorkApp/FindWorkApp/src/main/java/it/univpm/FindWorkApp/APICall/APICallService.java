@@ -1,6 +1,6 @@
 package it.univpm.FindWorkApp.APICall;
 
-import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.Model.City;
 
 /**
  * <p>
