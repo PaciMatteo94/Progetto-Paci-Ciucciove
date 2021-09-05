@@ -14,13 +14,13 @@ public class StatParser {
 		JSONObject JSON = new JSONObject();
 		JSONArray js = new JSONArray();
 		for(int i=0;i<cities.size();i++) {
-			Map json = new LinkedHashMap();
+			Map<String,Object> json = new LinkedHashMap();
 			json.put("Location",cities.get(i).getLocation());
 			json.put("Count",cities.get(i).getCount());
 			json.put("FullTimeAmount",cities.get(i).getFullTimeAmount());
-			json.put("PartTimeAmount",cities.get(i).getFullTimeAmount());
-			json.put("FullTimePerc",cities.get(i).getFullTimeAmount());
-			json.put("PartTimePerc",cities.get(i).getFullTimeAmount());
+			json.put("PartTimeAmount",cities.get(i).getPartTimeAmount());
+			json.put("FullTimePerc",cities.get(i).getFullTimePerc());
+			json.put("PartTimePerc",cities.get(i).getPartTimePerc());
 			//json.put("",cities.get(i).get...()); Statistiche per i linguaggi
 			
 			js.add(json);
