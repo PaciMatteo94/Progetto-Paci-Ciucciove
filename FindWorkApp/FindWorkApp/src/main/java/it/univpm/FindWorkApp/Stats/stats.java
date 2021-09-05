@@ -2,14 +2,14 @@ package it.univpm.FindWorkApp.Stats;
 
 import java.util.ArrayList;
 
-import it.univpm.FindWorkApp.model.City;
-import it.univpm.FindWorkApp.model.WorkInformation;
+import it.univpm.FindWorkApp.Model.City;
+import it.univpm.FindWorkApp.Model.WorkInformation;
 
 public class stats {
 	
 	public static void statsCalculate(City city) {
 		int cnt=0,cnt2=0;
-		ArrayList<WorkInformation> works=city.getWork();
+		ArrayList<WorkInformation> works = city.getWork();
 		for (WorkInformation w : works) {
         	 if(w.getEmployementType() == "full time") {
         		cnt++; 
