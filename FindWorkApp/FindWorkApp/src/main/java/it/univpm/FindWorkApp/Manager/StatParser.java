@@ -7,7 +7,7 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import it.univpm.FindWorkApp.model.City;
+import it.univpm.FindWorkApp.Model.City;
 
 public class StatParser {
 	public static JSONObject getJSON(ArrayList<City> cities) {
