@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
  * 
  * <p>
  * l'interfaccia <b>ManagerService</b> racchiude i metodi che restituiscono
- * l'oggetto JSON contenteti i dati richiesti dall'utente
+ * l'oggetto JSON contenenti i dati richiesti dall'utente
  * 
  * @author Paci Matteo
  * 
