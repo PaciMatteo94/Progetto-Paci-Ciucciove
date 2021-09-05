@@ -1,4 +1,4 @@
-package it.univpm.FindWork.Stats;
+package it.univpm.FindWorkApp.Stats;
 
 import java.util.ArrayList;
 
