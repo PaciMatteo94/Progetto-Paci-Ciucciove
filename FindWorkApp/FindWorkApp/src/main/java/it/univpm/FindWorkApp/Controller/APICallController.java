@@ -108,7 +108,7 @@ public class APICallController {
 		}
 		try {
 			if (employment_type != null) {
-				if (employment_type.contains("full time") || employment_type.contains("part time")) {
+				if (employment_type.contains("full time") || employment_type.contains("contract")) {
 					if (remote != null) {
 						switch (remote) {
 						case yes:

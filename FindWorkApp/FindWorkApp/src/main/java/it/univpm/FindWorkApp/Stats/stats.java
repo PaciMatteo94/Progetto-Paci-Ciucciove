@@ -11,10 +11,11 @@ public class stats {
 		int cnt=0,cnt2=0;
 		ArrayList<WorkInformation> works = city.getWork();
 		for (WorkInformation w : works) {
-        	 if(w.getEmployementType() == "full time") {
+			String prova = w.getEmployementType();
+        	 if(prova == "full time" ) {
         		cnt++; 
         	 }
-        	 if(w.getEmployementType() == "part time" || w.getEmployementType() == "contract") {
+        	 if(prova==("contract")) {
         		cnt2++; 
         	 }
          }
@@ -22,8 +23,8 @@ public class stats {
          city.setFullTimeAmount(cnt);
          city.setPartTimeAmount(cnt2);
          
-         double percFTA = (cnt/city.getWork().size())*100;
-         double percPTA = (cnt2/city.getWork().size())*100;
+         double percFTA = (double)cnt/city.getWork().size()*100;
+         double percPTA = (double)cnt2/city.getWork().size()*100;
          city.setFullTimePerc(percFTA);
          city.setPartTimePerc(percPTA);
 	}

@@ -56,7 +56,7 @@ public class Manager implements ManagerService {
 				city = call.getData();
 				if (city.getWork().size() != 0) {
 					stats.statsCalculate(city); // chiamata al metodo che genera le stats della città passandogli la città
-					
+		
 					cities.add(city);
 
 				}
@@ -75,9 +75,9 @@ public class Manager implements ManagerService {
 
 				}
 			}
-			JSONObject test = new JSONObject();
-			test.put("results", city.getWork());
-			return test;// return JsonParser.getCitiesJO(cities);
+			//JSONObject test = new JSONObject();
+			//test.put("results", city.getWork());
+			return CitiesParser.getJSON(cities); //return test;
 		}
 	}
 
@@ -90,28 +90,29 @@ public class Manager implements ManagerService {
 				call.setAPICall(name, employment_type, remote);
 				city = call.getData();
 				if (city.getWork().size() != 0) {
-					// chiamata al metodo che genera le stats della città passandogli la città
+					stats.statsCalculate(city);
 					cities.add(city);
 
 				}
 			}
-			JSONObject test = new JSONObject();
-			test.put("results", city.getWork());
-			return test;// return JsonParser.getCitiesJO(cities);
+			//JSONObject test = new JSONObject();
+			//test.put("results", city.getWork());
+			//return test;// return JsonParser.getCitiesJO(cities);
+			return CitiesParser.getJSON(cities);
 		} else {
 			for (String name : location) {
 				call.setAPICall(name, remote);
 				city = call.getData();
 				if (city.getWork().size() != 0) {
-					// chiamata al metodo che genera le stats della città passandogli la città
+					stats.statsCalculate(city);
 					cities.add(city);
 
 				}
 			}
-			JSONObject test = new JSONObject();
-			test.put("results", city.getWork());
-			return test;// return JsonParser.getCitiesJO(cities);
-
+			//JSONObject test = new JSONObject();
+			//test.put("results", city.getWork());
+			//return test;// return JsonParser.getCitiesJO(cities);
+			return CitiesParser.getJSON(cities);
 		}
 	}
 
@@ -141,13 +142,13 @@ public class Manager implements ManagerService {
 			if (date != null) {
 				return new JSONObject(); // return jsonParser.getStats(cityMatched,date);
 			}
-			return new JSONObject(); // return jsonParser.getStats(cityMatched);
+			return StatParser.getJSON(cityMatched); // return jsonParser.getStats(cityMatched);
 		}
 		if (date != null) {
 			return new JSONObject();// return JsonParser.getStats(cities, date);
 		}
 
-		return new JSONObject();// return JsonParser.getStats(cities);
+		return StatParser.getJSON(cities);// return JsonParser.getStats(cities);
 
 	}
 
