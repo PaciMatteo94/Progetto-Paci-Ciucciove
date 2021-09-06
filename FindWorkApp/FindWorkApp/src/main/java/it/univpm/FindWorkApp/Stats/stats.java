@@ -1,32 +1,32 @@
 package it.univpm.FindWorkApp.Stats;
 
-import java.util.ArrayList;
-
+import org.apache.commons.math3.util.Precision;
 import it.univpm.FindWorkApp.Model.City;
 import it.univpm.FindWorkApp.Model.WorkInformation;
 
 public class stats {
 	
-	public static void statsCalculate(City city) {
+	public static City statsCalculate(City city) {
 		int cnt=0,cnt2=0;
-		ArrayList<WorkInformation> works = city.getWork();
-		for (WorkInformation w : works) {
-        	 if(((String) w.getEmployementType()) == "full time") {
+		for (WorkInformation w : city.getWork()) {
+		if(w.getEmployementType()!=null) {
+        	 if(w.getEmployementType().equals("full time")) {
         		cnt++; 
         	 }
-        	 if(((String) w.getEmployementType()) == "part time" || ((String) w.getEmployementType()) == "contract") {
+        	 else if(w.getEmployementType().equals("part time") || w.getEmployementType().equals("contract")) {
         		cnt2++; 
         	 }
          }
-     		
+		}	
          city.setFullTimeAmount(cnt);
          city.setPartTimeAmount(cnt2);
-         
-         double percFTA = (cnt/city.getWork().size())*100;
-         double percPTA = (cnt2/city.getWork().size())*100;
+         double pFTA = (double) cnt/city.getWork().size()*100;
+         double pPTA = (double) cnt2/city.getWork().size()*100;
+         double percFTA = Precision.round(pFTA,2);
+         double percPTA = Precision.round(pPTA,2);
          city.setFullTimePerc(percFTA);
          city.setPartTimePerc(percPTA);
-       return;
+       return city;
 	}
 
 

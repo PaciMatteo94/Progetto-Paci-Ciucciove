@@ -55,8 +55,8 @@ public class Manager implements ManagerService {
 				call.setAPICall(name);
 				city = call.getData();
 				if (city.getWork().size() != 0) {
-					stats.statsCalculate(city); // chiamata al metodo che genera le stats della città passandogli la città
-					cities.add(city);
+					 // chiamata al metodo che genera le stats della città passandogli la città
+					cities.add(stats.statsCalculate(city));
 
 				}
 			}
