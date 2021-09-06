@@ -55,9 +55,10 @@ public class Manager implements ManagerService {
 				call.setAPICall(name);
 				city = call.getData();
 				if (city.getWork().size() != 0) {
-					stats.statsCalculate(city); // chiamata al metodo che genera le stats della città passandogli la città
-		
-					cities.add(city);
+
+					 // chiamata al metodo che genera le stats della città passandogli la città
+					cities.add(stats.statsCalculate(city));
+
 
 				}
 			}
@@ -77,7 +78,9 @@ public class Manager implements ManagerService {
 			}
 			//JSONObject test = new JSONObject();
 			//test.put("results", city.getWork());
-			return CitiesParser.getJSON(cities); //return test;
+
+			return CitiesParser.getJSON(cities);// return JsonParser.getCitiesJO(cities);
+
 		}
 	}
 
@@ -97,8 +100,9 @@ public class Manager implements ManagerService {
 			}
 			//JSONObject test = new JSONObject();
 			//test.put("results", city.getWork());
-			//return test;// return JsonParser.getCitiesJO(cities);
-			return CitiesParser.getJSON(cities);
+
+			return CitiesParser.getJSON(cities);// return JsonParser.getCitiesJO(cities);
+
 		} else {
 			for (String name : location) {
 				call.setAPICall(name, remote);
@@ -111,8 +115,10 @@ public class Manager implements ManagerService {
 			}
 			//JSONObject test = new JSONObject();
 			//test.put("results", city.getWork());
-			//return test;// return JsonParser.getCitiesJO(cities);
-			return CitiesParser.getJSON(cities);
+
+			return CitiesParser.getJSON(cities);// return JsonParser.getCitiesJO(cities);
+
+
 		}
 	}
 
