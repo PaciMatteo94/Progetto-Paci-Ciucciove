@@ -2,13 +2,26 @@ package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
 import it.univpm.FindWorkApp.Manager.Manager;
+import it.univpm.FindWorkApp.Model.City;
 
 /**
  * <p>
@@ -41,6 +54,15 @@ public class APICallController {
 		pref.put("Città di preferenza", cities);
 		return pref;
 	}
+	//@PostMapping("/preferences")
+	@RequestMapping(value = "/preferences", method = RequestMethod.POST)  
+	public @ResponseBody JSONObject suggested(@RequestBody (required=false) String body) {	
+		
+		JSONObject js = new JSONObject();
+		js.put("Città inserite", ...);
+		return js;
+	      } 
+	
 
 	/**
 	 * <p>
