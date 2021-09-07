@@ -6,7 +6,8 @@ public class WorkInformation {
 	private String role;
 	private String companyName;
 	private String employementType;
-	private boolean remote;
+	private Boolean remote;
+
 	private ArrayList<String> keywords;
 	private String dataPosted;
 	private String text;
@@ -29,12 +30,13 @@ public class WorkInformation {
 	public void setEmployementType(String employementType) {
 		this.employementType = employementType;
 	}
-	public boolean isRemote() {
+	public Boolean getRemote() {
 		return remote;
 	}
-	public void setRemote(boolean remote) {
+	public void setRemote(Boolean remote) {
 		this.remote = remote;
 	}
+
 	public ArrayList<String> getKeywords() {
 		return keywords;
 	}

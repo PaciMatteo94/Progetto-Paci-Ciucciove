@@ -58,24 +58,13 @@ public class APICall implements APICallService {
 	 * 
 	 */
 
-	public void setAPICall(String location) {
-		this.location = location;
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java";
-	}
-
-	public void setAPICall(String location, boolean remote) {
+	public void setAPICall(String location, Boolean remote) {
 		this.location = location;
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote;
 
 	}
 
-	public void setAPICall(String location, String employment_type) {
-		this.location = location;
-		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&employment_type="
-				+ employment_type;
-	}
-
-	public void setAPICall(String location, String employment_type, boolean remote) {
+	public void setAPICall(String location, String employment_type, Boolean remote) {
 		this.location = location;
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote
 				+ "&employment_type=" + employment_type;

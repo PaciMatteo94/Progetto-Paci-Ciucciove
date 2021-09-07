@@ -39,43 +39,11 @@ public class APICallController {
 	public JSONObject preferences(@RequestParam(name = "nome", defaultValue = "none") String nome) {
 		Preference pref = new Preference();
 		JSONObject obj = new JSONObject();
-		obj.put("Città di preferenza", pref);
+		obj.put("Città di preferenza", pref.getPreference());
 		return obj;
 	}
 
-	/**
-	 * <p>
-	 * Questo metodo restituisce i lavori presenti fino ad un massimo di 5 città. Se
-	 * non vengono inserite città, verrà visualizzato un messaggio di errore.
-	 * 
-	 * @param location indica il nome di una o più città in cui il cliente vuole
-	 *                 cercare
-	 * @return <code>JSONObject</code>oggetto di tipo JSON che contiene tutte le
-	 *         informazioni richieste dall'utente.
-	 */
-	@GetMapping("/cities")
-	public JSONObject city(@RequestParam(name = "location") String location) {
-		try {
-			if (location == "")
-				throw new NoLocationException();
-		} catch (NoLocationException e) {
-			JSONObject noLocation = new JSONObject();
-			noLocation.put("errore 400", e.getMessage());
-			return noLocation;
-		}
 
-		String[] cityArray = location.split(", |&|,");
-		String[] cities;
-		// Prendo la parte di array che mi interessa copiando i valori fino all termine
-		// dello stesso
-		if (cityArray.length <= 5) {
-			cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
-		} else {
-			cities = Arrays.copyOfRange(cityArray, 0, 5);
-		}
-		return manager.getCities(cities, null); // return manager.getCities(sCityArray)
-
-	}
 
 	/**
 	 * <p>
@@ -87,7 +55,7 @@ public class APICallController {
 	 * @return <code>JSONObject</code> oggetto di tipo JSON che contiene tutte le
 	 *         informazioni richieste dall'utente.
 	 */
-	@GetMapping("/cities/filter")
+	@GetMapping("/cities")
 	public JSONObject cityFilter(@RequestParam(name = "location") String location,
 			@RequestParam(name = "employment_type", required = false) String employment_type,
 			@RequestParam(name = "remote", required = false) Remote remote) {
@@ -118,8 +86,8 @@ public class APICallController {
 							return manager.getCities(cities, employment_type, false);
 						}
 					}
-					return manager.getCities(cities, employment_type); // return
-																		// manager.getCities(cities,employment_type)
+					return manager.getCities(cities, employment_type, null); 
+																		
 				} else {
 					throw new UnsupportedValueException();
 
@@ -140,7 +108,7 @@ public class APICallController {
 			unsupportedValue.put("errore 400", e.getMessage());
 			return unsupportedValue;
 		}
-		return manager.getCities(cities, null); // return manager.getCities(sCityArray2);
+		return manager.getCities(cities, null, null); 
 
 	}
 }
