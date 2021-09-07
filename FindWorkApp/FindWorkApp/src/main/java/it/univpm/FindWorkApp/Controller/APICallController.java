@@ -9,6 +9,7 @@ import java.util.Arrays;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
 import it.univpm.FindWorkApp.Manager.Manager;
+import it.univpm.FindWorkApp.Model.Preference;
 
 /**
  * <p>
@@ -36,10 +37,10 @@ public class APICallController {
 
 	@GetMapping("/preferences")
 	public JSONObject preferences(@RequestParam(name = "nome", defaultValue = "none") String nome) {
-		String[] cities = { "London", "Berlin", "New York", "Amsterdam", "Paris" };
-		JSONObject pref = new JSONObject();
-		pref.put("Città di preferenza", cities);
-		return pref;
+		Preference pref = new Preference();
+		JSONObject obj = new JSONObject();
+		obj.put("Città di preferenza", pref);
+		return obj;
 	}
 
 	/**

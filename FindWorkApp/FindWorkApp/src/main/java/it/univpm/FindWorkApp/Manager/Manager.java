@@ -146,12 +146,12 @@ public class Manager implements ManagerService {
 				}
 			}
 			if (date != null) {
-				return new JSONObject(); // return jsonParser.getStats(cityMatched,date);
+				return StatParser.getJSON(stats.statsFiltered(cityMatched, date)); // return jsonParser.getStats(cityMatched,date);
 			}
 			return StatParser.getJSON(cityMatched); // return jsonParser.getStats(cityMatched);
 		}
 		if (date != null) {
-			return new JSONObject();// return JsonParser.getStats(cities, date);
+			return StatParser.getJSON(stats.statsFiltered(cities, date));// return JsonParser.getStats(cities, date);
 		}
 
 		return StatParser.getJSON(cities);// return JsonParser.getStats(cities);
@@ -181,14 +181,14 @@ public class Manager implements ManagerService {
 				}
 			}
 			if (date != null) {
-				return new JSONObject(); // return jsonParser.getStats(cityMatched,date,remote);
+				return StatParser.getJSON(stats.statsFiltered(cityMatched, date,remote)); // return jsonParser.getStats(cityMatched,date,remote);
 			}
-			return new JSONObject(); // return jsonParser.getStats(cityMatched,remote);
+			return StatParser.getJSON(stats.statsFiltered(cityMatched, date,remote)); // return jsonParser.getStats(cityMatched,remote);
 		}
 		if (date != null) {
-			return new JSONObject();// return JsonParser.getStats(cities, date, remote);
+			return StatParser.getJSON(stats.statsFiltered(cities, date,remote));// return JsonParser.getStats(cities, date, remote);
 		}
-		return new JSONObject();// return JsonParser.getStats(cities, remote);
+		return StatParser.getJSON(stats.statsFiltered(cities, date,remote));// return JsonParser.getStats(cities, remote);
 	}
 
 }
