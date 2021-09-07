@@ -2,8 +2,6 @@ package it.univpm.FindWorkApp.Model;
 
 import java.util.ArrayList;
 
-
-
 public class City {
 	private String location;
 	private Long count;
