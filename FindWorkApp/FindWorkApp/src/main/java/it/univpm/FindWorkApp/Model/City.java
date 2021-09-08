@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class City {
 	private String location;
 	private Long count;
-	
-
 	private int fullTimeAmount;
 	private int partTimeAmount;
 	private double fullTimePerc;
