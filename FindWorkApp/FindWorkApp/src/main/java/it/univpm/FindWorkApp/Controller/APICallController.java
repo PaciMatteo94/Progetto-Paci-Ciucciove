@@ -2,12 +2,18 @@ package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Arrays;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.univpm.FindWorkApp.Exception.EmptyBodyException;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
+
 import it.univpm.FindWorkApp.Manager.Manager;
 import it.univpm.FindWorkApp.Model.Preference;
 
@@ -31,7 +37,7 @@ public class APICallController {
 	 * <p>
 	 * Questo metodo restituisce cinque città predefinite come suggerimento di
 	 * ricerca per l'utente.
-	 * 
+	 *
 	 * @return <code>JSONObject</code>
 	 */
 
@@ -42,6 +48,31 @@ public class APICallController {
 		obj.put("Città di preferenza", pref.getPreference());
 		return obj;
 	}
+	//@PostMapping("/preferences")
+	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
+	public @ResponseBody JSONObject suggested(@RequestBody (required=false) String body) {
+		try {
+		    if(body==null)
+		       throw new EmptyBodyException();
+		}
+		catch (EmptyBodyException e) {
+			JSONObject noBody = new JSONObject();
+			noBody.put("Errore 400", e.getMessage());
+			   return noBody;
+		}
+		String[] cityArray = body.split(", |&|,");
+		String[] cities;
+
+		if (cityArray.length < 5) {
+			cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
+		} else {
+			cities = Arrays.copyOfRange(cityArray, 0, 5);
+		}
+		JSONObject js = new JSONObject();
+		js.put("Città inserite", cities);
+		return js;
+	      }
+
 
 
 
@@ -49,7 +80,7 @@ public class APICallController {
 	 * <p>
 	 * Questo metodo permette di ricercare i lavori presenti in una o più città con
 	 * la possibilità di inserire dei filtri di ricerca.
-	 * 
+	 *
 	 * @param location        indica il nome di una o più città di ricerca.
 	 * @param employment_type indica se il lavoro è full time o part time/contratto.
 	 * @return <code>JSONObject</code> oggetto di tipo JSON che contiene tutte le
@@ -86,8 +117,8 @@ public class APICallController {
 							return manager.getCities(cities, employment_type, false);
 						}
 					}
-					return manager.getCities(cities, employment_type, null); 
-																		
+					return manager.getCities(cities, employment_type, null);
+
 				} else {
 					throw new UnsupportedValueException();
 
@@ -108,7 +139,7 @@ public class APICallController {
 			unsupportedValue.put("errore 400", e.getMessage());
 			return unsupportedValue;
 		}
-		return manager.getCities(cities, null, null); 
+		return manager.getCities(cities, null, null);
 
 	}
 }
