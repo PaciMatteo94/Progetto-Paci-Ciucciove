@@ -1,6 +1,6 @@
 package it.univpm.FindWorkApp.Stats;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -12,10 +12,11 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
 public class Stats {
 
 	public static City statsCalculate(City city) {
-		int cnt = 0, cnt2 = 0;
+		int cnt = 0, cnt2 = 0, cnt3=0;
 		int pythonCnt = 0, phpCnt = 0, springCnt = 0, typescriptCnt = 0, sqlCnt = 0;
 		for (WorkInformation w : city.getWork()) {
-			if (w.getEmployementType() != null) {
+			if(w.getEmployementType()== null) cnt3++; //provvisorio
+			else {
 				if (w.getEmployementType().equals("full time")) {
 					cnt++;
 				} else if (w.getEmployementType().equals("part time") || w.getEmployementType().equals("contract")) {
@@ -68,7 +69,8 @@ public class Stats {
 		calcs.setPercSpring(percSpring);
 		calcs.setPercTypescript(percTypescript);
 		calcs.setPercSql(percSql);
-
+		
+		city.setEmpNullAmount(cnt3); //provvisorio
 		city.setFullTimeAmount(cnt);
 		city.setPartTimeAmount(cnt2);
 		double pFTA = (double) cnt / city.getWork().size() * 100;
@@ -88,29 +90,30 @@ public class Stats {
 		if (date != null) {
 			DateTimeFormatter userFormat= DateTimeFormatter.ofPattern("uuuu-MM-dd");
 			DateTimeFormatter apiFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss'Z'");
-			LocalDateTime start = LocalDateTime.parse(date, userFormat);
+			LocalDate start = LocalDate.parse(date, userFormat);
 			for (City city : cities) {
 				tempWork = new ArrayList<WorkInformation>();
 				tempCity = new City(city.getLocation());
 				for (WorkInformation work : city.getWork()) {
-					LocalDateTime workDate = LocalDateTime.parse(work.getDataPosted(), apiFormat);
+					LocalDate workDate = LocalDate.parse(work.getDataPosted(), apiFormat);
 					if(remote !=null) {
-						if (start.isBefore(workDate) && work.getRemote() == remote) {
+						if ((start.isBefore(workDate)|| start.equals(workDate)) && work.getRemote() == remote) {
 							tempWork.add(work);
+							
 						}
 					}else {
-						if (start.isBefore(workDate)) {
+						if (start.isBefore(workDate) || start.equals(workDate)) {
 							tempWork.add(work);
 						}
 					}
 
 				}
+				tempCity.setCount((long)tempWork.size());
 				tempCity.setWork(tempWork);
 				match.add(Stats.statsCalculate(tempCity));
 			}
 
-		}
-		if (remote != null) {
+		}else if (remote != null) {
 			for (City city : cities) {
 				tempWork = new ArrayList<WorkInformation>();
 				tempCity = new City(city.getLocation());
@@ -119,6 +122,7 @@ public class Stats {
 						tempWork.add(work);
 					}
 				}
+				tempCity.setCount((long)tempWork.size());
 				tempCity.setWork(tempWork);
 				match.add(Stats.statsCalculate(tempCity));
 			}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 
 import it.univpm.FindWorkApp.APICall.APICall;
-
+import it.univpm.FindWorkApp.Exception.IncompatibilityRemoteException;
 import it.univpm.FindWorkApp.Exception.NoCityException;
 import it.univpm.FindWorkApp.Model.City;
 import it.univpm.FindWorkApp.Stats.Stats;
@@ -21,6 +21,8 @@ import it.univpm.FindWorkApp.Stats.Stats;
  */
 
 public class Manager implements ManagerService {
+
+	private Boolean remoteSave = null;
 	private APICall call = APICall.getInstance();
 	private ArrayList<City> cities;
 	/*
@@ -28,6 +30,7 @@ public class Manager implements ManagerService {
 	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
 	 * programma.
 	 */
+
 	private static Manager instance = null;
 
 	private Manager() {
@@ -40,8 +43,13 @@ public class Manager implements ManagerService {
 		return instance;
 	}
 
+	private void setRemoteSave(Boolean remote) {
+		this.remoteSave = remote;
+	}
+
 	@Override
 	public JSONObject getCities(String[] location, String employment_type, Boolean remote) {
+		setRemoteSave(remote);
 		City city = null;
 		cities = new ArrayList<City>();
 		if (employment_type != null) {
@@ -72,18 +80,13 @@ public class Manager implements ManagerService {
 	}
 
 	@Override
-	public JSONObject getStats(String[] location, String date, Boolean remote) {
-		try {
-			if (cities == null)
-				throw new NoCityException();
-		} catch (NoCityException e) {
-			JSONObject noCity = new JSONObject();
-			noCity.put("Errore 400", e.getMessage());
-			noCity.put("Descrizione",
-					"Prima di chiamare la rotta stats bisogna concludere con successo una richiesta /cities");
-			return noCity;
+	public JSONObject getStats(String[] location, String date, Boolean remote)
+			throws NoCityException, IncompatibilityRemoteException {
+		if (cities == null)
+			throw new NoCityException();
+		if (remote != null & remote != remoteSave)
+			throw new IncompatibilityRemoteException();
 
-		}
 		if (location != null) {
 			ArrayList<City> cityMatched = new ArrayList<City>(cities.size());
 			for (City city : cities) {

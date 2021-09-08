@@ -2,6 +2,9 @@ package it.univpm.FindWorkApp.Manager;
 
 import org.json.simple.JSONObject;
 
+import it.univpm.FindWorkApp.Exception.IncompatibilityRemoteException;
+import it.univpm.FindWorkApp.Exception.NoCityException;
+
 /**
  * 
  * <p>
@@ -45,6 +48,6 @@ public interface ManagerService {
 	 *         con le rispettive statistiche.
 	 */
 
-	public JSONObject getStats(String[] location, String date, Boolean remote);
+	public JSONObject getStats(String[] location, String date, Boolean remote)throws NoCityException,IncompatibilityRemoteException;
 
 }
