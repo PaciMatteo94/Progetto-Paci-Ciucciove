@@ -17,6 +17,7 @@ public class StatParser {
 			Map<String,Object> json = new LinkedHashMap();
 			json.put("Location",city.getLocation());
 			json.put("Count",city.getCount());
+			json.put("empNullAmount", city.getEmpNullAmount()); //provvisorio
 			json.put("FullTimeAmount",city.getFullTimeAmount());
 			json.put("PartTimeAmount",city.getPartTimeAmount());
 			json.put("FullTimePerc",city.getFullTimePerc()+"%");

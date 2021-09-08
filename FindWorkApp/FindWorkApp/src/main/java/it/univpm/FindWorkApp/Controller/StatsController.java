@@ -2,9 +2,12 @@ package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import it.univpm.FindWorkApp.Exception.IncompatibilityRemoteException;
+import it.univpm.FindWorkApp.Exception.NoCityException;
 import it.univpm.FindWorkApp.Exception.OverflowCityException;
 import it.univpm.FindWorkApp.Manager.Manager;
 import org.json.simple.JSONObject;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +26,6 @@ public class StatsController {
 	}
 
 	private Manager manager = Manager.getInstance();
-
 
 	/**
 	 * Questo metodo visualizza le statistiche delle città chiamate dalla precedente
@@ -44,25 +46,26 @@ public class StatsController {
 	@GetMapping("/stats")
 	public JSONObject statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
-			@RequestParam(name = "remote", required = false) Remote remote) {
+			@RequestParam(name = "remote", required = false) Remote remote)
+			throws NoCityException, IncompatibilityRemoteException {
 		String[] locationArray = null;
 		if (location != null) {
 			locationArray = location.split("&");
 			try {
 				if (locationArray.length > 5) {
 					throw new OverflowCityException();
-				} else {				
-						if (remote != null) {
-							switch (remote) {
-							case yes:
-								return manager.getStats(locationArray, date, true);
-							case no:
-								return manager.getStats(locationArray, date, false);
-							}
-
+				} else {
+					if (remote != null) {
+						switch (remote) {
+						case yes:
+							return manager.getStats(locationArray, date, true);
+						case no:
+							return manager.getStats(locationArray, date, false);
 						}
-						return manager.getStats(locationArray, date,null);
-					
+
+					}
+					return manager.getStats(locationArray, date, null);
+
 				}
 			} catch (OverflowCityException e) {
 				JSONObject overFlowCity = new JSONObject();
@@ -79,7 +82,23 @@ public class StatsController {
 			}
 
 		}
-		return manager.getStats(locationArray, date,null);
+		return manager.getStats(locationArray, date, null);
 
+	}
+
+	@ExceptionHandler(NoCityException.class)
+	public static JSONObject error(NoCityException e) {
+		JSONObject noCity = new JSONObject();
+		noCity.put("Errore 400", e.getMessage());
+		noCity.put("Descrizione",
+				"Prima di chiamare la rotta stats bisogna concludere con successo una richiesta /cities");
+		return noCity;
+	}
+
+	@ExceptionHandler(IncompatibilityRemoteException.class)
+	public static JSONObject errorCall(IncompatibilityRemoteException e) {
+		JSONObject remoteInc = new JSONObject();
+		remoteInc.put("Errore 400", e.getMessage());
+		return remoteInc;
 	}
 }

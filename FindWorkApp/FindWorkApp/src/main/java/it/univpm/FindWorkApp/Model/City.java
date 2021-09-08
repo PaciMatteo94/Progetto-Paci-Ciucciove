@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class City {
 	private String location;
 	private Long count;
-	
+	private int empNullAmount;
 
 	private int fullTimeAmount;
 	private int partTimeAmount;
@@ -33,6 +33,14 @@ public class City {
 	public void setCount(Long count) {
 		this.count = count;
 	}
+	public int getEmpNullAmount() {
+		return empNullAmount;
+	}
+
+	public void setEmpNullAmount(int empNullAmount) {
+		this.empNullAmount = empNullAmount;
+	}
+
 
 	public int getFullTimeAmount() {
 		return fullTimeAmount;
