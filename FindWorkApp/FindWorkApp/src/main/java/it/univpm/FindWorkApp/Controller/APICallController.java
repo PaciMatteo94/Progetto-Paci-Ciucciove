@@ -2,8 +2,7 @@ package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.JSONObject;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.Arrays;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,15 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import it.univpm.FindWorkApp.Exception.EmptyBodyException;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
+
 import it.univpm.FindWorkApp.Manager.Manager;
 import it.univpm.FindWorkApp.Model.Preference;
 
@@ -57,9 +51,25 @@ public class APICallController {
 	//@PostMapping("/preferences")
 	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
 	public @ResponseBody JSONObject suggested(@RequestBody (required=false) String body) {
+		try {
+		    if(body==null)
+		       throw new EmptyBodyException();
+		}
+		catch (EmptyBodyException e) {
+			JSONObject noBody = new JSONObject();
+			noBody.put("Errore 400", e.getMessage());
+			   return noBody;
+		}
+		String[] cityArray = body.split(", |&|,");
+		String[] cities;
 
+		if (cityArray.length < 5) {
+			cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
+		} else {
+			cities = Arrays.copyOfRange(cityArray, 0, 5);
+		}
 		JSONObject js = new JSONObject();
-		js.put("Città inserite", ...);
+		js.put("Città inserite", cities);
 		return js;
 	      }
 
