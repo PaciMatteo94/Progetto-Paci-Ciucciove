@@ -26,9 +26,8 @@ public interface ManagerService {
 	 *         rispettivi lavori trovati in essa
 	 * 
 	 */
-	public JSONObject getCities(String[] location, String employment_type);
 
-	public JSONObject getCities(String[] location, String employment_type, boolean remote);
+	public JSONObject getCities(String[] location, String employment_type, Boolean remote);
 
 	/**
 	 * <p>
@@ -45,8 +44,7 @@ public interface ManagerService {
 	 * @return <code>JSONObject</code> oggetto che contiene tutte le città richieste
 	 *         con le rispettive statistiche.
 	 */
-	public JSONObject getStats(String[] location, String date);
 
-	public JSONObject getStats(String[] location, String date, boolean remote);
+	public JSONObject getStats(String[] location, String date, Boolean remote);
 
 }

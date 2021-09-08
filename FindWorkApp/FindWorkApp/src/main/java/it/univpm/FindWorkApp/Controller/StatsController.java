@@ -24,39 +24,6 @@ public class StatsController {
 
 	private Manager manager = Manager.getInstance();
 
-	/**
-	 * <p>
-	 * Questo metodo visualizza le statistiche delle città chiamate dalla precedente
-	 * chiamata <b>/cities</b>. Se non vengono inserite delle località verrano
-	 * stampate le statistiche di tutte le città che sono state inserite nell'ultima
-	 * richiesta di tipo <b>/cities</b>. Se invece vengono inserite delle località,
-	 * verranno stampate le loro statistiche a patto che siano state inserite nella
-	 * precedente richiesta di tipo <b>/cities</b>.
-	 *
-	 * 
-	 * @param location indica le città richieste dall'utente.
-	 * 
-	 * @return <code>JSONObject</code> Un JSONObject con le statistiche delle varie
-	 *         città.
-	 */
-	@GetMapping("/stats")
-	public JSONObject stats(@RequestParam(name = "location", required = false) String location) {
-		if (location != null) {
-			String[] locationArray = location.split("&");
-			try {
-				if (locationArray.length > 5) {
-					throw new OverflowCityException();
-				} else {
-					return manager.getStats(locationArray, null); // return manager.getStats(locationArray);
-				}
-			} catch (OverflowCityException e) {
-				JSONObject overFlowCity = new JSONObject();
-				overFlowCity.put("Errore 400", e.getMessage());
-				return overFlowCity;
-			}
-		}
-		return manager.getStats(null, null); // return manager.getStats();
-	}
 
 	/**
 	 * Questo metodo visualizza le statistiche delle città chiamate dalla precedente
@@ -74,7 +41,7 @@ public class StatsController {
 	 * @return <code>JSONObject</code> Un JSONObject che contiene le varie
 	 *         statistiche delle varie città.
 	 */
-	@GetMapping("/stats/filter")
+	@GetMapping("/stats")
 	public JSONObject statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
 			@RequestParam(name = "remote", required = false) Remote remote) {
@@ -84,8 +51,7 @@ public class StatsController {
 			try {
 				if (locationArray.length > 5) {
 					throw new OverflowCityException();
-				} else {
-					if (date != null) {
+				} else {				
 						if (remote != null) {
 							switch (remote) {
 							case yes:
@@ -95,37 +61,14 @@ public class StatsController {
 							}
 
 						}
-						return manager.getStats(locationArray, date);
-					}
-					if (remote != null) {
-						switch (remote) {
-						case yes:
-							return manager.getStats(locationArray, date, true);
-						case no:
-							return manager.getStats(locationArray, date, false);
-						}
-
-					}
-					return manager.getStats(locationArray, date);
+						return manager.getStats(locationArray, date,null);
+					
 				}
 			} catch (OverflowCityException e) {
 				JSONObject overFlowCity = new JSONObject();
 				overFlowCity.put("Errore 400", e.getMessage());
 				return overFlowCity;
 			}
-		}
-		if (date != null) {
-			if (remote != null) {
-				switch (remote) {
-				case yes:
-					return manager.getStats(locationArray, date, true);
-				case no:
-					return manager.getStats(locationArray, date, false);
-				}
-
-			}
-			return manager.getStats(locationArray, date);
-
 		}
 		if (remote != null) {
 			switch (remote) {
@@ -136,7 +79,7 @@ public class StatsController {
 			}
 
 		}
-		return manager.getStats(locationArray, date);
+		return manager.getStats(locationArray, date,null);
 
 	}
 }
