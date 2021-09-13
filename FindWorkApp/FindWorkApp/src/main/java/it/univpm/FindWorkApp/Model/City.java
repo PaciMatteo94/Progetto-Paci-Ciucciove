@@ -2,18 +2,19 @@ package it.univpm.FindWorkApp.Model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe che rappresenta gli oggetti di tipo <b>City</b>.
+ * 
+ * @author Paci Matteo
+ * @author Ciucciovè Leonardo
+ *
+ */
 public class City {
 	private String location;
 	private Long count;
-	private int empNullAmount;
-
-	private int fullTimeAmount;
-	private int partTimeAmount;
-	private double fullTimePerc;
-	private double partTimePerc;
-	private StatsProgrammingLenguage lenguageStats;
+	private CityStats cityStats;
 	private ArrayList<WorkInformation> work;
-	
+
 	public City(String location) {
 		this.location = location;
 	}
@@ -25,7 +26,7 @@ public class City {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
+
 	public Long getCount() {
 		return count;
 	}
@@ -33,53 +34,13 @@ public class City {
 	public void setCount(Long count) {
 		this.count = count;
 	}
-	public int getEmpNullAmount() {
-		return empNullAmount;
+
+	public CityStats getCityStats() {
+		return cityStats;
 	}
 
-	public void setEmpNullAmount(int empNullAmount) {
-		this.empNullAmount = empNullAmount;
-	}
-
-
-	public int getFullTimeAmount() {
-		return fullTimeAmount;
-	}
-
-	public void setFullTimeAmount(int fullTimeAmount) {
-		this.fullTimeAmount = fullTimeAmount;
-	}
-
-	public int getPartTimeAmount() {
-		return partTimeAmount;
-	}
-
-	public void setPartTimeAmount(int partTimeAmount) {
-		this.partTimeAmount = partTimeAmount;
-	}
-
-	public double getFullTimePerc() {
-		return fullTimePerc;
-	}
-
-	public void setFullTimePerc(double fullTimePerc) {
-		this.fullTimePerc = fullTimePerc;
-	}
-
-	public double getPartTimePerc() {
-		return partTimePerc;
-	}
-
-	public void setPartTimePerc(double partTimePerc) {
-		this.partTimePerc = partTimePerc;
-	}
-
-	public StatsProgrammingLenguage getLenguageStats() {
-		return lenguageStats;
-	}
-
-	public void setLenguageStats(StatsProgrammingLenguage lenguageStats) {
-		this.lenguageStats = lenguageStats;
+	public void setCityStats(CityStats cityStats) {
+		this.cityStats = cityStats;
 	}
 
 	public ArrayList<WorkInformation> getWork() {
@@ -89,8 +50,5 @@ public class City {
 	public void setWork(ArrayList<WorkInformation> work) {
 		this.work = work;
 	}
-	
-
-
 
 }

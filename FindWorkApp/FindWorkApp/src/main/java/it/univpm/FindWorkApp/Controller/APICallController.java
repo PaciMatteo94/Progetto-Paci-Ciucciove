@@ -3,6 +3,9 @@ package it.univpm.FindWorkApp.Controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.JSONObject;
 import java.util.Arrays;
+import java.util.HashMap;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.univpm.FindWorkApp.Exception.EmptyBodyException;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
 
@@ -43,23 +45,21 @@ public class APICallController {
 
 	@GetMapping("/preferences")
 	public JSONObject preferences(@RequestParam(name = "nome", defaultValue = "none") String nome) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		Preference pref = new Preference();
-		JSONObject obj = new JSONObject();
-		obj.put("Città di preferenza", pref.getPreference());
+		map.put("Città di preferenza", pref.getPreference());
+		JSONObject obj = new JSONObject(map);
 		return obj;
 	}
-	//@PostMapping("/preferences")
+
+	// @PostMapping("/preferences")
 	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
-	public @ResponseBody JSONObject suggested(@RequestBody (required=false) String body) {
-		try {
-		    if(body==null)
-		       throw new EmptyBodyException();
-		}
-		catch (EmptyBodyException e) {
-			JSONObject noBody = new JSONObject();
-			noBody.put("Errore 400", e.getMessage());
-			   return noBody;
-		}
+	public @ResponseBody JSONObject suggested(@RequestBody(required = false) String body) {
+		/*
+		 * try { if(body==null) throw new EmptyBodyException(); } catch
+		 * (EmptyBodyException e) { JSONObject noBody = new JSONObject();
+		 * noBody.put("Errore 400", e.getMessage()); return noBody; }
+		 */
 		String[] cityArray = body.split(", |&|,");
 		String[] cities;
 
@@ -71,10 +71,7 @@ public class APICallController {
 		JSONObject js = new JSONObject();
 		js.put("Città inserite", cities);
 		return js;
-	      }
-
-
-
+	}
 
 	/**
 	 * <p>
@@ -87,59 +84,87 @@ public class APICallController {
 	 *         informazioni richieste dall'utente.
 	 */
 	@GetMapping("/cities")
-	public JSONObject cityFilter(@RequestParam(name = "location") String location,
+	public JSONObject cityFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "employment_type", required = false) String employment_type,
-			@RequestParam(name = "remote", required = false) Remote remote) {
-		try {
+			@RequestParam(name = "remote", required = false) Remote remote)
+			throws NoLocationException, UnsupportedValueException {
+		String[] cities = null;
+		if (location != null) {
 			if (location == "")
 				throw new NoLocationException();
-		} catch (NoLocationException e) {
-			JSONObject noLocation = new JSONObject();
-			noLocation.put("errore 400", e.getMessage());
-			return noLocation;
-		}
-		String[] cityArray = location.split(", |&|,");
-		String[] cities;
 
-		if (cityArray.length < 5) {
-			cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
-		} else {
-			cities = Arrays.copyOfRange(cityArray, 0, 5);
-		}
-		try {
-			if (employment_type != null) {
-				if (employment_type.contains("full time") || employment_type.contains("contract")) {
-					if (remote != null) {
-						switch (remote) {
-						case yes:
-							return manager.getCities(cities, employment_type, true);
-						case no:
-							return manager.getCities(cities, employment_type, false);
-						}
-					}
-					return manager.getCities(cities, employment_type, null);
+			String[] cityArray = location.split(", |&|,");
 
-				} else {
-					throw new UnsupportedValueException();
-
-				}
+			if (cityArray.length < 5) {
+				cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
 			} else {
+				cities = Arrays.copyOfRange(cityArray, 0, 5);
+			}
+		} else {
+			Preference pref = new Preference();
+			cities = pref.getPreference();
+		}
+		if (employment_type != null) {
+			if (employment_type.contains("full time") || employment_type.contains("contract")) {
 				if (remote != null) {
 					switch (remote) {
 					case yes:
-						return manager.getCities(cities, null, true);
+						return manager.getCities(cities, employment_type, true);
 					case no:
-						return manager.getCities(cities, null, false);
+						return manager.getCities(cities, employment_type, false);
 					}
-
 				}
+				return manager.getCities(cities, employment_type, null);
+
+			} else {
+				throw new UnsupportedValueException();
+
 			}
-		} catch (UnsupportedValueException e) {
-			JSONObject unsupportedValue = new JSONObject();
-			unsupportedValue.put("errore 400", e.getMessage());
-			return unsupportedValue;
+		} else {
+			if (remote != null) {
+				switch (remote) {
+				case yes:
+					return manager.getCities(cities, null, true);
+				case no:
+					return manager.getCities(cities, null, false);
+				}
+
+			}
 		}
+
 		return manager.getCities(cities, null, null);
 
 	}
+
+	/**
+	 * Il metodo <b>NoLocation</b> gestisce l'eccezione che si viene a creare nel
+	 * metodo <b>getCities</b> quando si lascia vuoto il parametro delle location.
+	 * 
+	 * @param e eccezione
+	 * @return <code>JSONObject</code> Oggetto dove viene descritto l'errore.
+	 */
+	@ExceptionHandler(NoLocationException.class)
+	public static JSONObject NoLocation(NoLocationException e) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("errore 400", e.getMessage());
+		JSONObject noLocation = new JSONObject(map);
+		return noLocation;
+	}
+
+	/**
+	 * Il metodo <b>UnsupportedValue</b> gestisce l'eccezione che si viene a creare
+	 * nel metodo <b>getCities</b> quando si inserisce un valore inaspettato nel
+	 * parametro <b>employment_type</b>.
+	 * 
+	 * @param e eccezione
+	 * @return <code>JSONObject</code> Oggetto dove viene descritto l'errore.
+	 */
+	@ExceptionHandler(UnsupportedValueException.class)
+	public static JSONObject UnsupportedValue(UnsupportedValueException e) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("errore 400", e.getMessage());
+		JSONObject unsupportedValue = new JSONObject(map);
+		return unsupportedValue;
+	}
+
 }

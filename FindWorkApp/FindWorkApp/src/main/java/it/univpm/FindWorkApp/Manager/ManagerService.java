@@ -2,9 +2,6 @@ package it.univpm.FindWorkApp.Manager;
 
 import org.json.simple.JSONObject;
 
-import it.univpm.FindWorkApp.Exception.IncompatibilityRemoteException;
-import it.univpm.FindWorkApp.Exception.NoCityException;
-
 /**
  * 
  * <p>
@@ -17,7 +14,7 @@ import it.univpm.FindWorkApp.Exception.NoCityException;
 public interface ManagerService {
 	/**
 	 * <p>
-	 * Il metodo <b>getCities</b> ha l'obbiettivo di fare una chiamata all'api per
+	 * Il metodo <b>getCities</b> ha l'obbiettivo di fare una chiamata all'API per
 	 * poi restituire un oggetto JSON contente tutti i dati richiesti.
 	 * 
 	 * @param location        lista di città dove effettuare la ricerca
@@ -34,9 +31,9 @@ public interface ManagerService {
 
 	/**
 	 * <p>
-	 * Il metodo<b>getStats</b> restituisce un oggetto JSON in cui sono presenti le
-	 * statistiche, eventualemente filtrate, delle varie città richieste, se
-	 * presenti in memoria.
+	 * Il metodo<b>getStats</b> ha l'obbiettivo di fare una chiamata all'API per poi
+	 * restituire un oggetto JSON che contiene le statistiche, eventualmente
+	 * filtrate, delle città richieste.
 	 * 
 	 * @param location lista delle città di cui si vuole visualizzare le
 	 *                 statistiche.
@@ -48,6 +45,6 @@ public interface ManagerService {
 	 *         con le rispettive statistiche.
 	 */
 
-	public JSONObject getStats(String[] location, String date, Boolean remote)throws NoCityException,IncompatibilityRemoteException;
+	public JSONObject getStats(String[] location, String date, Boolean remote);
 
 }

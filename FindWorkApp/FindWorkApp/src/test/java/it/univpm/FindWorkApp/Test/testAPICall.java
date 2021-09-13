@@ -13,13 +13,12 @@ import it.univpm.FindWorkApp.Model.City;
 class testAPICall {
 	private APICall testApi;
 	private City testCity;
-	
 
 	@BeforeEach
 	void setUp() throws Exception {
-		testApi= APICall.getInstance();
+		testApi = APICall.getInstance();
 		testApi.setAPICall("Berlin", true);
-		testCity= testApi.getData();
+		testCity = testApi.getData();
 	}
 
 	@AfterEach
@@ -29,6 +28,6 @@ class testAPICall {
 	@Test
 	@DisplayName("La località dell'oggetto coincide con la località di ricerca")
 	void testLcationCity() {
-		assertEquals("Berlin", testCity.getLocation() );
+		assertEquals("Berlin", testCity.getLocation());
 	}
 }

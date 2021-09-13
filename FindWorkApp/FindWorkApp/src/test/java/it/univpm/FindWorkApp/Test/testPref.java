@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import it.univpm.FindWorkApp.*;
 
 class testPref {
-private String[] cities;
+	private String[] cities;
+
 	@BeforeEach
 	void setUp() throws Exception {
 	}
