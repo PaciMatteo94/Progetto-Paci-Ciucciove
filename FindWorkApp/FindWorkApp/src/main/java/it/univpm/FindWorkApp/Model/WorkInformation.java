@@ -7,7 +7,6 @@ public class WorkInformation {
 	private String companyName;
 	private String employementType;
 	private Boolean remote;
-
 	private ArrayList<String> keywords;
 	private String dataPosted;
 	private String text;

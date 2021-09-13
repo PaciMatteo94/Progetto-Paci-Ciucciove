@@ -2,7 +2,13 @@ package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.JSONObject;
+
 import java.util.Arrays;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.univpm.FindWorkApp.Exception.EmptyBodyException;
+import it.univpm.FindWorkApp.Exception.NoCityException;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
-
+import it.univpm.FindWorkApp.Exception.WrongCredentialsException;
 import it.univpm.FindWorkApp.Manager.Manager;
 import it.univpm.FindWorkApp.Model.Preference;
 
@@ -27,11 +34,15 @@ import it.univpm.FindWorkApp.Model.Preference;
  */
 @RestController
 public class APICallController {
+	Preference pref;
+	String[] p;
 	private static enum Remote {
 		yes, no
 	}
 
+
 	private Manager manager = Manager.getInstance();
+	
 
 	/**
 	 * <p>
@@ -43,38 +54,79 @@ public class APICallController {
 
 	@GetMapping("/preferences")
 	public JSONObject preferences(@RequestParam(name = "nome", defaultValue = "none") String nome) {
-		Preference pref = new Preference();
+		pref = new Preference();
 		JSONObject obj = new JSONObject();
+		if(p == null)
 		obj.put("Città di preferenza", pref.getPreference());
+		else
+		obj.put("Città di preferenza", p);
 		return obj;
 	}
-	//@PostMapping("/preferences")
+	
+	/**
+	 * <p>
+	 * Questo metodo sfrutta l'HttpServletResponse per creare un facsimile di autenticazione creando prima degli headers 
+	 * durante la risposta del server all'invio della richiesta per la rotta '/preferences'. 
+	 * Vengono poi confrontati con il contenuto del body e se corrette, l'header AUTHENTICATION verrà settato
+	 * a 'YES'. Quando il body non sarà vuoto né conterra delle credenziali errate, 
+	 * allora il metodo prenderà le città che l'utente avrà inserito nella
+	 * scheda parametri e le restituirà allo stesso modo di una richiesta fatta allo stesso indirizzo utilizzando 
+	 * il metodo GET. L'utente qui ha scelta, potrà inserire le città che vuole.
+	 * 
+	 * @param body dove sono contenute le credenziali inserite che vengono confrontate
+	 * @param response elemento di tipo 'HttpServletResponse' utile per generare specifiche funzionalità HTTP, in questo caso l'aggiunte diìegli headers di autenticazione
+	 * @param location dove vengono salvate le località scelte dall'utente
+	 * 
+	 * @return <code>JSONObject</code>
+	 * @throws EmptyBodyException
+	 * @throws WrongCredentialsException
+	 */
+	
 	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
-	public @ResponseBody JSONObject suggested(@RequestBody (required=false) String body) {
-		try {
-		    if(body==null)
-		       throw new EmptyBodyException();
-		}
-		catch (EmptyBodyException e) {
-			JSONObject noBody = new JSONObject();
-			noBody.put("Errore 400", e.getMessage());
-			   return noBody;
-		}
-		String[] cityArray = body.split(", |&|,");
-		String[] cities;
-
-		if (cityArray.length < 5) {
-			cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
-		} else {
-			cities = Arrays.copyOfRange(cityArray, 0, 5);
-		}
+	@ResponseBody
+	public JSONObject suggested(@RequestBody (required=false) String body, HttpServletResponse response, HttpServletRequest request, @RequestParam(name = "Location",required=false) String location) 
+			throws EmptyBodyException, WrongCredentialsException{
+		response.addHeader("Username", "admin");
+		response.addHeader("Password", "root");
+		response.addHeader("Authenticate", "NO");
+		boolean r=true;
+		do {	
+		if(body==null)
+			   throw new EmptyBodyException();
+		if(!(body.contains(response.getHeader("Username")) && body.contains(response.getHeader("Password"))))
+			throw new WrongCredentialsException();
+		r=false;  
+		 }while(r);
+		response.setHeader("Authenticate", "YES");
 		JSONObject js = new JSONObject();
-		js.put("Città inserite", cities);
-		return js;
-	      }
+		if(response.getHeader("Authenticate").equals("YES")) {
+			try {
+				String s;
+				s=request.getParameter("Location");
+				if (location == null  && s == null)
+					throw new NoLocationException();
+			} catch (NoLocationException e) {
+				JSONObject noLocation = new JSONObject();
+				noLocation.put("Errore 400", e.getMessage() + ". Oppure hai sbagliato ad inserire il parametro");
+				return noLocation;
+			}
+			String[] cityArray = location.split(", |&|,");
+			String[] cities;
 
-
-
+			if (cityArray.length < 5) {
+				cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
+			} else {
+				cities = Arrays.copyOfRange(cityArray, 0, 5);
+			}
+			pref=new Preference();
+			pref.setPreference(cities);
+			p=pref.getPreference();
+	
+			js.put("Città inserite", cities);
+	}
+			return js;
+		
+	}
 
 	/**
 	 * <p>
@@ -141,5 +193,32 @@ public class APICallController {
 		}
 		return manager.getCities(cities, null, null);
 
+	}
+	/**
+	 * <p> 
+	 * Cattura esterna dell'eccezione relativa ad un contenuto vuoto del body
+	 * 
+	 * @param e eccezione
+	 * @return <code>JSONObject</code> contiene il messaggio di errore della relativa eccezione
+	 */
+	@ExceptionHandler(EmptyBodyException.class)
+	public static JSONObject error(EmptyBodyException e) {
+		JSONObject emptyBody = new JSONObject();
+		emptyBody.put("Errore 400", e.getMessage());
+		return emptyBody;
+		
+	}
+	/**
+	 * <p>
+	 * Cattura esterna dell'eccezione prodotta dall'inserimento errato delle credenziali di accesso
+	 * 
+	 * @param e eccezione
+	 * @return <code>JSONObject</code> contiene il messaggio di errore della relativa eccezione
+	 */
+	@ExceptionHandler(WrongCredentialsException.class)
+	public static JSONObject error(WrongCredentialsException e) {
+		JSONObject wCredentials = new JSONObject();
+		wCredentials.put("Errore 401", e.getMessage()+" Credenziali errate");
+		return wCredentials;
 	}
 }

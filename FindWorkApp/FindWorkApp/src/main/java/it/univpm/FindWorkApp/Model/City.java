@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class City {
 	private String location;
 	private Long count;
-	private int empNullAmount;
-
+	private int NotSpecifiedAmount;
+	private double NotSpecifiedPerc;
 	private int fullTimeAmount;
 	private int partTimeAmount;
 	private double fullTimePerc;
@@ -33,15 +33,7 @@ public class City {
 	public void setCount(Long count) {
 		this.count = count;
 	}
-	public int getEmpNullAmount() {
-		return empNullAmount;
-	}
-
-	public void setEmpNullAmount(int empNullAmount) {
-		this.empNullAmount = empNullAmount;
-	}
-
-
+	
 	public int getFullTimeAmount() {
 		return fullTimeAmount;
 	}
@@ -73,6 +65,22 @@ public class City {
 	public void setPartTimePerc(double partTimePerc) {
 		this.partTimePerc = partTimePerc;
 	}
+	
+	public int getNotSpecifiedAmount() {
+		return NotSpecifiedAmount;
+	}
+
+	public void setNotSpecifiedAmount(int NotSpecifiedAmount) {
+		this.NotSpecifiedAmount = NotSpecifiedAmount;
+	}
+	
+	public double getNotSpecifiedPerc() {
+		return NotSpecifiedPerc;
+	}
+
+	public void setNotSpecifiedPerc(double notSpecifiedPerc) {
+		NotSpecifiedPerc = notSpecifiedPerc;
+	}
 
 	public StatsProgrammingLenguage getLenguageStats() {
 		return lenguageStats;
@@ -89,8 +97,5 @@ public class City {
 	public void setWork(ArrayList<WorkInformation> work) {
 		this.work = work;
 	}
-
-
-
 
 }
