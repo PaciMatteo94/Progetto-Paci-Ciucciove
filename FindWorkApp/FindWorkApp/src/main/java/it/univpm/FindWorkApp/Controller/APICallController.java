@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.univpm.FindWorkApp.Exception.EmptyBodyException;
-import it.univpm.FindWorkApp.Exception.NoCityException;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
 import it.univpm.FindWorkApp.Exception.WrongCredentialsException;

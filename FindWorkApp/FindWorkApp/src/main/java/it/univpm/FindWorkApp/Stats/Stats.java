@@ -11,6 +11,15 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
 
 
 public class Stats {
+	private static Stats instance = null;
+	private Stats() {}
+	public static Stats getInstance() {
+		if(instance == null) {
+			instance = new Stats();
+		
+		}
+		return instance;
+	}
 /**
  * <p>
  * Questo metodo inizializza contatori (cnt) per il conteggio di:
@@ -23,7 +32,8 @@ public class Stats {
  * @param city contiene i lavori relativi ad una città
  * @return city, un oggetto di tipo City che contiene tutte le informazioni dei lavori a cui sono appena stati riempiti i campi relativi alle statistiche
  */
-	public static City statsCalculate(City city) {
+	public City statsCalculate(City city) {
+		CityStats stats = new CityStats();
 		int cnt = 0, cnt2 = 0, cnt3=0, cnt4=0, cnt5=0;
 		int pythonCnt = 0, phpCnt = 0, springCnt = 0, typescriptCnt = 0, sqlCnt = 0;
 		for (WorkInformation w : city.getWork()) {
@@ -84,28 +94,27 @@ public class Stats {
 		double percSpring = Precision.round(pSpring, 2);
 		double percTypescript = Precision.round(pTypescript, 2);
 		double percSql = Precision.round(pSql, 2);
-		StatsProgrammingLenguage calcs = new StatsProgrammingLenguage();
-		calcs.setPercPython(percPython);
-		calcs.setPercPhp(percPhp);
-		calcs.setPercSpring(percSpring);
-		calcs.setPercTypescript(percTypescript);
-		calcs.setPercSql(percSql);
+		stats.setPercPython(percPython);
+		stats.setPercPhp(percPhp);
+		stats.setPercSpring(percSpring);
+		stats.setPercTypescript(percTypescript);
+		stats.setPercSql(percSql);
 
 		cnt=cnt+cnt3;
 		cnt2=cnt2+cnt4;
-		city.setFullTimeAmount(cnt);
-		city.setPartTimeAmount(cnt2);
-		city.setNotSpecifiedAmount(cnt5);
+		stats.setFullTimeAmount(cnt);
+		stats.setPartTimeAmount(cnt2);
+		stats.setNotSpecifiedAmount(cnt5);
 		double pFTA = (double) cnt / city.getWork().size() * 100;
 		double pPTA = (double) cnt2 / city.getWork().size() * 100;
 		double pNTA = (double) cnt5 / city.getWork().size() * 100;
 		double percFTA = Precision.round(pFTA, 2);
 		double percPTA = Precision.round(pPTA, 2);
 		double percNTA = Precision.round(pNTA, 2);
-		city.setFullTimePerc(percFTA);
-		city.setPartTimePerc(percPTA);
-		city.setNotSpecifiedPerc(percNTA);
-		city.setLenguageStats(calcs);
+		stats.setFullTimePerc(percFTA);
+		stats.setPartTimePerc(percPTA);
+		stats.setNotSpecifiedPerc(percNTA);
+		city.setCityStats(stats);
 		return city;
 	}
 

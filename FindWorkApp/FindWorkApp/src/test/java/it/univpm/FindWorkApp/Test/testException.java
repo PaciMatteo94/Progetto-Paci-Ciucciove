@@ -2,22 +2,36 @@ package it.univpm.FindWorkApp.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 
 import it.univpm.FindWorkApp.Controller.APICallController;
 import it.univpm.FindWorkApp.Controller.StatsController;
+import it.univpm.FindWorkApp.Exception.EmptyBodyException;
 import it.univpm.FindWorkApp.Exception.NoLocationException;
 import it.univpm.FindWorkApp.Exception.OverflowCityException;
 import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
 
 class testException {
+	
+	HttpServletRequest mockRequest = EasyMock.createMock(HttpServletRequest.class);
+	HttpServletResponse mockResponse = EasyMock.createMock(HttpServletResponse.class);
+	HttpServletRequest httpServletRequest = new MockHttpServletRequest();
+	HttpServletResponse httpServletResponse = new MockHttpServletResponse();
 	NoLocationException ecc1;
 	OverflowCityException ecc2;
 	UnsupportedValueException ecc3;
+	EmptyBodyException ecc4;
 	APICallController c1;
 	StatsController c2;
+
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -52,6 +66,17 @@ class testException {
 		});
 		assertEquals("Il valore inserito in employment_type non è supportato", ecc3.getMessage());
 
+	}
+	@Test
+	void testEmptyBodyException(){
+		ecc4 = assertThrows(EmptyBodyException.class, () -> {
+			c1.suggested(null,httpServletResponse,httpServletRequest, "");
+	    });
+
+	    String expectedMessage = "Non hai inserito nulla nel Body";
+	    String actualMessage = ecc4.getMessage();
+
+	    assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 }

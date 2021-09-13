@@ -11,14 +11,31 @@ public class CityStats {
 	private int empNullAmount;
 	private int fullTimeAmount;
 	private int partTimeAmount;
+	private int notSpecifiedAmount;
 	private double fullTimePerc;
 	private double partTimePerc;
-	private double percPyton;
+	private double notSpecifiedPerc;
+	private double percPython;
 	private double percPhp;
 	private double percSpring;
 	private double percTypescript;
 	private double percSql;
 
+	public int getNotSpecifiedAmount() {
+		return notSpecifiedAmount;
+	}
+
+	public void setNotSpecifiedAmount(int notSpecifiedAmount) {
+		this.notSpecifiedAmount = notSpecifiedAmount;
+	}
+
+	public double getNotSpecifiedPerc() {
+		return notSpecifiedPerc;
+	}
+
+	public void setNotSpecifiedPerc(double notSpecifiedPerc) {
+		this.notSpecifiedPerc = notSpecifiedPerc;
+	}
 	public String[] getCommonLanguages() {
 		return commonLanguages;
 	}
@@ -68,11 +85,11 @@ public class CityStats {
 	}
 
 	public double getPercPyton() {
-		return percPyton;
+		return percPython;
 	}
 
-	public void setPercPyton(double percPyton) {
-		this.percPyton = percPyton;
+	public void setPercPython(double percPyton) {
+		this.percPython = percPyton;
 	}
 
 	public double getPercPhp() {
