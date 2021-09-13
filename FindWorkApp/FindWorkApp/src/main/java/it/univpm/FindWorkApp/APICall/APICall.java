@@ -26,7 +26,7 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
  *
  */
 public class APICall implements APICallService {
-	/*
+	/**
 	 * La classe è implementata come singleton, quindi verrà creata una singola
 	 * istanza di tale classe che poi verrà usata dagli altri metodi durante
 	 * l'esecuzione del programma.
@@ -76,8 +76,8 @@ public class APICall implements APICallService {
 	 * 
 	 * <p>
 	 * Il metodo setta i parametri per la chiamata all'API inserendo la tipologia di
-	 * metodo, l'autorizzazione e il tipo di dato che accettiamo. Dopo aver fatto la
-	 * chiamata all'API e salvato i dati in un oggetto JSON, invocherà il metodo
+	 * richiesta, l'autorizzazione e il tipo di dato che accettiamo. Dopo aver fatto
+	 * la chiamata all'API e salvato i dati in un oggetto JSON, invocherà il metodo
 	 * privato <b>workParser</b>.
 	 * 
 	 */
@@ -91,7 +91,6 @@ public class APICall implements APICallService {
 		try {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(api).openConnection();
 			openConnection.setRequestMethod("GET");
-			openConnection.addRequestProperty("User-Agent", "default");
 			openConnection.setRequestProperty("Authorization", "Token 838d2cb24efd24d35d81f7cc6846cd6ec54cd4dd ");
 			openConnection.setRequestProperty("Accept", "application/json");
 
@@ -163,7 +162,7 @@ public class APICall implements APICallService {
 		}
 		city.setCount((Long) obj.get("count"));
 		city.setWork(workArray);
-		
+
 		return city;
 	}
 }

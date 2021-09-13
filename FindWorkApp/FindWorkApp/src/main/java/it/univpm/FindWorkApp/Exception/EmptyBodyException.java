@@ -9,16 +9,16 @@ package it.univpm.FindWorkApp.Exception;
  *
  * @author Paci Matteo
  * @author Ciucciovè Leonardo
- * 
- */ 
+ *
+ */
 
 public class EmptyBodyException extends Exception{
 	private static final long serialVersionUID = 5;
-	
+
 	/**
 	 * Costruttore della classe <b>EmptyBodyException</b>
 	 */
-	
+
 	public EmptyBodyException() {
 		super("Non hai inserito nulla nel Body");
 	}

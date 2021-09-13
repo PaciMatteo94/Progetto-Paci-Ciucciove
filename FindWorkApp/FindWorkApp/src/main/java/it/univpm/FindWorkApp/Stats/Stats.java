@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.commons.math3.util.Precision;
 import it.univpm.FindWorkApp.Model.City;
-import it.univpm.FindWorkApp.Model.StatsProgrammingLenguage;
+import it.univpm.FindWorkApp.Model.CityStats;
 import it.univpm.FindWorkApp.Model.WorkInformation;
 
 
@@ -14,12 +14,12 @@ public class Stats {
 /**
  * <p>
  * Questo metodo inizializza contatori (cnt) per il conteggio di:
- * lavori part-time/contratto, full-time o dove non è specificato 
+ * lavori part-time/contratto, full-time o dove non è specificato
  * quanti di essi contengono i linguaggi predefiniti del python, php, spring, typescript, sql
- * 
+ *
  * calcola poi le percentuali di tutti questi dati
  * (le percentuali dei linguaggi sono sul totoale)
- * 
+ *
  * @param city contiene i lavori relativi ad una città
  * @return city, un oggetto di tipo City che contiene tutte le informazioni dei lavori a cui sono appena stati riempiti i campi relativi alle statistiche
  */
@@ -46,26 +46,26 @@ public class Stats {
 			}
 			if (w.getKeywords() != null) {
 				for (String s : w.getKeywords()) {
-					for (int i = 0; i < StatsProgrammingLenguage.getCommonLanguages().length; i++) {
+					for (int i = 0; i < stats.getCommonLanguages().length; i++) {
 						switch (i) {
 						case 0:
-							if (s.equals(StatsProgrammingLenguage.getCommonLanguages()[i]))
+							if (s.equals(stats.getCommonLanguages()[i]))
 								pythonCnt++;
 							break;
 						case 1:
-							if (s.equals(StatsProgrammingLenguage.getCommonLanguages()[i]))
+							if (s.equals(stats.getCommonLanguages()[i]))
 								phpCnt++;
 							break;
 						case 2:
-							if (s.equals(StatsProgrammingLenguage.getCommonLanguages()[i]))
+							if (s.equals(stats.getCommonLanguages()[i]))
 								springCnt++;
 							break;
 						case 3:
-							if (s.equals(StatsProgrammingLenguage.getCommonLanguages()[i]))
+							if (s.equals(stats.getCommonLanguages()[i]))
 								typescriptCnt++;
 							break;
 						case 4:
-							if (s.equals(StatsProgrammingLenguage.getCommonLanguages()[i]))
+							if (s.equals(stats.getCommonLanguages()[i]))
 								sqlCnt++;
 							break;
 						}
@@ -90,7 +90,7 @@ public class Stats {
 		calcs.setPercSpring(percSpring);
 		calcs.setPercTypescript(percTypescript);
 		calcs.setPercSql(percSql);
-		
+
 		cnt=cnt+cnt3;
 		cnt2=cnt2+cnt4;
 		city.setFullTimeAmount(cnt);
@@ -109,52 +109,34 @@ public class Stats {
 		return city;
 	}
 
-	public static ArrayList<City> statsFiltered(ArrayList<City> cities, String date, Boolean remote) {
-		ArrayList<City> match = new ArrayList<City>(cities.size());
-		City tempCity;
-		ArrayList<WorkInformation> tempWork;
-		if (date != null) {
-			DateTimeFormatter userFormat= DateTimeFormatter.ofPattern("uuuu-MM-dd");
-			DateTimeFormatter apiFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss'Z'");
-			LocalDate start = LocalDate.parse(date, userFormat);
-			for (City city : cities) {
-				tempWork = new ArrayList<WorkInformation>();
-				tempCity = new City(city.getLocation());
-				for (WorkInformation work : city.getWork()) {
-					LocalDate workDate = LocalDate.parse(work.getDataPosted(), apiFormat);
-					if(remote !=null) {
-						if ((start.isBefore(workDate)|| start.equals(workDate)) && work.getRemote() == remote) {
-							tempWork.add(work);
-							
-						}
-					}else {
-						if (start.isBefore(workDate) || start.equals(workDate)) {
-							tempWork.add(work);
-						}
-					}
-
-				}
-				tempCity.setCount((long)tempWork.size());
-				tempCity.setWork(tempWork);
-				match.add(Stats.statsCalculate(tempCity));
-			}
-
-		}else if (remote != null) {
-			for (City city : cities) {
-				tempWork = new ArrayList<WorkInformation>();
-				tempCity = new City(city.getLocation());
-				for (WorkInformation work : city.getWork()) {
-					if (work.getRemote() == remote) {
-						tempWork.add(work);
-					}
-				}
-				tempCity.setCount((long)tempWork.size());
-				tempCity.setWork(tempWork);
-				match.add(Stats.statsCalculate(tempCity));
+	/**
+	 * Il metodo <b>statsFiltered</b> ha l'obbiettivo di calcolare le statistiche
+	 * filtrate per data. Converte le date in un formato comune per fare un
+	 * confronto tra di loro per capire quali lavori soddisfano il filtro inserito e
+	 * li salva in una lista. Successivamente questa lista viente salvata in un
+	 * oggetto di tipo <b>City</b> che viene passato al metoto <b>statsCalculate</b>
+	 * che calcola le statistiche dei lavori della città.
+	 *
+	 * @param city oggetto di tipo City.
+	 * @param date filtro inserito dell'utente con cui calcolare le statistiche.
+	 * @return <code>City</code> oggetto dove sono salvate le informazioni e le
+	 *         statistiche della città.
+	 */
+	public City statsFiltered(City city, String date) {
+		ArrayList<WorkInformation> tempWork = new ArrayList<WorkInformation>();
+		DateTimeFormatter userFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+		DateTimeFormatter apiFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss'Z'");
+		LocalDate start = LocalDate.parse(date, userFormat);
+		for (WorkInformation work : city.getWork()) {
+			LocalDate workDate = LocalDate.parse(work.getDataPosted(), apiFormat);
+			if (start.isBefore(workDate) || start.equals(workDate)) {
+				tempWork.add(work);
 			}
 		}
-		
-		return match;
+		city.setCount((long) tempWork.size());
+		city.setWork(tempWork);
+		statsCalculate(city);
+		return city;
 	}
 
 }

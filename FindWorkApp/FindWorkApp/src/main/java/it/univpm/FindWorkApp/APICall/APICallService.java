@@ -14,7 +14,8 @@ public interface APICallService {
 	/**
 	 * <p>
 	 * Il metodo <b>getData</b> ha come obbiettivo quello di chiamare l'API e
-	 * salvare i dati che riceve in un modello chiamato City.
+	 * salvare i dati che riceve in un modello chiamato City che restituisce.
+	 * 
 	 * 
 	 * @return <code>City</code> oggetto che racchiude le informazioni e i lavori di
 	 *         una città.

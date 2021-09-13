@@ -10,7 +10,7 @@ import it.univpm.FindWorkApp.Model.Preference;
 
 /**
  * *<p>
- *La classe è generata per testare se le città restituite all richiesta della rotta /preference (GET) 
+ *La classe è generata per testare se le città restituite all richiesta della rotta /preference (GET)
  *in questo metodo dell'APICallController, sono le stesse contenute nell'array della classe 'Preference'
  *</p>
  *
@@ -35,10 +35,10 @@ private String[] pref = {"London", "Berlin", "New York", "Amsterdam", "Paris"};
 	/**
 	 * test dell' dell'eccezione che confronta se le città restituite dal metodo sono effettivamente
 	 * le stesse contenute nell'array istanziato dalla classe 'Preference'
-	 * 
+	 *
 	 * @see it.univpm.FindWorkApp.Controller.APICallController#preference()
 	 */
-	
+
 	@Test
 	void test() {
 		for(int i = 0;i<pref.length;i++) {

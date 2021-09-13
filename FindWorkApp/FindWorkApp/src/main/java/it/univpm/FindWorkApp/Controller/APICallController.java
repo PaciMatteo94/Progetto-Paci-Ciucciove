@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class APICallController {
 
 
 	private Manager manager = Manager.getInstance();
-	
+
 
 	/**
 	 * <p>
@@ -65,37 +66,37 @@ public class APICallController {
 	
 	/**
 	 * <p>
-	 * Questo metodo sfrutta l'HttpServletResponse per creare un facsimile di autenticazione creando prima degli headers 
-	 * durante la risposta del server all'invio della richiesta per la rotta '/preferences'. 
+	 * Questo metodo sfrutta l'HttpServletResponse per creare un facsimile di autenticazione creando prima degli headers
+	 * durante la risposta del server all'invio della richiesta per la rotta '/preferences'.
 	 * Vengono poi confrontati con il contenuto del body e se corrette, l'header AUTHENTICATION verrà settato
-	 * a 'YES'. Quando il body non sarà vuoto né conterra delle credenziali errate, 
+	 * a 'YES'. Quando il body non sarà vuoto né conterra delle credenziali errate,
 	 * allora il metodo prenderà le città che l'utente avrà inserito nella
-	 * scheda parametri e le restituirà allo stesso modo di una richiesta fatta allo stesso indirizzo utilizzando 
+	 * scheda parametri e le restituirà allo stesso modo di una richiesta fatta allo stesso indirizzo utilizzando
 	 * il metodo GET. L'utente qui ha scelta, potrà inserire le città che vuole.
-	 * 
+	 *
 	 * @param body dove sono contenute le credenziali inserite che vengono confrontate
 	 * @param response elemento di tipo 'HttpServletResponse' utile per generare specifiche funzionalità HTTP, in questo caso l'aggiunte diìegli headers di autenticazione
 	 * @param location dove vengono salvate le località scelte dall'utente
-	 * 
+	 *
 	 * @return <code>JSONObject</code>
 	 * @throws EmptyBodyException
 	 * @throws WrongCredentialsException
 	 */
-	
+
 	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject suggested(@RequestBody (required=false) String body, HttpServletResponse response, HttpServletRequest request, @RequestParam(name = "Location",required=false) String location) 
+	public JSONObject suggested(@RequestBody (required=false) String body, HttpServletResponse response, HttpServletRequest request, @RequestParam(name = "Location",required=false) String location)
 			throws EmptyBodyException, WrongCredentialsException{
 		response.addHeader("Username", "admin");
 		response.addHeader("Password", "root");
 		response.addHeader("Authenticate", "NO");
 		boolean r=true;
-		do {	
+		do {
 		if(body==null)
 			   throw new EmptyBodyException();
 		if(!(body.contains(response.getHeader("Username")) && body.contains(response.getHeader("Password"))))
 			throw new WrongCredentialsException();
-		r=false;  
+		r=false;
 		 }while(r);
 		response.setHeader("Authenticate", "YES");
 		JSONObject js = new JSONObject();
@@ -121,11 +122,11 @@ public class APICallController {
 			pref=new Preference();
 			pref.setPreference(cities);
 			p=pref.getPreference();
-	
+
 			js.put("Città inserite", cities);
 	}
 			return js;
-		
+
 	}
 
 	/**
@@ -139,65 +140,93 @@ public class APICallController {
 	 *         informazioni richieste dall'utente.
 	 */
 	@GetMapping("/cities")
-	public JSONObject cityFilter(@RequestParam(name = "location") String location,
+	public JSONObject cityFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "employment_type", required = false) String employment_type,
-			@RequestParam(name = "remote", required = false) Remote remote) {
-		try {
+			@RequestParam(name = "remote", required = false) Remote remote)
+			throws NoLocationException, UnsupportedValueException {
+		String[] cities = null;
+		if (location != null) {
 			if (location == "")
 				throw new NoLocationException();
-		} catch (NoLocationException e) {
-			JSONObject noLocation = new JSONObject();
-			noLocation.put("errore 400", e.getMessage());
-			return noLocation;
-		}
-		String[] cityArray = location.split(", |&|,");
-		String[] cities;
 
-		if (cityArray.length < 5) {
-			cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
-		} else {
-			cities = Arrays.copyOfRange(cityArray, 0, 5);
-		}
-		try {
-			if (employment_type != null) {
-				if (employment_type.contains("full time") || employment_type.contains("contract")) {
-					if (remote != null) {
-						switch (remote) {
-						case yes:
-							return manager.getCities(cities, employment_type, true);
-						case no:
-							return manager.getCities(cities, employment_type, false);
-						}
-					}
-					return manager.getCities(cities, employment_type, null);
+			String[] cityArray = location.split(", |&|,");
 
-				} else {
-					throw new UnsupportedValueException();
-
-				}
+			if (cityArray.length < 5) {
+				cities = Arrays.copyOfRange(cityArray, 0, cityArray.length);
 			} else {
+				cities = Arrays.copyOfRange(cityArray, 0, 5);
+			}
+		} else {
+			Preference pref = new Preference();
+			cities = pref.getPreference();
+		}
+		if (employment_type != null) {
+			if (employment_type.contains("full time") || employment_type.contains("contract")) {
 				if (remote != null) {
 					switch (remote) {
 					case yes:
-						return manager.getCities(cities, null, true);
+						return manager.getCities(cities, employment_type, true);
 					case no:
-						return manager.getCities(cities, null, false);
+						return manager.getCities(cities, employment_type, false);
 					}
-
 				}
+				return manager.getCities(cities, employment_type, null);
+
+			} else {
+				throw new UnsupportedValueException();
+
 			}
-		} catch (UnsupportedValueException e) {
-			JSONObject unsupportedValue = new JSONObject();
-			unsupportedValue.put("errore 400", e.getMessage());
-			return unsupportedValue;
+		} else {
+			if (remote != null) {
+				switch (remote) {
+				case yes:
+					return manager.getCities(cities, null, true);
+				case no:
+					return manager.getCities(cities, null, false);
+				}
+
+			}
 		}
+
 		return manager.getCities(cities, null, null);
 
 	}
+
 	/**
-	 * <p> 
+	 * Il metodo <b>NoLocation</b> gestisce l'eccezione che si viene a creare nel
+	 * metodo <b>getCities</b> quando si lascia vuoto il parametro delle location.
+	 *
+	 * @param e eccezione
+	 * @return <code>JSONObject</code> Oggetto dove viene descritto l'errore.
+	 */
+	@ExceptionHandler(NoLocationException.class)
+	public static JSONObject NoLocation(NoLocationException e) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("errore 400", e.getMessage());
+		JSONObject noLocation = new JSONObject(map);
+		return noLocation;
+	}
+
+	/**
+	 * Il metodo <b>UnsupportedValue</b> gestisce l'eccezione che si viene a creare
+	 * nel metodo <b>getCities</b> quando si inserisce un valore inaspettato nel
+	 * parametro <b>employment_type</b>.
+	 *
+	 * @param e eccezione
+	 * @return <code>JSONObject</code> Oggetto dove viene descritto l'errore.
+	 */
+	@ExceptionHandler(UnsupportedValueException.class)
+	public static JSONObject UnsupportedValue(UnsupportedValueException e) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("errore 400", e.getMessage());
+		JSONObject unsupportedValue = new JSONObject(map);
+		return unsupportedValue;
+	}
+
+	/**
+	 * <p>
 	 * Cattura esterna dell'eccezione relativa ad un contenuto vuoto del body
-	 * 
+	 *
 	 * @param e eccezione
 	 * @return <code>JSONObject</code> contiene il messaggio di errore della relativa eccezione
 	 */
@@ -206,12 +235,12 @@ public class APICallController {
 		JSONObject emptyBody = new JSONObject();
 		emptyBody.put("Errore 400", e.getMessage());
 		return emptyBody;
-		
+
 	}
 	/**
 	 * <p>
 	 * Cattura esterna dell'eccezione prodotta dall'inserimento errato delle credenziali di accesso
-	 * 
+	 *
 	 * @param e eccezione
 	 * @return <code>JSONObject</code> contiene il messaggio di errore della relativa eccezione
 	 */
