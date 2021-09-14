@@ -36,6 +36,7 @@ public class CityStats {
 	public void setNotSpecifiedPerc(double notSpecifiedPerc) {
 		this.notSpecifiedPerc = notSpecifiedPerc;
 	}
+
 	public String[] getCommonLanguages() {
 		return commonLanguages;
 	}

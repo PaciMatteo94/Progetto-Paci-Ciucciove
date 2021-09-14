@@ -1,10 +1,8 @@
 package it.univpm.FindWorkApp.Manager;
 
 import java.util.ArrayList;
-
-import org.json.simple.JSONObject;
-
 import it.univpm.FindWorkApp.APICall.APICall;
+import it.univpm.FindWorkApp.Exception.NoResultsException;
 import it.univpm.FindWorkApp.Model.City;
 import it.univpm.FindWorkApp.Parser.FindWorkParser;
 import it.univpm.FindWorkApp.Stats.Stats;
@@ -12,8 +10,8 @@ import it.univpm.FindWorkApp.Stats.Stats;
 /**
  * <p>
  * La classe <b>Manager</b> implementa l'interfaccia <b>ManagerService</b> e ha
- * l'obbiettivo di gestire le chiamate all'api e restituire un oggetto JSON in
- * cui sono salvati tutti i dati richiesti.
+ * l'obbiettivo di gestire le chiamate all'api e restituire un oggetto in cui
+ * sono salvati tutti i dati richiesti.
  * 
  * @author Paci Matteo
  *
@@ -53,14 +51,14 @@ public class Manager implements ManagerService {
 
 	/**
 	 * Il metodo <b>getCities</b> ha l'obbiettivo di gestire le funzioni necessarie
-	 * alla creazione dell'oggetto JSON da restituire all'utente. In base ai
-	 * parametri che gli vengono passati effettuerà le varie chiamate all'API,
-	 * salvare gli oggetti <b>City</b> in un ArrayList che verrà poi passata al
-	 * metodo <b>getJSON</b> che impacchetterà le informazioni in un oggetto JSON
-	 * che verrà restituito all'utente.
+	 * alla creazione dell'oggetto da restituire all'utente. In base ai parametri
+	 * che gli vengono passati effettuerà le varie chiamate all'API, salvare gli
+	 * oggetti <b>City</b> in un ArrayList che verrà poi passata al metodo
+	 * <b>getJSON</b> che impacchetterà le informazioni in un oggetto che verrà
+	 * restituito all'utente.
 	 */
 	@Override
-	public JSONObject getCities(String[] location, String employment_type, Boolean remote) {
+	public Object getCities(String[] location, String employment_type, Boolean remote) throws NoResultsException {
 
 		City city = null;
 		cities = new ArrayList<City>();
@@ -73,7 +71,9 @@ public class Manager implements ManagerService {
 
 				}
 			}
-			return parser.getJSON(cities);
+			if (cities.size() == 0)
+				throw new NoResultsException();
+			return parser.getCitiesObj(cities);
 
 		} else {
 			for (String name : location) {
@@ -84,22 +84,23 @@ public class Manager implements ManagerService {
 
 				}
 			}
-			return parser.getJSON(cities);
+			if (cities.size() == 0)
+				throw new NoResultsException();
+			return parser.getCitiesObj(cities);
 
 		}
 	}
 
 	/**
 	 * Il metodo <b>getStats</b> ha l'obbiettivo di gestire le funzioni necessarie
-	 * alla creazione dell'oggetto JSON da restituire all'utente. In base ai
-	 * parametri che gli vengono passati effettuerà le varie chiamate all'API,
-	 * calcolerà le statistiche della città esalverà gli oggetti di tipo <b>City</b>
-	 * in un ArrayList che verrà poi passata al metodo <b>getJSON</b> che
-	 * impacchetterà le informazioni in un oggetto JSON che verrà restituito
-	 * all'utente.
+	 * alla creazione dell'oggetto da restituire all'utente. In base ai parametri
+	 * che gli vengono passati effettuerà le varie chiamate all'API, calcolerà le
+	 * statistiche della città esalverà gli oggetti di tipo <b>City</b> in un
+	 * ArrayList che verrà poi passata al metodo <b>getJSON</b> che impacchetterà le
+	 * informazioni in un oggetto che verrà restituito all'utente.
 	 */
 	@Override
-	public JSONObject getStats(String[] location, String date, Boolean remote) {
+	public Object getStats(String[] location, String date, Boolean remote) {
 		City city = null;
 		cities = new ArrayList<City>();
 		for (String name : location) {
@@ -115,6 +116,7 @@ public class Manager implements ManagerService {
 				}
 			}
 		}
-		return parser.getJSONStats(cities);
+
+		return parser.getStatsObj(cities);
 	}
 }

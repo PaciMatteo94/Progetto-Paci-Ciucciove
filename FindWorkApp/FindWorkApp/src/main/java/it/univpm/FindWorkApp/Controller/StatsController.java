@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @RestController
 public class StatsController {
+	Preference pref = Preference.getInstance();
+
 	private static enum Remote {
 		yes, no
 	}
@@ -41,11 +43,11 @@ public class StatsController {
 	 * @param remote   indica il filtro per quanto riguarda la tipologia di lavoro
 	 *                 in remoto o non.
 	 * 
-	 * @return <code>JSONObject</code> Un JSONObject che contiene le varie
-	 *         statistiche delle varie città.
+	 * @return <code>Object</code> Un JSONObject che contiene le varie statistiche
+	 *         delle varie città.
 	 */
 	@GetMapping("/stats")
-	public JSONObject statsFilter(@RequestParam(name = "location", required = false) String location,
+	public Object statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
 			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException {
 		String[] locationArray = null;
@@ -69,32 +71,32 @@ public class StatsController {
 			}
 
 		} else {
-			Preference prefStats = new Preference();
 			if (remote != null) {
 				switch (remote) {
 				case yes:
-					return manager.getStats(prefStats.getPreference(), date, true);
+					return manager.getStats(pref.getPreference(), date, true);
 				case no:
-					return manager.getStats(prefStats.getPreference(), date, false);
+					return manager.getStats(pref.getPreference(), date, false);
 				}
 
 			}
-			return manager.getStats(prefStats.getPreference(), date, null);
+			return manager.getStats(pref.getPreference(), date, null);
 		}
 	}
-	
-/**
- * Il metodo <b>OverflowCity</b> gestisce l'eccezione che si viene a creare nel
+
+	/**
+	 * Il metodo <b>OverflowCity</b> gestisce l'eccezione che si viene a creare nel
 	 * metodo <b>getStats</b> quando si inseriscono più di 5 città.
 	 * 
 	 * @param e eccezione
-	 * @return <code>JSONObject</code> Oggetto dove viene descritto l'errore.
- */
+	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
+	 */
 	@ExceptionHandler(OverflowCityException.class)
 	public static JSONObject OverflowCity(OverflowCityException e) {
-		HashMap<String,String> map = new HashMap<String,String>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Errore 400", e.getMessage());
 		JSONObject overFlowCity = new JSONObject();
 		return overFlowCity;
 	}
+
 }

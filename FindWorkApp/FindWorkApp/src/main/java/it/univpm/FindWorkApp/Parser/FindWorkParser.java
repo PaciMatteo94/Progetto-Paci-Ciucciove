@@ -4,12 +4,23 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import it.univpm.FindWorkApp.Model.City;
 
-public class FindWorkParser {
+/**
+ * La classe <b>FindWorkParser</b> implementa l'intefaccia
+ * <b>FindWorkParserService</b>.
+ * 
+ * @author Paci Matteo
+ * @author Ciucciovè Leonardo
+ *
+ */
+public class FindWorkParser implements FindWorkParserService {
+	/**
+	 * <p>
+	 * la classe è implementata come singleton semplice. Si creerà una singola
+	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
+	 * programma.
+	 */
 	private static FindWorkParser instance = null;
 
 	private FindWorkParser() {
@@ -22,15 +33,22 @@ public class FindWorkParser {
 		return instance;
 	}
 
-	public JSONObject getJSON(ArrayList<City> cities) {
-		JSONObject JSON = new JSONObject();
-		JSONArray js = new JSONArray();
+	/**
+	 * Il metodo <b>getCitiesObj</b> forma un oggetto dove sono presenti tutti i
+	 * lavori, suddivisi per città, che soddisfano le richieste dell'utente.
+	 * 
+	 * @param cities lista di oggetti di tipo città dove sono presenti i lavori che
+	 *               soddisfano le richieste dell'utente.
+	 * @return <code>Object</code>
+	 */
+	public Object getCitiesObj(ArrayList<City> cities) {
+		Map<String, Object> JSON = new LinkedHashMap<String, Object>();
+		ArrayList<Object> js = new ArrayList<Object>();
 		for (City obj : cities) {
 			Map<String, Object> json = new LinkedHashMap<String, Object>();
 			json.put("Location", obj.getLocation());
 			json.put("Count", obj.getCount());
 			json.put("Works", obj.getWork());
-
 			js.add(json);
 
 		}
@@ -40,11 +58,20 @@ public class FindWorkParser {
 
 	}
 
-	public JSONObject getJSONStats(ArrayList<City> cities) {
-		JSONObject JSON = new JSONObject();
-		JSONArray js = new JSONArray();
+	/**
+	 * Il metodo <b>getStatsObj</b> forma un oggetto dove sono presenti le stastiche
+	 * dei lavori presenti nelle città di ricerca.
+	 * 
+	 * @param cities lista di oggetti di tipo città dove sono salvate le statistiche
+	 *               di ogni città.
+	 * @return <code>Object</code>
+	 */
+
+	public Object getStatsObj(ArrayList<City> cities) {
+		Map<String, Object> JSON = new LinkedHashMap<String, Object>();
+		ArrayList<Object> js = new ArrayList<Object>();
 		for (City city : cities) {
-			Map<String, Object> json = new LinkedHashMap();
+			Map<String, Object> json = new LinkedHashMap<String, Object>();
 			json.put("Location", city.getLocation());
 			json.put("Count", city.getCount());
 			json.put("stats", city.getCityStats());

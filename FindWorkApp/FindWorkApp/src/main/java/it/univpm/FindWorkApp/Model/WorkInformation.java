@@ -1,6 +1,7 @@
 package it.univpm.FindWorkApp.Model;
 
 import java.util.ArrayList;
+
 /**
  * Classe che rappresenta gli oggetti di tipo <b>WorkInformation</b>.
  * 

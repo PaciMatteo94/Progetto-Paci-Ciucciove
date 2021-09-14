@@ -10,7 +10,15 @@ import org.junit.jupiter.api.Test;
 import it.univpm.FindWorkApp.APICall.APICall;
 import it.univpm.FindWorkApp.Model.City;
 
-class testAPICall {
+/**
+ * La classe<b>TestAPICall</b> testa che la località che viene salvata
+ * nell'oggetto ti tipo <b>City</b> coincida con la località di ricerca
+ * dell'API.
+ * 
+ * @author Paci Matteo
+ * @author Ciucciovè Leonardo
+ */
+class TestAPICall {
 	private APICall testApi;
 	private City testCity;
 

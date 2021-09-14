@@ -9,45 +9,62 @@ import it.univpm.FindWorkApp.Model.City;
 import it.univpm.FindWorkApp.Model.CityStats;
 import it.univpm.FindWorkApp.Model.WorkInformation;
 
-
-public class Stats {
+/**
+ * <p>
+ * La Classe <b>Stats</b> implementa l'interfaccia <b>StatsService</b>.
+ * 
+ * @author Paci Matteo
+ * @author Ciucciovè Leonardo
+ *
+ */
+public class Stats implements StatsService {
+	/**
+	 * <p>
+	 * la classe è implementata come singleton semplice. Si creerà una singola
+	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
+	 * programma.
+	 */
 	private static Stats instance = null;
-	private Stats() {}
+
+	private Stats() {
+	}
+
 	public static Stats getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new Stats();
-		
+
 		}
 		return instance;
 	}
-/**
- * <p>
- * Questo metodo inizializza contatori (cnt) per il conteggio di:
- * lavori part-time/contratto, full-time o dove non è specificato
- * quanti di essi contengono i linguaggi predefiniti del python, php, spring, typescript, sql
- *
- * calcola poi le percentuali di tutti questi dati
- * (le percentuali dei linguaggi sono sul totoale)
- *
- * @param city contiene i lavori relativi ad una città
- * @return city, un oggetto di tipo City che contiene tutte le informazioni dei lavori a cui sono appena stati riempiti i campi relativi alle statistiche
- */
+
+	/**
+	 * <p>
+	 * Questo metodo inizializza contatori (cnt) per il conteggio di: lavori
+	 * part-time/contratto, full-time o dove non è specificato quanti di essi
+	 * contengono i linguaggi predefiniti del python, php, spring, typescript, sql
+	 *
+	 * calcola poi le percentuali di tutti questi dati (le percentuali dei linguaggi
+	 * sono sul totoale)
+	 *
+	 * @param city contiene i lavori relativi ad una città
+	 * @return city, un oggetto di tipo City che contiene tutte le informazioni dei
+	 *         lavori a cui sono appena stati riempiti i campi relativi alle
+	 *         statistiche
+	 */
 	public City statsCalculate(City city) {
 		CityStats stats = new CityStats();
-		int cnt = 0, cnt2 = 0, cnt3=0, cnt4=0, cnt5=0;
+		int cnt = 0, cnt2 = 0, cnt3 = 0, cnt4 = 0, cnt5 = 0;
 		int pythonCnt = 0, phpCnt = 0, springCnt = 0, typescriptCnt = 0, sqlCnt = 0;
 		for (WorkInformation w : city.getWork()) {
-			if(w.getEmployementType()== null) {
+			if (w.getEmployementType() == null) {
 				if (w.getText().contains("full-time") || w.getText().contains("full time")) {
 					cnt3++;
 				} else if (w.getText().contains("part-time") || w.getText().contains("part time")) {
 					cnt4++;
-				}
-				else {
+				} else {
 					cnt5++;
 				}
-			}
-			else {
+			} else {
 				if (w.getEmployementType().equals("full time")) {
 					cnt++;
 				} else if (w.getEmployementType().equals("part time") || w.getEmployementType().equals("contract")) {
@@ -100,8 +117,8 @@ public class Stats {
 		stats.setPercTypescript(percTypescript);
 		stats.setPercSql(percSql);
 
-		cnt=cnt+cnt3;
-		cnt2=cnt2+cnt4;
+		cnt = cnt + cnt3;
+		cnt2 = cnt2 + cnt4;
 		stats.setFullTimeAmount(cnt);
 		stats.setPartTimeAmount(cnt2);
 		stats.setNotSpecifiedAmount(cnt5);
