@@ -74,7 +74,7 @@ public class FindWorkParser implements FindWorkParserService {
 			Map<String, Object> json = new LinkedHashMap<String, Object>();
 			json.put("Location", city.getLocation());
 			json.put("Count", city.getCount());
-			json.put("stats", city.getCityStats());
+			json.put("Stats", city.getCityStats());
 			js.add(json);
 		}
 		JSON.put("CityEntered", cities.size());

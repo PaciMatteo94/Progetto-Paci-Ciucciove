@@ -8,7 +8,6 @@ package it.univpm.FindWorkApp.Model;
  */
 public class CityStats {
 	private static String[] commonLanguages = { "python", "php", "spring", "typescript", "sql" };
-	private int empNullAmount;
 	private int fullTimeAmount;
 	private int partTimeAmount;
 	private int notSpecifiedAmount;
@@ -45,14 +44,6 @@ public class CityStats {
 		CityStats.commonLanguages = commonLanguages;
 	}
 
-	public int getEmpNullAmount() {
-		return empNullAmount;
-	}
-
-	public void setEmpNullAmount(int empNullAmount) {
-		this.empNullAmount = empNullAmount;
-	}
-
 	public int getFullTimeAmount() {
 		return fullTimeAmount;
 	}
@@ -85,12 +76,12 @@ public class CityStats {
 		this.partTimePerc = partTimePerc;
 	}
 
-	public double getPercPyton() {
+	public double getPercPython() {
 		return percPython;
 	}
 
-	public void setPercPython(double percPyton) {
-		this.percPython = percPyton;
+	public void setPercPython(double percPython) {
+		this.percPython = percPython;
 	}
 
 	public double getPercPhp() {

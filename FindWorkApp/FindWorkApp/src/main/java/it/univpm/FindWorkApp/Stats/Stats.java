@@ -56,7 +56,7 @@ public class Stats implements StatsService {
 		int cnt = 0, cnt2 = 0, cnt3 = 0, cnt4 = 0, cnt5 = 0;
 		int pythonCnt = 0, phpCnt = 0, springCnt = 0, typescriptCnt = 0, sqlCnt = 0;
 		for (WorkInformation w : city.getWork()) {
-			if (w.getEmployementType() == null) {
+			if (w.getEmploymentType() == null) {
 				if (w.getText().contains("full-time") || w.getText().contains("full time")) {
 					cnt3++;
 				} else if (w.getText().contains("part-time") || w.getText().contains("part time")) {
@@ -65,9 +65,9 @@ public class Stats implements StatsService {
 					cnt5++;
 				}
 			} else {
-				if (w.getEmployementType().equals("full time")) {
+				if (w.getEmploymentType().equals("full time")) {
 					cnt++;
-				} else if (w.getEmployementType().equals("part time") || w.getEmployementType().equals("contract")) {
+				} else if (w.getEmploymentType().equals("part time") || w.getEmploymentType().equals("contract")) {
 					cnt2++;
 				}
 			}

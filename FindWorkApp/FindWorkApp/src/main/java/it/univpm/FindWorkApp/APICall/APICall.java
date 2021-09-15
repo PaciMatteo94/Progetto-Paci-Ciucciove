@@ -91,6 +91,7 @@ public class APICall implements APICallService {
 		try {
 			HttpURLConnection openConnection = (HttpURLConnection) new URL(api).openConnection();
 			openConnection.setRequestMethod("GET");
+			openConnection.addRequestProperty("User Agent", "default");
 			openConnection.setRequestProperty("Authorization", "Token 838d2cb24efd24d35d81f7cc6846cd6ec54cd4dd ");
 			openConnection.setRequestProperty("Accept", "application/json");
 
@@ -154,7 +155,7 @@ public class APICall implements APICallService {
 			work.setKeywords(keywords);
 			work.setRole((String) json.get("role"));
 			work.setCompanyName((String) json.get("company_name"));
-			work.setEmployementType((String) json.get("employment_type"));
+			work.setEmploymentType((String) json.get("employment_type"));
 			work.setRemote((Boolean) json.get("remote"));
 			work.setDataPosted((String) json.get("date_posted"));
 			work.setText((String) json.get("text"));
