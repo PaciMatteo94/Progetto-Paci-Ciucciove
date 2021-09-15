@@ -29,16 +29,6 @@ public class Manager implements ManagerService {
 	private APICall call = APICall.getInstance();
 	private ArrayList<City> cities;
 	private static Manager instance = null;
-
-	/**
-	 * <p>
-	 * Il costruttore privato <b>Manager</b> ha l'obbiettivo di istanziare l'unico
-	 * oggetto di tale classe. Per ottenere l'oggetto sarà necessario invocare il
-	 * metodo <b>getInstance</b> che nel caso in la variabile <b>instance</b> è
-	 * nulla, invocherà il costruttore privato, mentre se non lo è, semplicemente
-	 * restituirà la variabile <b>instance</b>.
-	 *
-	 */
 	private Manager() {
 	}
 
@@ -54,7 +44,7 @@ public class Manager implements ManagerService {
 	 * alla creazione dell'oggetto da restituire all'utente. In base ai parametri
 	 * che gli vengono passati effettuerà le varie chiamate all'API, salvare gli
 	 * oggetti <b>City</b> in un ArrayList che verrà poi passata al metodo
-	 * <b>getJSON</b> che impacchetterà le informazioni in un oggetto che verrà
+	 * <b>getCitiesObj</b> che impacchetterà le informazioni in un oggetto che verrà
 	 * restituito all'utente.
 	 */
 	@Override
@@ -96,7 +86,7 @@ public class Manager implements ManagerService {
 	 * alla creazione dell'oggetto da restituire all'utente. In base ai parametri
 	 * che gli vengono passati effettuerà le varie chiamate all'API, calcolerà le
 	 * statistiche della città esalverà gli oggetti di tipo <b>City</b> in un
-	 * ArrayList che verrà poi passata al metodo <b>getJSON</b> che impacchetterà le
+	 * ArrayList che verrà poi passata al metodo <b>getStatsObj</b> che impacchetterà le
 	 * informazioni in un oggetto che verrà restituito all'utente.
 	 */
 	@Override

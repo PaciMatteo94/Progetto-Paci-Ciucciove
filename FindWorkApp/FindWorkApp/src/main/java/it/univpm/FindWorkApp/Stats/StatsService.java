@@ -13,7 +13,7 @@ import it.univpm.FindWorkApp.Model.City;
  */
 public interface StatsService {
 	/**
-	 * Il metodo <b>statsCalculate</b> calcola le stetistiche dei lavori in una
+	 * Il metodo <b>statsCalculate</b> calcola le statistiche dei lavori in una
 	 * città.
 	 * 
 	 * @param city Oggetto che rappresenta la città con i suoi lavori e statistiche.
@@ -23,7 +23,7 @@ public interface StatsService {
 
 	/**
 	 * Il metodo <b>statsFiltered</b> filtra i lavori per data per poi calcolare le
-	 * statiche della città con i lavori che soddisfano i filtri inseriti
+	 * statistiche della città con i lavori che soddisfano i filtri inseriti
 	 * dall'utente.
 	 * 
 	 * @param city Oggetto che rappresenta la città con i suoi lavori e statistiche.

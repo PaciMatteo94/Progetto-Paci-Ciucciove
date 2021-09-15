@@ -43,7 +43,7 @@ public class APICallController {
 
 	/**
 	 * <p>
-	 * Questo metodo restituisce cinque città predefinite come suggerimento di
+	 * Questo metodo restituisce le città predefinite come suggerimento di
 	 * ricerca per l'utente.
 	 *
 	 * @return <code>Object</code>

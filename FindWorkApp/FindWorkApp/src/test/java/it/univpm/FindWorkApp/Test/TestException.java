@@ -51,7 +51,7 @@ class TestException {
 	}
 
 	/**
-	 * Test dell'eccezione <b>testNoLocationException</b> prodotta dal metodo
+	 * Test dell'eccezione <b>NoLocationException</b> prodotta dal metodo
 	 * <b>cityFilter</b>
 	 */
 	@Test
@@ -63,7 +63,7 @@ class TestException {
 	}
 
 	/**
-	 * Test dell'eccezione<b>testOverFlowCityException</b>prodotta dal
+	 * Test dell'eccezione<b>OverFlowCityException</b>prodotta dal
 	 * metodo<b>statsFilter</b>
 	 */
 	@Test
@@ -75,7 +75,7 @@ class TestException {
 	}
 
 	/**
-	 * Test dell'eccezione<b>testUnsupportedValueException</b>prodotta dal
+	 * Test dell'eccezione<b>UnsupportedValueException</b>prodotta dal
 	 * metodo<b>cityFilter</b>
 	 */
 	@Test
@@ -88,7 +88,7 @@ class TestException {
 	}
 
 	/**
-	 * Test dell'eccezione<b>testEmptyBodyException</b>prodotta dal
+	 * Test dell'eccezione<b>EmptyBodyException</b>prodotta dal
 	 * metodo<b>suggested</b>
 	 */
 	@Test

@@ -12,7 +12,7 @@ import it.univpm.FindWorkApp.Model.City;
 
 /**
  * La classe<b>TestAPICall</b> testa che la località che viene salvata
- * nell'oggetto ti tipo <b>City</b> coincida con la località di ricerca
+ * nell'oggetto di tipo <b>City</b> coincida con la località di ricerca
  * dell'API.
  * 
  * @author Paci Matteo

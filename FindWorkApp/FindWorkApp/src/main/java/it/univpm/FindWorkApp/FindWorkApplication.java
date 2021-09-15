@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FindWorkApplication {
 	/**
 	 * <p>
-	 * metodo main che fa partire l'appliccazione.
+	 * Metodo main che fa partire l'appliccazione.
 	 * 
 	 * @param args argomenti del metodo main
 	 */
