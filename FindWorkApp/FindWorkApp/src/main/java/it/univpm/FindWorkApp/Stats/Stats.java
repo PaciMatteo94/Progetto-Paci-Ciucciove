@@ -2,9 +2,12 @@ package it.univpm.FindWorkApp.Stats;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import org.apache.commons.math3.util.Precision;
+
+
 import it.univpm.FindWorkApp.Model.City;
 import it.univpm.FindWorkApp.Model.CityStats;
 import it.univpm.FindWorkApp.Model.WorkInformation;
@@ -148,7 +151,7 @@ public class Stats implements StatsService {
 	 * @return <code>City</code> oggetto dove sono salvate le informazioni e le
 	 *         statistiche della città.
 	 */
-	public City statsFiltered(City city, String date) {
+	public City statsFiltered(City city, String date) throws DateTimeParseException{
 		ArrayList<WorkInformation> tempWork = new ArrayList<WorkInformation>();
 		DateTimeFormatter userFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 		DateTimeFormatter apiFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss'Z'");

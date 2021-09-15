@@ -1,5 +1,6 @@
 package it.univpm.FindWorkApp.Manager;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import it.univpm.FindWorkApp.APICall.APICall;
 import it.univpm.FindWorkApp.Exception.NoResultsException;
@@ -90,7 +91,7 @@ public class Manager implements ManagerService {
 	 * informazioni in un oggetto che verrà restituito all'utente.
 	 */
 	@Override
-	public Object getStats(String[] location, String date, Boolean remote) {
+	public Object getStats(String[] location, String date, Boolean remote)throws DateTimeParseException {
 		City city = null;
 		cities = new ArrayList<City>();
 		for (String name : location) {

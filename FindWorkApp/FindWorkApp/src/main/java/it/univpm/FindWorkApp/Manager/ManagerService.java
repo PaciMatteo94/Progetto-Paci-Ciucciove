@@ -1,5 +1,7 @@
 package it.univpm.FindWorkApp.Manager;
 
+import java.time.format.DateTimeParseException;
+
 import it.univpm.FindWorkApp.Exception.NoResultsException;
 
 /**
@@ -45,6 +47,6 @@ public interface ManagerService {
 	 *         le rispettive statistiche.
 	 */
 
-	public Object getStats(String[] location, String date, Boolean remote);
+	public Object getStats(String[] location, String date, Boolean remote)throws DateTimeParseException;
 
 }

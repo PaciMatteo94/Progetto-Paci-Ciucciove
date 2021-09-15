@@ -1,5 +1,8 @@
 package it.univpm.FindWorkApp.Stats;
 
+
+import java.time.format.DateTimeParseException;
+
 import it.univpm.FindWorkApp.Model.City;
 
 /**
@@ -30,5 +33,5 @@ public interface StatsService {
 	 * @param date indica la data con cui filtrare i lavori
 	 * @return <code>City</code>
 	 */
-	public City statsFiltered(City city, String date);
+	public City statsFiltered(City city, String date)throws DateTimeParseException;
 }

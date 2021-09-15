@@ -6,6 +6,7 @@ import it.univpm.FindWorkApp.Exception.OverflowCityException;
 import it.univpm.FindWorkApp.Manager.Manager;
 import it.univpm.FindWorkApp.Model.Preference;
 
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
@@ -49,7 +50,7 @@ public class StatsController {
 	@GetMapping("/stats")
 	public Object statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
-			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException {
+			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException,DateTimeParseException {
 		String[] locationArray = null;
 		if (location != null) {
 			locationArray = location.split("&");
@@ -98,5 +99,18 @@ public class StatsController {
 		JSONObject overFlowCity = new JSONObject();
 		return overFlowCity;
 	}
+	/**
+	 * Il metodo <b>unsupportedValue</b> gestisce l'eccezione che viene generata dal parser della data nel metodo <b>statsFiltered</b>.
+	 * @param e eccezione
+	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
+	 */
+	@ExceptionHandler(DateTimeParseException.class)
+	public static Object unsupportedValue(DateTimeParseException e) {
+		HashMap<String, String> unsupportedValueError = new HashMap<String, String>();
+		unsupportedValueError.put("errore 400", "Si è inserita una data sbagliata");
+		return unsupportedValueError;
+	}
+
+	
 
 }
