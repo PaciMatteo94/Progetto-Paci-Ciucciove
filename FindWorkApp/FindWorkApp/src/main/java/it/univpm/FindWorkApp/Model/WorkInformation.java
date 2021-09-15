@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class WorkInformation {
 	private String role;
 	private String companyName;
-	private String employementType;
+	private String employmentType;
 	private Boolean remote;
 	private ArrayList<String> keywords;
 	private String dataPosted;
@@ -33,12 +33,12 @@ public class WorkInformation {
 		this.companyName = companyName;
 	}
 
-	public String getEmployementType() {
-		return employementType;
+	public String getEmploymentType() {
+		return employmentType;
 	}
 
-	public void setEmployementType(String employementType) {
-		this.employementType = employementType;
+	public void setEmploymentType(String employmentType) {
+		this.employmentType = employmentType;
 	}
 
 	public Boolean getRemote() {
