@@ -6,10 +6,10 @@ package it.univpm.FindWorkApp.Exception;
  * viene generata quando l'utente alla rotta /preference (POST) inserisce nel
  * body delle credenziali che non corrispondono a quelle della risposta a tale
  * richiesta.
- * </p>
+ * 
  *
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  * 
  */
 

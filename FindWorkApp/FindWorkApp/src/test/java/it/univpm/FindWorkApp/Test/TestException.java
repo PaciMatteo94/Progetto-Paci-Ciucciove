@@ -24,7 +24,7 @@ import it.univpm.FindWorkApp.Exception.UnsupportedValueException;
  * nell'applicazione.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  */
 
 class TestException {

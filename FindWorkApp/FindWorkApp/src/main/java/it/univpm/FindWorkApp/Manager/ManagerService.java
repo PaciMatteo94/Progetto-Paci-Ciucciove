@@ -24,6 +24,8 @@ public interface ManagerService {
 	 *                        lavoro, full time o part time
 	 * @param remote          parametro che indica il filtro per la tipologia di
 	 *                        lavoro, in remoto o non
+	 * @throws NoResultsException eccezione generata quando non ci sono risultati
+	 *                            nella ricerca.
 	 * @return <code>Object</code> oggetto che contiene tutte le città con i
 	 *         rispettivi lavori trovati in essa
 	 * 
@@ -47,6 +49,6 @@ public interface ManagerService {
 	 *         le rispettive statistiche.
 	 */
 
-	public Object getStats(String[] location, String date, Boolean remote)throws DateTimeParseException;
+	public Object getStats(String[] location, String date, Boolean remote) throws DateTimeParseException;
 
 }

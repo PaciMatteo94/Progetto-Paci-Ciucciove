@@ -15,14 +15,14 @@ import it.univpm.FindWorkApp.Stats.Stats;
  * sono salvati tutti i dati richiesti.
  * 
  * @author Paci Matteo
- *
+ * @author Ciucciov&eacute; Leonardo
  */
 
 public class Manager implements ManagerService {
 	/**
 	 * <p>
-	 * la classe è implementata come singleton semplice. Si creerà una singola
-	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
+	 * la classe &eacute; implementata come singleton semplice. Si creer&aacute; una singola
+	 * instanza che verr&aacute; poi usata dagli altri metodi per tutta l'esecuzione del
 	 * programma.
 	 */
 	private Stats stats = Stats.getInstance();
@@ -32,7 +32,11 @@ public class Manager implements ManagerService {
 	private static Manager instance = null;
 	private Manager() {
 	}
-
+	/**
+	 * Metodo necessario a creare il singleton.
+	 * Se instance è null creerà l'oggetto, in caso contrario restituirà il riferimento all'oggetto
+	 * @return instance riferimento al singolo oggetto crato. 
+	 */
 	public static Manager getInstance() {
 		if (instance == null) {
 			instance = new Manager();
@@ -43,9 +47,9 @@ public class Manager implements ManagerService {
 	/**
 	 * Il metodo <b>getCities</b> ha l'obbiettivo di gestire le funzioni necessarie
 	 * alla creazione dell'oggetto da restituire all'utente. In base ai parametri
-	 * che gli vengono passati effettuerà le varie chiamate all'API, salvare gli
-	 * oggetti <b>City</b> in un ArrayList che verrà poi passata al metodo
-	 * <b>getCitiesObj</b> che impacchetterà le informazioni in un oggetto che verrà
+	 * che gli vengono passati effettuer&aacute; le varie chiamate all'API, salvare gli
+	 * oggetti <b>City</b> in un ArrayList che verr&aacute; poi passata al metodo
+	 * <b>getCitiesObj</b> che impacchetter&aacute; le informazioni in un oggetto che verr&aacute;
 	 * restituito all'utente.
 	 */
 	@Override
@@ -85,10 +89,10 @@ public class Manager implements ManagerService {
 	/**
 	 * Il metodo <b>getStats</b> ha l'obbiettivo di gestire le funzioni necessarie
 	 * alla creazione dell'oggetto da restituire all'utente. In base ai parametri
-	 * che gli vengono passati effettuerà le varie chiamate all'API, calcolerà le
-	 * statistiche della città esalverà gli oggetti di tipo <b>City</b> in un
-	 * ArrayList che verrà poi passata al metodo <b>getStatsObj</b> che impacchetterà le
-	 * informazioni in un oggetto che verrà restituito all'utente.
+	 * che gli vengono passati effettuer&aacute; le varie chiamate all'API, calcoler&aacute; le
+	 * statistiche della citt&aacute; esalver&aacute; gli oggetti di tipo <b>City</b> in un
+	 * ArrayList che verr&aacute; poi passata al metodo <b>getStatsObj</b> che impacchetter&aacute; le
+	 * informazioni in un oggetto che verr&aacute; restituito all'utente.
 	 */
 	@Override
 	public Object getStats(String[] location, String date, Boolean remote)throws DateTimeParseException {

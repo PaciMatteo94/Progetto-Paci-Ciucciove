@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Classe che rappresenta gli oggetti di tipo <b>City</b>.
  *
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  *
  */
 public class City {
@@ -14,7 +14,10 @@ public class City {
 	private Long count;
 	private CityStats cityStats;
 	private ArrayList<WorkInformation> work;
-
+/**
+ * Costruttore della classe <b>City</b>.
+ * @param location nome della città.
+ */
 	public City(String location) {
 		this.location = location;
 	}

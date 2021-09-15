@@ -1,1 +1,9 @@
-it.univpm.FindWorkApp.controller
+it.univpm.FindWorkApp
+it.univpm.FindWorkApp.APICall
+it.univpm.FindWorkApp.Controller
+it.univpm.FindWorkApp.Exception
+it.univpm.FindWorkApp.Manager
+it.univpm.FindWorkApp.Model
+it.univpm.FindWorkApp.Parser
+it.univpm.FindWorkApp.Stats
+it.univpm.FindWorkApp.Test

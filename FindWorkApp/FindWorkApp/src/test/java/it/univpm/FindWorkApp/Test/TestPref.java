@@ -11,13 +11,13 @@ import it.univpm.FindWorkApp.Model.Preference;
 /**
  * *
  * <p>
- * La classe è generata per testare se le città restituite all richiesta della
+ * La classe &eacute; generata per testare se le citt&aacute; restituite all richiesta della
  * rotta /preference (GET) in questo metodo dell'APICallController, sono le
  * stesse contenute nell'array della classe 'Preference'
  * </p>
  *
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  *
  */
 
@@ -35,7 +35,7 @@ class TestPref {
 	}
 
 	/**
-	 * test dell' dell'eccezione che confronta se le città restituite dal metodo
+	 * test dell' dell'eccezione che confronta se le citt&aacute; restituite dal metodo
 	 * sono effettivamente le stesse contenute nell'array istanziato dalla classe
 	 * 'Preference'
 	 *

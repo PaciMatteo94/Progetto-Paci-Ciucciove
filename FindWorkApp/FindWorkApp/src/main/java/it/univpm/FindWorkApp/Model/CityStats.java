@@ -4,7 +4,7 @@ package it.univpm.FindWorkApp.Model;
  * Classe che rappresenta gli oggetti di tipo <b>CityStats</b>.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  */
 public class CityStats {
 	private static String[] commonLanguages = { "python", "php", "spring", "typescript", "sql" };

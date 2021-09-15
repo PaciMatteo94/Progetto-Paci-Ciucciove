@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Classe che rappresenta gli oggetti di tipo <b>WorkInformation</b>.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  */
 public class WorkInformation {
 	private String role;

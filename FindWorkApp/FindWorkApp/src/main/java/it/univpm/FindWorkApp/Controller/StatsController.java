@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * <p>
  * Questa classe gestisce le chiamate postman per quanto riguarda le statistiche
- * delle città.
+ * delle citt&aacute;.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  */
 @RestController
 public class StatsController {
@@ -35,23 +35,27 @@ public class StatsController {
 
 	/**
 	 * <p>
-	 * Questo metodo visualizza le statistiche delle città inserite con
-	 * l'oppurtunità di inserire dei filtri. Se non vengono inserite locazioni,
-	 * saranno restituite le statistiche delle città presenti nelle preferenze.
+	 * Questo metodo visualizza le statistiche delle citt&aacute; inserite con
+	 * l'oppurtunit&aacute; di inserire dei filtri. Se non vengono inserite
+	 * locazioni, saranno restituite le statistiche delle citt&aacute; presenti
+	 * nelle preferenze.
 	 * 
 	 * 
-	 * @param location indica le città richieste dall'utente.
+	 * @param location indica le citt&aacute; richieste dall'utente.
 	 * @param date     indica la data di filtraggio.
 	 * @param remote   indica il filtro per quanto riguarda la tipologia di lavoro
 	 *                 in remoto o non.
+	 * @throws OverflowCityException eccezione generata quando si inserisco più di 5
+	 *                               citt&aacute; nel campo location per la ricerca.
 	 * 
-	 * @return <code>Object</code> Un JSONObject che contiene le varie statistiche
-	 *         delle varie città.
+	 * @return <code>Object</code> Un Object che contiene le varie statistiche delle
+	 *         varie citt&aacute;.
 	 */
 	@GetMapping("/stats")
 	public Object statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
-			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException,DateTimeParseException,MethodArgumentTypeMismatchException {
+			@RequestParam(name = "remote", required = false) Remote remote)
+			throws OverflowCityException, DateTimeParseException, MethodArgumentTypeMismatchException {
 		String[] locationArray = null;
 		if (location != null) {
 			locationArray = location.split("&");
@@ -88,7 +92,7 @@ public class StatsController {
 
 	/**
 	 * Il metodo <b>OverflowCity</b> gestisce l'eccezione che si viene a creare nel
-	 * metodo <b>getStats</b> quando si inseriscono più di 5 città.
+	 * metodo <b>getStats</b> quando si inseriscono più di 5 citt&aacute;.
 	 * 
 	 * @param e eccezione
 	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
@@ -100,8 +104,11 @@ public class StatsController {
 		JSONObject overFlowCity = new JSONObject();
 		return overFlowCity;
 	}
+
 	/**
-	 * Il metodo <b>unsupportedValue</b> gestisce l'eccezione che viene generata dal parser della data nel metodo <b>statsFiltered</b>.
+	 * Il metodo <b>unsupportedValue</b> gestisce l'eccezione che viene generata dal
+	 * parser della data nel metodo <b>statsFiltered</b>.
+	 * 
 	 * @param e eccezione
 	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
 	 */

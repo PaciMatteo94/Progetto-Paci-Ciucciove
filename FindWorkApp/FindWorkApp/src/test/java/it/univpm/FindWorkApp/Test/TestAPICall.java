@@ -11,12 +11,12 @@ import it.univpm.FindWorkApp.APICall.APICall;
 import it.univpm.FindWorkApp.Model.City;
 
 /**
- * La classe<b>TestAPICall</b> testa che la località che viene salvata
- * nell'oggetto di tipo <b>City</b> coincida con la località di ricerca
+ * La classe<b>TestAPICall</b> testa che la localit&aacute; che viene salvata
+ * nell'oggetto di tipo <b>City</b> coincida con la localit&aacute; di ricerca
  * dell'API.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  */
 class TestAPICall {
 	private APICall testApi;

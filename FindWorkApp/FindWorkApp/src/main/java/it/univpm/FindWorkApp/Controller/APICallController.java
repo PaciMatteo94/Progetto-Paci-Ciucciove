@@ -30,7 +30,7 @@ import it.univpm.FindWorkApp.Model.Preference;
  * dell'utente tramite l'inserimento, o meno, di parametri di interesse.
  *
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  */
 @RestController
 public class APICallController {
@@ -44,8 +44,8 @@ public class APICallController {
 
 	/**
 	 * <p>
-	 * Questo metodo restituisce le città predefinite come suggerimento di ricerca
-	 * per l'utente.
+	 * Questo metodo restituisce le citt&aacute; predefinite come suggerimento di
+	 * ricerca per l'utente.
 	 *
 	 * @return <code>Object</code>
 	 */
@@ -63,21 +63,23 @@ public class APICallController {
 	 * autenticazione creando prima degli headers durante la risposta del server
 	 * all'invio della richiesta per la rotta '/preferences'. Vengono poi
 	 * confrontati con il contenuto del body e se corrette, l'header AUTHENTICATION
-	 * verrà settato a 'YES'. Quando il body non sarà vuoto né conterra delle
-	 * credenziali errate, allora il metodo prenderà le città che l'utente avrà
-	 * inserito nella scheda parametri e le restituirà allo stesso modo di una
-	 * richiesta fatta allo stesso indirizzo utilizzando il metodo GET. L'utente qui
-	 * ha scelta, potrà inserire le città che vuole.
+	 * verrà settato a 'YES'. Quando il body non sar&aacute; vuoto n&eacute;
+	 * conterra delle credenziali errate, allora il metodo prender&aacute; le città
+	 * che l'utente avr&aacute; inserito nella scheda parametri e le
+	 * restituir&aacute; allo stesso modo di una richiesta fatta allo stesso
+	 * indirizzo utilizzando il metodo GET. L'utente qui ha scelta, potr&aacute;
+	 * inserire le citt&aacute; che vuole.
 	 *
 	 * @param body     dove sono contenute le credenziali inserite che vengono
-	 *                 confrontate
+	 *                 confrontate.
 	 * @param response elemento di tipo 'HttpServletResponse' utile per generare
-	 *                 specifiche funzionalità HTTP, in questo caso l'aggiunte
-	 *                 diìegli headers di autenticazione
-	 * @param location dove vengono salvate le località scelte dall'utente
-	 * @throws EmptyBodyException
-	 * @throws WrongCredentialsException
-	 * 
+	 *                 specifiche funzionalità HTTP, in questo caso l'aggiunte degli
+	 *                 headers di autenticazione.
+	 * @param request
+	 * @param location dove vengono salvate le localit&aacute; scelte dall'utente.
+	 * @throws EmptyBodyException        eccezione se si lascia il body vuoto.
+	 * @throws WrongCredentialsException eccezione se si sbaglia ad inserire le
+	 *                                   credenziali.
 	 * @return <code>Object</code>
 	 * 
 	 */
@@ -128,20 +130,31 @@ public class APICallController {
 
 	/**
 	 * <p>
-	 * Questo metodo permette di ricercare i lavori presenti in una o più città con
-	 * la possibilità di inserire dei filtri di ricerca.
+	 * Questo metodo permette di ricercare i lavori presenti in una o più
+	 * citt&aacute; con la possibilit&aacute; di inserire dei filtri di ricerca.
 	 *
-	 * @param location        indica il nome di una o più città di ricerca.
-	 * @param employment_type indica se il lavoro è full time o part time/contratto.
+	 * @param location       indica il nome di una o più citt&aacute; di ricerca.
+	 * @param employmentType indica se il lavoro &eacute; full time o part
+	 *                       time/contratto.
+	 * @param remote         enumerazione per la scelta del filtro di lavoro in
+	 *                       remoto.
+	 * @throws NoLocationException                 eccezione che si genera quando si
+	 *                                             lascia vuoto il campo location.
+	 * @throws UnsupportedValueException           eccezione che si genera quando si
+	 *                                             mette un valore sbagliato in
+	 *                                             employmantType.
+	 * @throws NoResultsException                  eccezione che viene cenerata
+	 *                                             quando non ci sono risultati
+	 *                                             nella ricerca.
 	 * 
 	 * @return <code>Object</code> oggetto che contiene tutte le informazioni
 	 *         richieste dall'utente.
 	 */
 	@GetMapping("/cities")
 	public Object cityFilter(@RequestParam(name = "location", required = false) String location,
-			@RequestParam(name = "employment_type", required = false) String employment_type,
-			@RequestParam(name = "remote", required = false) Remote remote)
-			throws NoLocationException, UnsupportedValueException, NoResultsException,MethodArgumentTypeMismatchException{
+			@RequestParam(name = "employment_type", required = false) String employmentType,
+			@RequestParam(name = "remote", required = false) Remote remote) throws NoLocationException,
+			UnsupportedValueException, NoResultsException, MethodArgumentTypeMismatchException {
 		String[] cities = null;
 		if (location != null) {
 			if (location == "")
@@ -157,17 +170,17 @@ public class APICallController {
 		} else {
 			cities = pref.getPreference();
 		}
-		if (employment_type != null) {
-			if (employment_type.contains("full time") || employment_type.contains("contract")) {
+		if (employmentType != null) {
+			if (employmentType.contains("full time") || employmentType.contains("contract")) {
 				if (remote != null) {
 					switch (remote) {
 					case yes:
-						return manager.getCities(cities, employment_type, true);
+						return manager.getCities(cities, employmentType, true);
 					case no:
-						return manager.getCities(cities, employment_type, false);
+						return manager.getCities(cities, employmentType, false);
 					}
 				}
-				return manager.getCities(cities, employment_type, null);
+				return manager.getCities(cities, employmentType, null);
 
 			} else {
 				throw new UnsupportedValueException();
@@ -194,6 +207,7 @@ public class APICallController {
 	 * metodo <b>getCities</b> quando si lascia vuoto il parametro delle location.
 	 *
 	 * @param e eccezione
+	 * 
 	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
 	 */
 	@ExceptionHandler(NoLocationException.class)
@@ -209,6 +223,7 @@ public class APICallController {
 	 * parametro <b>employment_type</b>.
 	 *
 	 * @param e eccezione
+	 * 
 	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
 	 */
 	@ExceptionHandler(UnsupportedValueException.class)
@@ -223,6 +238,7 @@ public class APICallController {
 	 * Cattura esterna dell'eccezione relativa ad un contenuto vuoto del body
 	 *
 	 * @param e eccezione
+	 * 
 	 * @return <code>Object</code> contiene il messaggio di errore della relativa
 	 *         eccezione
 	 */
@@ -240,6 +256,7 @@ public class APICallController {
 	 * credenziali di accesso
 	 *
 	 * @param e eccezione
+	 * 
 	 * @return <code>Object</code> contiene il messaggio di errore della relativa
 	 *         eccezione
 	 */
@@ -256,6 +273,7 @@ public class APICallController {
 	 * soddisfano i parametri inseriti dall'utente.
 	 * 
 	 * @param e eccezione
+	 * 
 	 * @return <code>Object</code> contiene il messaggio di errore della relativa
 	 *         eccezione
 	 */
@@ -272,6 +290,7 @@ public class APICallController {
 	 * parametro remote.
 	 * 
 	 * @param e eccezione
+	 * 
 	 * @return <code>Object</code> contiene il messaggio di errore della relativa
 	 *         eccezione
 	 */

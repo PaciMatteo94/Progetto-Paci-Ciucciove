@@ -22,13 +22,13 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
  * La classe <b>APICall</b> implementa l'interfaccia <b>APICallService</b>.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&egrave; Leonardo
  *
  */
 public class APICall implements APICallService {
 	/**
-	 * La classe è implementata come singleton, quindi verrà creata una singola
-	 * istanza di tale classe che poi verrà usata dagli altri metodi durante
+	 * La classe &egrave; implementata come singleton, quindi verr&aacute; creata una singola
+	 * istanza di tale classe che poi verr&aacute; usata dagli altri metodi durante
 	 * l'esecuzione del programma.
 	 */
 	private String location;
@@ -37,7 +37,11 @@ public class APICall implements APICallService {
 
 	private APICall() {
 	}
-
+/**
+ * Metodo necessario a creare il singleton.
+ * Se instance è null creerà l'oggetto, in caso contrario restituirà il riferimento all'oggetto
+ * @return instance riferimento al singolo oggetto crato. 
+ */
 	public static APICall getInstance() {
 		if (instance == null) {
 			instance = new APICall();
@@ -69,15 +73,15 @@ public class APICall implements APICallService {
 	 * @param location        nome della città in cui fare la ricerca
 	 * @param remote          parametro che indica il filtro che riguarda la
 	 *                        tipologia di lavoro in remoto o non
-	 * @param employment_type paremetro che indica il filtro che riguarda la
+	 * @param employmentType paremetro che indica il filtro che riguarda la
 	 *                        tipologia di lavoro full time o part time
 	 * 
 	 */
 
-	public void setAPICall(String location, String employment_type, Boolean remote) {
+	public void setAPICall(String location, String employmentType, Boolean remote) {
 		this.location = location;
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote
-				+ "&employment_type=" + employment_type;
+				+ "&employment_type=" + employmentType;
 	}
 
 	/**
@@ -87,7 +91,7 @@ public class APICall implements APICallService {
 	 * <p>
 	 * Il metodo setta i parametri per la chiamata all'API inserendo la tipologia di
 	 * richiesta, l'autorizzazione e il tipo di dato che accettiamo. Dopo aver fatto
-	 * la chiamata all'API e salvato i dati in un oggetto JSON, invocherà il metodo
+	 * la chiamata all'API e salvato i dati in un oggetto JSON, invocher&aacute; il metodo
 	 * privato <b>workParser</b>.
 	 * 
 	 */

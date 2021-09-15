@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.univpm.FindWorkApp.controller"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.univpm.FindWorkApp"},{"l":"it.univpm.FindWorkApp.APICall"},{"l":"it.univpm.FindWorkApp.Controller"},{"l":"it.univpm.FindWorkApp.Exception"},{"l":"it.univpm.FindWorkApp.Manager"},{"l":"it.univpm.FindWorkApp.Model"},{"l":"it.univpm.FindWorkApp.Parser"},{"l":"it.univpm.FindWorkApp.Stats"},{"l":"it.univpm.FindWorkApp.Test"}];updateSearchResults();

@@ -8,7 +8,7 @@ package it.univpm.FindWorkApp.Exception;
  * </p>
  *
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&eacute; Leonardo
  *
  */
 

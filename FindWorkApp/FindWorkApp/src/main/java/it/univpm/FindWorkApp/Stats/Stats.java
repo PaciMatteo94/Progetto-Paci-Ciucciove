@@ -17,21 +17,25 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
  * La Classe <b>Stats</b> implementa l'interfaccia <b>StatsService</b>.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&egrave; Leonardo
  *
  */
 public class Stats implements StatsService {
 	/**
 	 * <p>
-	 * la classe è implementata come singleton semplice. Si creerà una singola
-	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
+	 * la classe &egrave; implementata come singleton semplice. Si creer&aacute; una singola
+	 * instanza che verr&aacute; poi usata dagli altri metodi per tutta l'esecuzione del
 	 * programma.
 	 */
 	private static Stats instance = null;
 
 	private Stats() {
 	}
-
+	/**
+	 * Metodo necessario a creare il singleton.
+	 * Se instance è null creerà l'oggetto, in caso contrario restituirà il riferimento all'oggetto
+	 * @return instance riferimento al singolo oggetto crato. 
+	 */
 	public static Stats getInstance() {
 		if (instance == null) {
 			instance = new Stats();
@@ -43,13 +47,13 @@ public class Stats implements StatsService {
 	/**
 	 * <p>
 	 * Questo metodo inizializza contatori (cnt) per il conteggio di: lavori
-	 * part-time/contratto, full-time o dove non è specificato quanti di essi
+	 * part-time/contratto, full-time o dove non &egrave; specificato quanti di essi
 	 * contengono i linguaggi predefiniti del python, php, spring, typescript, sql
 	 *
 	 * calcola poi le percentuali di tutti questi dati (le percentuali dei linguaggi
 	 * sono sul totoale)
 	 *
-	 * @param city contiene i lavori relativi ad una città
+	 * @param city contiene i lavori relativi ad una citt&aacute;
 	 * @return city, un oggetto di tipo City che contiene tutte le informazioni dei
 	 *         lavori a cui sono appena stati riempiti i campi relativi alle
 	 *         statistiche
@@ -144,12 +148,12 @@ public class Stats implements StatsService {
 	 * confronto tra di loro per capire quali lavori soddisfano il filtro inserito e
 	 * li salva in una lista. Successivamente questa lista viente salvata in un
 	 * oggetto di tipo <b>City</b> che viene passato al metoto <b>statsCalculate</b>
-	 * che calcola le statistiche dei lavori della città.
+	 * che calcola le statistiche dei lavori della citt&aacute;.
 	 *
 	 * @param city oggetto di tipo City.
 	 * @param date filtro inserito dell'utente con cui calcolare le statistiche.
 	 * @return <code>City</code> oggetto dove sono salvate le informazioni e le
-	 *         statistiche della città.
+	 *         statistiche della citt&aacute;.
 	 */
 	public City statsFiltered(City city, String date) throws DateTimeParseException{
 		ArrayList<WorkInformation> tempWork = new ArrayList<WorkInformation>();

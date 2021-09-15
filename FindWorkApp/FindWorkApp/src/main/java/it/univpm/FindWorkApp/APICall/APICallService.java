@@ -7,7 +7,7 @@ import it.univpm.FindWorkApp.Model.City;
  * L'interfaccia <b>APICallService</b> gestisce le chiamate all'API.
  * 
  * @author Paci Matteo
- * @author Ciucciovè Leonardo
+ * @author Ciucciov&egrave; Leonardo
  *
  */
 public interface APICallService {
@@ -18,7 +18,7 @@ public interface APICallService {
 	 * 
 	 * 
 	 * @return <code>City</code> oggetto che racchiude le informazioni e i lavori di
-	 *         una città.
+	 *         una citt&aacute;.
 	 */
 	public City getData();
 
