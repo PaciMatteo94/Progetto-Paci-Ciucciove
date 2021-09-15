@@ -1,6 +1,7 @@
 package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -43,8 +44,8 @@ public class APICallController {
 
 	/**
 	 * <p>
-	 * Questo metodo restituisce le città predefinite come suggerimento di
-	 * ricerca per l'utente.
+	 * Questo metodo restituisce le città predefinite come suggerimento di ricerca
+	 * per l'utente.
 	 *
 	 * @return <code>Object</code>
 	 */
@@ -132,7 +133,6 @@ public class APICallController {
 	 *
 	 * @param location        indica il nome di una o più città di ricerca.
 	 * @param employment_type indica se il lavoro è full time o part time/contratto.
-	 * @throws NoLocationException, UnsupportedValueException, NoResultsException.
 	 * 
 	 * @return <code>Object</code> oggetto che contiene tutte le informazioni
 	 *         richieste dall'utente.
@@ -141,7 +141,7 @@ public class APICallController {
 	public Object cityFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "employment_type", required = false) String employment_type,
 			@RequestParam(name = "remote", required = false) Remote remote)
-			throws NoLocationException, UnsupportedValueException, NoResultsException {
+			throws NoLocationException, UnsupportedValueException, NoResultsException,MethodArgumentTypeMismatchException{
 		String[] cities = null;
 		if (location != null) {
 			if (location == "")
@@ -263,6 +263,22 @@ public class APICallController {
 	public static Object noResults(NoResultsException e) {
 		HashMap<String, String> noResultsError = new HashMap<String, String>();
 		noResultsError.put("Errore 400", e.getMessage());
+		return noResultsError;
+	}
+
+	/**
+	 * <p>
+	 * Cattura l'eccezione prodotta nel caso si inserisce un valore non corretto nel
+	 * parametro remote.
+	 * 
+	 * @param e eccezione
+	 * @return <code>Object</code> contiene il messaggio di errore della relativa
+	 *         eccezione
+	 */
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public static Object unsupportedValue(MethodArgumentTypeMismatchException e) {
+		HashMap<String, String> noResultsError = new HashMap<String, String>();
+		noResultsError.put("Errore 400", "è stato inserito un valore non corretto in remote");
 		return noResultsError;
 	}
 }

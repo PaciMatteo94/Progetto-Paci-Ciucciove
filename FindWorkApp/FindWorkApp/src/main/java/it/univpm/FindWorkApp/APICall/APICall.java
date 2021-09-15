@@ -53,8 +53,6 @@ public class APICall implements APICallService {
 	 * @param location        nome della città in cui fare la ricerca
 	 * @param remote          parametro che indica il filtro che riguarda la
 	 *                        tipologia di lavoro in remoto o non
-	 * @param employment_type paremetro che indica il filtro che riguarda la
-	 *                        tipologia di lavoro full time o part time
 	 * 
 	 */
 
@@ -63,6 +61,18 @@ public class APICall implements APICallService {
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote;
 
 	}
+	/**
+	 * <p>
+	 * Il metodo <b>setAPICall</b> salva la location che gli viene passata e imposta
+	 * l'url con cui chiamare l'API.
+	 * 
+	 * @param location        nome della città in cui fare la ricerca
+	 * @param remote          parametro che indica il filtro che riguarda la
+	 *                        tipologia di lavoro in remoto o non
+	 * @param employment_type paremetro che indica il filtro che riguarda la
+	 *                        tipologia di lavoro full time o part time
+	 * 
+	 */
 
 	public void setAPICall(String location, String employment_type, Boolean remote) {
 		this.location = location;

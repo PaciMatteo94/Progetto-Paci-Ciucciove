@@ -1,6 +1,7 @@
 package it.univpm.FindWorkApp.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import it.univpm.FindWorkApp.Exception.OverflowCityException;
 import it.univpm.FindWorkApp.Manager.Manager;
@@ -50,7 +51,7 @@ public class StatsController {
 	@GetMapping("/stats")
 	public Object statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
-			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException,DateTimeParseException {
+			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException,DateTimeParseException,MethodArgumentTypeMismatchException {
 		String[] locationArray = null;
 		if (location != null) {
 			locationArray = location.split("&");
@@ -111,6 +112,20 @@ public class StatsController {
 		return unsupportedValueError;
 	}
 
-	
+	/**
+	 * <p>
+	 * Cattura l'eccezione prodotta nel caso si inserisce un valore non corretto nel
+	 * parametro remote.
+	 * 
+	 * @param e eccezione
+	 * @return <code>Object</code> contiene il messaggio di errore della relativa
+	 *         eccezione
+	 */
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public static Object unsupportedValue(MethodArgumentTypeMismatchException e) {
+		HashMap<String, String> noResultsError = new HashMap<String, String>();
+		noResultsError.put("Errore 400", "è stato inserito un valore non corretto in remote");
+		return noResultsError;
+	}
 
 }
