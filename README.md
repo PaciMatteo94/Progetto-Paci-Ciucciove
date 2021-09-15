@@ -47,11 +47,7 @@ Qui di seguito viene riportata una chiamata alla rotta <i>cities</i> che vedremo
                   "text": "Revolut is one of the fastest growing companies in Europe. We’re hiring throughout the company for many roles. I work on Data Platform, helping people bring ML models to production. We use Terraform, Kubernetes, GCP, Vault, Python, Java, Kotlin, Postgres and many more. There are a lot of interesting challenges and projects. We&#x27;re looking for experienced engineers that will work within a distributed company.<br>We are valued at 33B and on the track to IPO soon.<br>Careers: <a href=\"https:&#x2F;&#x2F;jobs.lever.co&#x2F;revolut?lever-via=8QDkIWda8L\" rel=\"nofollow\">https:&#x2F;&#x2F;jobs.lever.co&#x2F;revolut?lever-via=8QDkIWda8L</a>"
               },
               {
-                  "role": "Software Engineers and many more",
-                  "companyName": "Revolut",
-                  "employementType": null,
-                  "remote": true,
-                  "etc..."}
+                  "role": "etc..."}
           ]
       }
   ]
