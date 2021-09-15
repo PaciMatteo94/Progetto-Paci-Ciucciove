@@ -33,12 +33,12 @@ class TestException {
 	HttpServletResponse mockResponse = EasyMock.createMock(HttpServletResponse.class);
 	HttpServletRequest httpServletRequest = new MockHttpServletRequest();
 	HttpServletResponse httpServletResponse = new MockHttpServletResponse();
-	NoLocationException ecc1;
-	OverflowCityException ecc2;
-	UnsupportedValueException ecc3;
-	EmptyBodyException ecc4;
-	APICallController c1;
-	StatsController c2;
+	private NoLocationException ecc1;
+	private OverflowCityException ecc2;
+	private UnsupportedValueException ecc3;
+	private EmptyBodyException ecc4;
+	private APICallController c1;
+	private StatsController c2;
 
 	@BeforeEach
 	void setUp() throws Exception {

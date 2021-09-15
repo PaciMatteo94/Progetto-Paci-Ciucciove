@@ -7,6 +7,12 @@ package it.univpm.FindWorkApp.Model;
  * @author Ciucciovè Leonardo
  */
 public class Preference {
+	/**
+	 * <p>
+	 * la classe è implementata come singleton semplice. Si creerà una singola
+	 * instanza che verrà poi usata dagli altri metodi per tutta l'esecuzione del
+	 * programma.
+	 */
 	private String[] preference;
 	private static Preference instance = null;
 

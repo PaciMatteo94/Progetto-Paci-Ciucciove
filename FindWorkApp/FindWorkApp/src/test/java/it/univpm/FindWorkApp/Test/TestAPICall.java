@@ -35,7 +35,7 @@ class TestAPICall {
 
 	@Test
 	@DisplayName("La località dell'oggetto coincide con la località di ricerca")
-	void testLcationCity() {
+	void testLocationCity() {
 		assertEquals("Berlin", testCity.getLocation());
 	}
 }
