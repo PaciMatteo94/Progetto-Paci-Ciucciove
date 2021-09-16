@@ -75,7 +75,7 @@ public class APICallController {
 	 * @param response elemento di tipo 'HttpServletResponse' utile per generare
 	 *                 specifiche funzionalità HTTP, in questo caso l'aggiunte degli
 	 *                 headers di autenticazione.
-	 * @param request
+	 * @param request  elemento necessario per ottenere il paramentro location.
 	 * @param location dove vengono salvate le localit&aacute; scelte dall'utente.
 	 * @throws EmptyBodyException        eccezione se si lascia il body vuoto.
 	 * @throws WrongCredentialsException eccezione se si sbaglia ad inserire le
@@ -138,14 +138,12 @@ public class APICallController {
 	 *                       time/contratto.
 	 * @param remote         enumerazione per la scelta del filtro di lavoro in
 	 *                       remoto.
-	 * @throws NoLocationException                 eccezione che si genera quando si
-	 *                                             lascia vuoto il campo location.
-	 * @throws UnsupportedValueException           eccezione che si genera quando si
-	 *                                             mette un valore sbagliato in
-	 *                                             employmantType.
-	 * @throws NoResultsException                  eccezione che viene cenerata
-	 *                                             quando non ci sono risultati
-	 *                                             nella ricerca.
+	 * @throws NoLocationException       eccezione che si genera quando si lascia
+	 *                                   vuoto il campo location.
+	 * @throws UnsupportedValueException eccezione che si genera quando si mette un
+	 *                                   valore sbagliato in employmantType.
+	 * @throws NoResultsException        eccezione che viene cenerata quando non ci
+	 *                                   sono risultati nella ricerca.
 	 * 
 	 * @return <code>Object</code> oggetto che contiene tutte le informazioni
 	 *         richieste dall'utente.
