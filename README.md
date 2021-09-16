@@ -114,7 +114,7 @@ Per effettuare la modifica bisognerà fornire i parametri di autenticazione nel 
 Le credenziali da inserire nel body di tipo <u>raw</u> su postman per avere accesso a tale funzionalità sono <b>admin,root</b>.<br>
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.04.22.png"></img><br>
 Risultato:<br>
-<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.05.34.png"></img><br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.05.45.png"></img><br>
 <p>
 
 <h3>ROTTA PER LA RICERCA DI LAVORI</h3>
@@ -132,7 +132,7 @@ Possibili casi di utilizzo:
 - Senza inserimento di locazioni o parametri di filtraggio verrano restituiti i lavori di tipo java presenti nelle città di preferenza.<br>
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.25.16.png"></img><br>
 - Con l'inserimento solo di parametri di filtraggio verrano restituiti i lavori presenti nelle città di preferenza oppurtunamente filtrati.<br>
-<img src=""></img><br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.47.22.png"></img><br>
 - Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verrano restituiti i lavori presenti in tali locazioni.<br>
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.27.30.png"></img><br>
 
