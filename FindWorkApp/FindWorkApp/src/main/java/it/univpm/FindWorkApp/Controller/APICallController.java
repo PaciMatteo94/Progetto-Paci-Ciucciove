@@ -79,6 +79,9 @@ public class APICallController {
 	 * @throws EmptyBodyException        eccezione se si lascia il body vuoto.
 	 * @throws WrongCredentialsException eccezione se si sbaglia ad inserire le
 	 *                                   credenziali.
+	 * 
+	 * @throws NoLocationException       eccezione generata se si lascia il
+	 *                                   parametro location vuoto.
 	 * @return <code>Object</code>
 	 * 
 	 */
@@ -86,8 +89,7 @@ public class APICallController {
 	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
 	@ResponseBody
 	public Object suggested(@RequestBody(required = false) String body, HttpServletResponse response,
-			HttpServletRequest request)
-			throws EmptyBodyException, WrongCredentialsException {
+			HttpServletRequest request) throws EmptyBodyException, WrongCredentialsException, NoLocationException {
 		response.addHeader("Username", "admin");
 		response.addHeader("Password", "root");
 		response.addHeader("Authenticate", "NO");
@@ -102,15 +104,10 @@ public class APICallController {
 		response.setHeader("Authenticate", "YES");
 		if (response.getHeader("Authenticate").equals("YES")) {
 			String s;
-			try {				
-				s = request.getParameter("location");
-				if (s == "" || s == null)
-					throw new NoLocationException();
-			} catch (NoLocationException e) {
-				HashMap<String, String> noLocation = new HashMap<String, String>();
-				noLocation.put("Errore 400", e.getMessage() + ". Oppure hai sbagliato ad inserire il parametro");
-				return noLocation;
-			}
+			s = request.getParameter("location");
+			if (s == "" || s == null)
+				throw new NoLocationException();
+
 			String[] cityArray = s.split(", |&|,");
 			String[] cities;
 
