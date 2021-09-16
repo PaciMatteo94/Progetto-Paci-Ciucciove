@@ -118,7 +118,15 @@ Le credenziali da inserire nel body di tipo <u>raw</u> su postman per avere acce
 <h3>ROTTA PER LA RICERCA DI LAVORI</h3>
 
 La rotta in questo caso usa solo il metodo GET e viene referenziata dall'url: <b>localhost:8080/cities</b><br>
+Parametri di utilizzo e modo di inserimento:
+- <b>location</b> vengono inserite le località di ricerca. Le località devono essere separate dal carattere <b>&</b> se inserite nei valori di postman oppure con il carattere <b>%26</b> se inserite nell'url.<br> Qualisiasi altro carattere non verrà ignorato ma bensi salvato nella stringa e quindi utilizzato per la ricerca nell'API.<br>
+Se viene inserito il parametro ma si lascia vuoto il suo valore, verrà genereta un eccezione e verrà visualizzato un messaggio di errore.
+- <b>remote</b> questo parametro accetta solo 2 tipi di input, <b>yes</b> e <b>no</b>. <br>Se vengono inseriti valori diversi da quelli precedenti si verificherà un eccezione e verrà visualizzato un messaggio di errore.<br> Questo parametro serve ad indicare la tipologia di lavoro in remoto o non.
+- <b>employmentType</b> questo parametro accetta solo 2 tipi di input, <b>full+time</b> e <b>contract</b>.<br>Se vengono inseriti valori diversi da quelli precedenti si verificherà un eccezione e verrà visualizzato un messaggio di errore.<br> Questo parametro serve ad indicare la tipologia di lavoro full time o part time.
+
+<br>
 Possibili casi di utilizzo:
+
 - Senza inserimento di locazioni o parametri di filtraggio verrano restituiti i lavori di tipo java presenti nelle città di preferenza.<br>
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.25.16.png"></img><br>
 - Con l'inserimento solo di parametri di filtraggio verrano restituiti i lavori presenti nelle città di preferenza oppurtunamente filtrati.<br>
@@ -129,6 +137,11 @@ Possibili casi di utilizzo:
 <h3>ROTTA PER IL CALCOLO DELLE STATISTICHE</h3>
 
 Anche in questo caso il metodo usato è GET e tale rotta viene referenziata tramite l'url: <b>localhost:8080/stats</b><br>
+Parametri di utilizzo e modo di inserimento:
+- <b>location</b> vengono inserite le località di ricerca. Le località devono essere separate dal carattere <b>&</b> se inserite nei valori di postman oppure con il carattere <b>%26</b> se inserite nell'url.<br> Qualisiasi altro carattere non verrà ignorato ma bensi salvato nella stringa e quindi utilizzato per la ricerca nell'API.<br>
+- <b>remote</b> questo parametro accetta solo 2 tipi di input, <b>yes</b> e <b>no</b>. <br>Se vengono inseriti valori diversi da quelli precedenti si verificherà un eccezione e verrà visualizzato un messaggio di errore.<br> Questo parametro serve ad indicare la tipologia di lavoro in remoto o non.
+- <b>date</b> questo parametro accetta date solo nel formato <b>aaaa-MM-dd</b>.<br> Se viene inserita una data in formato diverso o caratteri non ammessi, verrà generata un eccezione con successiva visualizzazione di un messaggio di errore.<br>Questo parametro indica la data da cui considerari i lavori per il calcolo delle statistiche.
+
 Possibili casi di utilizzo:<br>
 - Senza inserimento di locazioni o parametri di filtraggio verranno restituite le statistiche delle città di preferenza.
 - Con l'inserimento solo di parametri di filtraggio verrano restituite le statistiche filtrate delle città di preferenza.
