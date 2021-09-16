@@ -27,7 +27,7 @@ public class City {
 	/**
 	 * Metodo per ottenere <b>location</b>.
 	 * 
-	 * @return location nome della citt&aacute;.
+	 * @return <code>String</code> nome della citt&aacute;.
 	 */
 
 	public String getLocation() {
@@ -47,7 +47,7 @@ public class City {
 	/**
 	 * Metodo per ottenere <b>count</b>.
 	 * 
-	 * @return count numero di lavori presenti nella citt&aacute;.
+	 * @return <code>Long</code> numero di lavori presenti nella citt&aacute;.
 	 */
 
 	public Long getCount() {
@@ -67,8 +67,8 @@ public class City {
 	/**
 	 * Metodo per ottenere <b>cityStats</b>.
 	 * 
-	 * @return cityStats oggetto dove sono salvate le statistiche dei lavori
-	 *         presenti in citt&aacute;
+	 * @return <code>CityStats</code> oggetto dove sono salvate le statistiche dei
+	 *         lavori presenti in citt&aacute;
 	 */
 
 	public CityStats getCityStats() {
@@ -89,7 +89,7 @@ public class City {
 	/**
 	 * Metodo per ottenere <b>work</b>.
 	 * 
-	 * @return work lista di lavori presenti in una citt&aacute;
+	 * @return <code>ArrayList</code> lista di lavori presenti in una citt&aacute;
 	 */
 
 	public ArrayList<WorkInformation> getWork() {

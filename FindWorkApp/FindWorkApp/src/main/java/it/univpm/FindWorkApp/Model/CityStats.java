@@ -23,7 +23,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>notSpecifiedAmount</b>.
 	 * 
-	 * @return notSpecifiedAmount indica i lavori in una citt&aacute; che non hanno
+	 * @return <code>int</code> indica i lavori in una citt&aacute; che non hanno
 	 *         specificato la tipologia di lavoro full time o part time.
 	 */
 	public int getNotSpecifiedAmount() {
@@ -44,9 +44,9 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>notSpecifiedPerc</b>.
 	 * 
-	 * @return notSpecifiedPerc indica la percentuale di lavori in una citt&aacute;
-	 *         che non hanno specificato la tipologia di lavoro full time o part
-	 *         time.
+	 * @return <code>double</code> indica la percentuale di lavori in una
+	 *         citt&aacute; che non hanno specificato la tipologia di lavoro full
+	 *         time o part time.
 	 */
 	public double getNotSpecifiedPerc() {
 		return notSpecifiedPerc;
@@ -66,7 +66,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>commonLanguages</b>.
 	 * 
-	 * @return commonLanguanges array dei linguaggi su cui si calcolano le
+	 * @return <code>String[]</code> array dei linguaggi su cui si calcolano le
 	 *         statistiche.
 	 */
 	public String[] getCommonLanguages() {
@@ -76,7 +76,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>fullTimeAmount</b>.
 	 * 
-	 * @return fullTimeAmount numero di lavori che sono full time.
+	 * @return <code>int</code> numero di lavori che sono full time.
 	 */
 	public int getFullTimeAmount() {
 		return fullTimeAmount;
@@ -94,7 +94,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>partTimeAmount</b>.
 	 * 
-	 * @return partTimeAmount numero di lavori che sono part time.
+	 * @return <code>int</code> numero di lavori che sono part time.
 	 */
 	public int getPartTimeAmount() {
 		return partTimeAmount;
@@ -112,7 +112,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>fullTimePerc</b>.
 	 * 
-	 * @return fullTimePerc percentuale dei lavori full time.
+	 * @return <code>double</code> percentuale dei lavori full time.
 	 */
 	public double getFullTimePerc() {
 		return fullTimePerc;
@@ -130,7 +130,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>partTimePerc</b>.
 	 * 
-	 * @return partTimePerc percentuale dei lavori part time.
+	 * @return <code>double</code> percentuale dei lavori part time.
 	 */
 	public double getPartTimePerc() {
 		return partTimePerc;
@@ -148,8 +148,8 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>percPython</b>.
 	 * 
-	 * @return percPython percentuale dei lavori che richiedono anche la conoscenza
-	 *         di Python come linguaggio.
+	 * @return <code>double</code> percentuale dei lavori che richiedono anche la
+	 *         conoscenza di Python come linguaggio.
 	 */
 	public double getPercPython() {
 		return percPython;
@@ -168,8 +168,8 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>percPhp</b>.
 	 * 
-	 * @return percPhp percentuale dei lavori che richiedono anche la conoscenza di
-	 *         Php come linguaggio.
+	 * @return <code>double</code> percentuale dei lavori che richiedono anche la
+	 *         conoscenza di Php come linguaggio.
 	 */
 	public double getPercPhp() {
 		return percPhp;
@@ -178,8 +178,8 @@ public class CityStats {
 	/**
 	 * Metodo per settare <b>percPhp</b>.
 	 * 
-	 * @param perctPhp percentuale dei lavori che richiedono anche la conoscenza di
-	 *                 Php come linguaggio.
+	 * @param percPhp percentuale dei lavori che richiedono anche la conoscenza di
+	 *                Php come linguaggio.
 	 */
 	public void setPercPhp(double percPhp) {
 		this.percPhp = percPhp;
@@ -188,8 +188,8 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>percSpring</b>.
 	 * 
-	 * @return percSpring percentuale dei lavori che richiedono anche la conoscenza
-	 *         di Spring come linguaggio.
+	 * @return <code>double</code> percentuale dei lavori che richiedono anche la
+	 *         conoscenza di Spring come linguaggio.
 	 */
 	public double getPercSpring() {
 		return percSpring;
@@ -208,7 +208,7 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>percTypescript</b>.
 	 * 
-	 * @return percTypescript percentuale dei lavori che richiedono anche la
+	 * @return <code>double</code> percentuale dei lavori che richiedono anche la
 	 *         conoscenza di Typescript come linguaggio.
 	 */
 	public double getPercTypescript() {
@@ -228,8 +228,8 @@ public class CityStats {
 	/**
 	 * Metodo per ottenere <b>percSql</b>.
 	 * 
-	 * @return percSql percentuale dei lavori che richiedono anche la conoscenza di
-	 *         Sql come linguaggio.
+	 * @return <code>double</code> percentuale dei lavori che richiedono anche la
+	 *         conoscenza di Sql come linguaggio.
 	 */
 	public double getPercSql() {
 		return percSql;

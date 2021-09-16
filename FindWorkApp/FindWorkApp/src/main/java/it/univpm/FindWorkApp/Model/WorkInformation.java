@@ -22,7 +22,7 @@ public class WorkInformation {
 	 * 
 	 * @return una <code>String</code> con il nome del ruolo del lavoro corrente
 	 */
-	
+
 	public String getRole() {
 		return role;
 	}
@@ -32,11 +32,11 @@ public class WorkInformation {
 	 * 
 	 * @param role indica il ruolo
 	 */
-	
+
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	/**
 	 * ritorna il valore companyName
 	 * 
@@ -53,7 +53,7 @@ public class WorkInformation {
 	 * 
 	 * @param companyName indica il nome della compagnia che offre il lavoro
 	 */
-	
+
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
@@ -61,10 +61,11 @@ public class WorkInformation {
 	/**
 	 * ritorna il valore employmentType
 	 * 
-	 * @return una <code>String</code> con le opzioni null, full time, part time/contract
+	 * @return una <code>String</code> con le opzioni null, full time, part
+	 *         time/contract
 	 * 
 	 */
-	
+
 	public String getEmploymentType() {
 		return employmentType;
 	}
@@ -72,9 +73,10 @@ public class WorkInformation {
 	/**
 	 * permette di scegliere il valore employmentType
 	 * 
-	 * @param employmentType rappresenta il valore null, full time, part time/contract
+	 * @param employmentType rappresenta il valore null, full time, part
+	 *                       time/contract
 	 */
-	
+
 	public void setEmploymentType(String employmentType) {
 		this.employmentType = employmentType;
 	}
@@ -82,11 +84,11 @@ public class WorkInformation {
 	/**
 	 * ritorna il valore del campo remote
 	 * 
-	 * @return un <code>Boolean</code> con il valore true o false a seconda se il lavoro
-	 * si svolger&agrave da remoto o meno
+	 * @return un <code>Boolean</code> con il valore true o false a seconda se il
+	 *         lavoro si svolger&agrave; da remoto o meno
 	 * 
 	 */
-	
+
 	public Boolean getRemote() {
 		return remote;
 	}
@@ -96,15 +98,16 @@ public class WorkInformation {
 	 * 
 	 * @param remote corrisponde al valore di lavoro da remoto o non
 	 */
-	
+
 	public void setRemote(Boolean remote) {
 		this.remote = remote;
 	}
-	
+
 	/**
 	 * ritorna il valore del campo keywords
 	 * 
-	 * @return un <code>ArrayList<String></code> con il valore delle parole chiave per quel lavoro
+	 * @return un <code>ArrayList</code> con il valore delle parole chiave per quel
+	 *         lavoro
 	 * 
 	 */
 
@@ -117,11 +120,11 @@ public class WorkInformation {
 	 * 
 	 * @param keywords indica le parole chiave
 	 */
-	
+
 	public void setKeywords(ArrayList<String> keywords) {
 		this.keywords = keywords;
 	}
-	
+
 	/**
 	 * ritorna il valore del campo datePosted
 	 * 
@@ -138,11 +141,11 @@ public class WorkInformation {
 	 * 
 	 * @param dataPosted indica la data di pubblicazione dell'annuncio
 	 */
-	
+
 	public void setDataPosted(String dataPosted) {
 		this.dataPosted = dataPosted;
 	}
-	
+
 	/**
 	 * ritorna il valore del campo description
 	 * 
@@ -159,7 +162,7 @@ public class WorkInformation {
 	 * 
 	 * @param text indica la descrizione del lavoro corrente
 	 */
-	
+
 	public void setText(String text) {
 		this.text = text;
 	}

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import org.apache.commons.math3.util.Precision;
 
-
 import it.univpm.FindWorkApp.Model.City;
 import it.univpm.FindWorkApp.Model.CityStats;
 import it.univpm.FindWorkApp.Model.WorkInformation;
@@ -23,18 +22,20 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
 public class Stats implements StatsService {
 	/**
 	 * <p>
-	 * la classe &egrave; implementata come singleton semplice. Si creer&aacute; una singola
-	 * instanza che verr&aacute; poi usata dagli altri metodi per tutta l'esecuzione del
-	 * programma.
+	 * la classe &egrave; implementata come singleton semplice. Si creer&aacute; una
+	 * singola instanza che verr&aacute; poi usata dagli altri metodi per tutta
+	 * l'esecuzione del programma.
 	 */
 	private static Stats instance = null;
 
 	private Stats() {
 	}
+
 	/**
-	 * Metodo necessario a creare il singleton.
-	 * Se instance è null creerà l'oggetto, in caso contrario restituirà il riferimento all'oggetto
-	 * @return instance riferimento al singolo oggetto crato. 
+	 * Metodo necessario a creare il singleton. Se instance è null creerà l'oggetto,
+	 * in caso contrario restituirà il riferimento all'oggetto
+	 * 
+	 * @return instance riferimento al singolo oggetto crato.
 	 */
 	public static Stats getInstance() {
 		if (instance == null) {
@@ -155,7 +156,7 @@ public class Stats implements StatsService {
 	 * @return <code>City</code> oggetto dove sono salvate le informazioni e le
 	 *         statistiche della citt&aacute;.
 	 */
-	public City statsFiltered(City city, String date) throws DateTimeParseException{
+	public City statsFiltered(City city, String date) throws DateTimeParseException {
 		ArrayList<WorkInformation> tempWork = new ArrayList<WorkInformation>();
 		DateTimeFormatter userFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 		DateTimeFormatter apiFormat = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss'Z'");

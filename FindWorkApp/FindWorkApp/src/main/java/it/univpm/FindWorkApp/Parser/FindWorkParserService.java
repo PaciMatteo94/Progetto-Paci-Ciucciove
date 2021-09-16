@@ -19,8 +19,8 @@ public interface FindWorkParserService {
 	 * Il metedo <b>getCitiesObj</b> produce l'oggetto con i lavori presenti nelle
 	 * varie citt&aacute; di richiesta filtrati per gli opportuni parametri.
 	 * 
-	 * @param cities lista di citt&aacute; dove sono presenti i lavori che soddisfano le
-	 *               richieste dell'utente.
+	 * @param cities lista di citt&aacute; dove sono presenti i lavori che
+	 *               soddisfano le richieste dell'utente.
 	 * 
 	 * @return <code>Object</code>
 	 */
@@ -30,7 +30,8 @@ public interface FindWorkParserService {
 	 * Il metedo <b>getStatsObj</b> produce l'oggetto racchiude le statistiche,
 	 * oppurtamente filtrate, dei lavori presenti nelle citt&aacute; di ricerca.
 	 * 
-	 * @param cities lista di citt&aacute; su cui sono state calcolate le statistiche.
+	 * @param cities lista di citt&aacute; su cui sono state calcolate le
+	 *               statistiche.
 	 * @return <code>Object</code>
 	 */
 	public Object getStatsObj(ArrayList<City> cities);

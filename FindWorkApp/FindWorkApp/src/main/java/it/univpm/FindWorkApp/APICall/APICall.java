@@ -27,9 +27,9 @@ import it.univpm.FindWorkApp.Model.WorkInformation;
  */
 public class APICall implements APICallService {
 	/**
-	 * La classe &egrave; implementata come singleton, quindi verr&aacute; creata una singola
-	 * istanza di tale classe che poi verr&aacute; usata dagli altri metodi durante
-	 * l'esecuzione del programma.
+	 * La classe &egrave; implementata come singleton, quindi verr&aacute; creata
+	 * una singola istanza di tale classe che poi verr&aacute; usata dagli altri
+	 * metodi durante l'esecuzione del programma.
 	 */
 	private String location;
 	private String url;
@@ -37,11 +37,13 @@ public class APICall implements APICallService {
 
 	private APICall() {
 	}
-/**
- * Metodo necessario a creare il singleton.
- * Se instance è null creerà l'oggetto, in caso contrario restituirà il riferimento all'oggetto
- * @return instance riferimento al singolo oggetto crato. 
- */
+
+	/**
+	 * Metodo necessario a creare il singleton. Se instance è null creerà l'oggetto,
+	 * in caso contrario restituirà il riferimento all'oggetto
+	 * 
+	 * @return instance riferimento al singolo oggetto crato.
+	 */
 	public static APICall getInstance() {
 		if (instance == null) {
 			instance = new APICall();
@@ -54,9 +56,9 @@ public class APICall implements APICallService {
 	 * Il metodo <b>setAPICall</b> salva la location che gli viene passata e imposta
 	 * l'url con cui chiamare l'API.
 	 * 
-	 * @param location        nome della città in cui fare la ricerca
-	 * @param remote          parametro che indica il filtro che riguarda la
-	 *                        tipologia di lavoro in remoto o non
+	 * @param location nome della città in cui fare la ricerca
+	 * @param remote   parametro che indica il filtro che riguarda la tipologia di
+	 *                 lavoro in remoto o non
 	 * 
 	 */
 
@@ -65,16 +67,17 @@ public class APICall implements APICallService {
 		this.url = "https://findwork.dev/api/jobs/?location=" + location + "&search=java" + "&remote=" + remote;
 
 	}
+
 	/**
 	 * <p>
 	 * Il metodo <b>setAPICall</b> salva la location che gli viene passata e imposta
 	 * l'url con cui chiamare l'API.
 	 * 
-	 * @param location        nome della città in cui fare la ricerca
-	 * @param remote          parametro che indica il filtro che riguarda la
-	 *                        tipologia di lavoro in remoto o non
+	 * @param location       nome della città in cui fare la ricerca
+	 * @param remote         parametro che indica il filtro che riguarda la
+	 *                       tipologia di lavoro in remoto o non
 	 * @param employmentType paremetro che indica il filtro che riguarda la
-	 *                        tipologia di lavoro full time o part time
+	 *                       tipologia di lavoro full time o part time
 	 * 
 	 */
 
@@ -91,8 +94,8 @@ public class APICall implements APICallService {
 	 * <p>
 	 * Il metodo setta i parametri per la chiamata all'API inserendo la tipologia di
 	 * richiesta, l'autorizzazione e il tipo di dato che accettiamo. Dopo aver fatto
-	 * la chiamata all'API e salvato i dati in un oggetto JSON, invocher&aacute; il metodo
-	 * privato <b>workParser</b>.
+	 * la chiamata all'API e salvato i dati in un oggetto JSON, invocher&aacute; il
+	 * metodo privato <b>workParser</b>.
 	 * 
 	 */
 	public City getData() {
