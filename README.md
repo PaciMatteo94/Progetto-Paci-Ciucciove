@@ -113,6 +113,8 @@ Per effettuare la modifica bisognerà fornire i parametri di autenticazione nel 
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.02.18.png"></img><br>
 Le credenziali da inserire nel body di tipo <u>raw</u> su postman per avere accesso a tale funzionalità sono <b>admin,root</b>.<br>
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.04.22.png"></img><br>
+Risultato:<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.05.34.png"></img><br>
 <p>
 
 <h3>ROTTA PER LA RICERCA DI LAVORI</h3>
@@ -132,7 +134,7 @@ Possibili casi di utilizzo:
 - Con l'inserimento solo di parametri di filtraggio verrano restituiti i lavori presenti nelle città di preferenza oppurtunamente filtrati.<br>
 <img src=""></img><br>
 - Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verrano restituiti i lavori presenti in tali locazioni.<br>
-- <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.27.30.png"></img><br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.27.30.png"></img><br>
 
 <h3>ROTTA PER IL CALCOLO DELLE STATISTICHE</h3>
 
@@ -143,9 +145,12 @@ Parametri di utilizzo e modo di inserimento:
 - <b>date</b> questo parametro accetta date solo nel formato <b>aaaa-MM-dd</b>.<br> Se viene inserita una data in formato diverso o caratteri non ammessi, verrà generata un eccezione con successiva visualizzazione di un messaggio di errore.<br>Questo parametro indica la data da cui considerare i lavori per il calcolo delle statistiche.
 
 Possibili casi di utilizzo:<br>
-- Senza inserimento di locazioni o parametri di filtraggio verranno restituite le statistiche delle città di preferenza.
-- Con l'inserimento solo di parametri di filtraggio verrano restituite le statistiche filtrate delle città di preferenza.
-- Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verranno restituite le statistiche per tali locazioni.
+- Senza inserimento di locazioni o parametri di filtraggio verranno restituite le statistiche delle città di preferenza.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/stats/Schermata%202021-09-16%20alle%2015.30.44.png"></img><br>
+- Con l'inserimento solo di parametri di filtraggio verrano restituite le statistiche filtrate delle città di preferenza.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/stats/Schermata%202021-09-16%20alle%2016.55.58.png"></img><br>
+- Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verranno restituite le statistiche per tali locazioni.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/stats/Schermata%202021-09-16%20alle%2017.23.01.png"></img><br>
 # Gestione Eccezioni
 Sono state create eccezioni specifiche per la gestione di alcuni casi specifici e abbiamo utlizzato anche eccezioni gia presenti nelle librerie usate.
 La generazione di una di queste eccezioni porta la visualizzazione di un messaggio salvato in un oggetto, dove si descrive a cosa è dovuto l'errore.
