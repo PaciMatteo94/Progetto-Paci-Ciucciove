@@ -146,7 +146,7 @@ public class APICallController {
 	 */
 	@GetMapping("/cities")
 	public Object cityFilter(@RequestParam(name = "location", required = false) String location,
-			@RequestParam(name = "employment_type", required = false) String employmentType,
+			@RequestParam(name = "employmentType", required = false) String employmentType,
 			@RequestParam(name = "remote", required = false) Remote remote) throws NoLocationException,
 			UnsupportedValueException, NoResultsException, MethodArgumentTypeMismatchException {
 		String[] cities = null;
