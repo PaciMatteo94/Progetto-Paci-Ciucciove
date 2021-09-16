@@ -45,10 +45,13 @@ public interface ManagerService {
 	 *                 cui prendere i lavori per calcolare le statistiche.
 	 * @param remote   parametro che indica il filtro della tipologia di lavoro, in
 	 *                 remoto o non
+	 * @throws NoResultsException eccezione nel caso in cui non ci sono risultati
+	 *                            nella ricerca.
 	 * @return <code>Object</code> oggetto che contiene tutte le città richieste con
 	 *         le rispettive statistiche.
 	 */
 
-	public Object getStats(String[] location, String date, Boolean remote) throws DateTimeParseException;
+	public Object getStats(String[] location, String date, Boolean remote)
+			throws DateTimeParseException, NoResultsException;
 
 }

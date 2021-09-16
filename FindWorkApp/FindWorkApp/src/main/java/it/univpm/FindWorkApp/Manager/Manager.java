@@ -99,7 +99,7 @@ public class Manager implements ManagerService {
 	 * oggetto che verr&aacute; restituito all'utente.
 	 */
 	@Override
-	public Object getStats(String[] location, String date, Boolean remote) throws DateTimeParseException {
+	public Object getStats(String[] location, String date, Boolean remote) throws DateTimeParseException,NoResultsException {
 		City city = null;
 		cities = new ArrayList<City>();
 		for (String name : location) {
@@ -115,6 +115,8 @@ public class Manager implements ManagerService {
 				}
 			}
 		}
+		if (cities.size() == 0)
+			throw new NoResultsException();
 
 		return parser.getStatsObj(cities);
 	}

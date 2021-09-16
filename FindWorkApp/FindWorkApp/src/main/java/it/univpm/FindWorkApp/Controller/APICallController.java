@@ -76,7 +76,6 @@ public class APICallController {
 	 *                 specifiche funzionalità HTTP, in questo caso l'aggiunte degli
 	 *                 headers di autenticazione.
 	 * @param request  elemento necessario per ottenere il paramentro location.
-	 * @param location dove vengono salvate le localit&aacute; scelte dall'utente.
 	 * @throws EmptyBodyException        eccezione se si lascia il body vuoto.
 	 * @throws WrongCredentialsException eccezione se si sbaglia ad inserire le
 	 *                                   credenziali.
@@ -87,7 +86,7 @@ public class APICallController {
 	@RequestMapping(value = "/preferences", method = RequestMethod.POST)
 	@ResponseBody
 	public Object suggested(@RequestBody(required = false) String body, HttpServletResponse response,
-			HttpServletRequest request, @RequestParam(name = "Location", required = false) String location)
+			HttpServletRequest request)
 			throws EmptyBodyException, WrongCredentialsException {
 		response.addHeader("Username", "admin");
 		response.addHeader("Password", "root");
@@ -102,17 +101,17 @@ public class APICallController {
 		} while (r);
 		response.setHeader("Authenticate", "YES");
 		if (response.getHeader("Authenticate").equals("YES")) {
-			try {
-				String s;
-				s = request.getParameter("Location");
-				if (location == null && s == null)
+			String s;
+			try {				
+				s = request.getParameter("location");
+				if (s == "" || s == null)
 					throw new NoLocationException();
 			} catch (NoLocationException e) {
 				HashMap<String, String> noLocation = new HashMap<String, String>();
 				noLocation.put("Errore 400", e.getMessage() + ". Oppure hai sbagliato ad inserire il parametro");
 				return noLocation;
 			}
-			String[] cityArray = location.split(", |&|,");
+			String[] cityArray = s.split(", |&|,");
 			String[] cities;
 
 			if (cityArray.length < 5) {
@@ -293,7 +292,7 @@ public class APICallController {
 	 *         eccezione
 	 */
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	public static Object unsupportedValue(MethodArgumentTypeMismatchException e) {
+	public static Object misMatchValue(MethodArgumentTypeMismatchException e) {
 		HashMap<String, String> noResultsError = new HashMap<String, String>();
 		noResultsError.put("Errore 400", "è stato inserito un valore non corretto in remote");
 		return noResultsError;

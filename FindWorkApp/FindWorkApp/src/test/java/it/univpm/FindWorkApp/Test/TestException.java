@@ -94,7 +94,7 @@ class TestException {
 	@Test
 	void testEmptyBodyException() {
 		ecc4 = assertThrows(EmptyBodyException.class, () -> {
-			c1.suggested(null, httpServletResponse, httpServletRequest, "");
+			c1.suggested(null, httpServletResponse, httpServletRequest);
 		});
 
 		String expectedMessage = "Non hai inserito nulla nel Body";

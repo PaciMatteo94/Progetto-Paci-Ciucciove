@@ -83,7 +83,7 @@ public class FindWorkParser implements FindWorkParserService {
 			json.put("Stats", city.getCityStats());
 			js.add(json);
 		}
-		JSON.put("CityEntered", cities.size());
+		JSON.put("CityCount", cities.size());
 		JSON.put("Results", js);
 		return JSON;
 	}

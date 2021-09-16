@@ -3,13 +3,14 @@ package it.univpm.FindWorkApp.Controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import it.univpm.FindWorkApp.Exception.NoLocationException;
+import it.univpm.FindWorkApp.Exception.NoResultsException;
 import it.univpm.FindWorkApp.Exception.OverflowCityException;
 import it.univpm.FindWorkApp.Manager.Manager;
 import it.univpm.FindWorkApp.Model.Preference;
 
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
-
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,10 @@ public class StatsController {
 	 *                 in remoto o non.
 	 * @throws OverflowCityException eccezione generata quando si inserisco più di 5
 	 *                               citt&aacute; nel campo location per la ricerca.
+	 * @throws NoLocationException   eccezione generata quando si inserisce il
+	 *                               parametro locatione e si lascia vuoto.
+	 * @throws NoResultsException    eccezione generata quando non ci sono risultati
+	 *                               nella ricerca.
 	 * 
 	 * @return <code>Object</code> Un Object che contiene le varie statistiche delle
 	 *         varie citt&aacute;.
@@ -54,10 +59,12 @@ public class StatsController {
 	@GetMapping("/stats")
 	public Object statsFilter(@RequestParam(name = "location", required = false) String location,
 			@RequestParam(name = "date", required = false) String date,
-			@RequestParam(name = "remote", required = false) Remote remote)
-			throws OverflowCityException, DateTimeParseException, MethodArgumentTypeMismatchException {
+			@RequestParam(name = "remote", required = false) Remote remote) throws OverflowCityException,
+			DateTimeParseException, MethodArgumentTypeMismatchException, NoLocationException, NoResultsException {
 		String[] locationArray = null;
 		if (location != null) {
+			if (location == "")
+				throw new NoLocationException();
 			locationArray = location.split("&");
 
 			if (locationArray.length > 5) {
@@ -112,7 +119,7 @@ public class StatsController {
 	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
 	 */
 	@ExceptionHandler(DateTimeParseException.class)
-	public static Object unsupportedValue(DateTimeParseException e) {
+	public static Object dateTimeError(DateTimeParseException e) {
 		HashMap<String, String> unsupportedValueError = new HashMap<String, String>();
 		unsupportedValueError.put("errore 400", "Si è inserita una data sbagliata");
 		return unsupportedValueError;
@@ -131,6 +138,38 @@ public class StatsController {
 	public static Object unsupportedValue(MethodArgumentTypeMismatchException e) {
 		HashMap<String, String> noResultsError = new HashMap<String, String>();
 		noResultsError.put("Errore 400", "è stato inserito un valore non corretto in remote");
+		return noResultsError;
+	}
+
+	/**
+	 * Il metodo <b>NoLocation</b> gestisce l'eccezione che si viene a creare nel
+	 * metodo <b>getCities</b> quando si lascia vuoto il parametro delle location.
+	 *
+	 * @param e eccezione
+	 * 
+	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
+	 */
+	@ExceptionHandler(NoLocationException.class)
+	public static Object noLocation(NoLocationException e) {
+		HashMap<String, String> noLocationError = new HashMap<String, String>();
+		noLocationError.put("errore 400", e.getMessage());
+		return noLocationError;
+	}
+
+	/**
+	 * <p>
+	 * Cattura l'eccezione prodotta nel caso in cui non si trovano lavori che
+	 * soddisfano i parametri inseriti dall'utente.
+	 * 
+	 * @param e eccezione
+	 * 
+	 * @return <code>Object</code> contiene il messaggio di errore della relativa
+	 *         eccezione
+	 */
+	@ExceptionHandler(NoResultsException.class)
+	public static Object noResults(NoResultsException e) {
+		HashMap<String, String> noResultsError = new HashMap<String, String>();
+		noResultsError.put("Errore 400", e.getMessage());
 		return noResultsError;
 	}
 
