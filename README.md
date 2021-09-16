@@ -107,17 +107,24 @@ Di seguito invece è riportato un semplice risultato della rotta delle statistic
 La rotta delle preferenze si divide in due tipi di chiamate, una chiamata di tipo GET e una di tipo POST.<br>
 Entrame le chiamate possono essere effetuate su postman tramite l'url <b>localhost:8080/preferences</b> sostituendo adeguatamente il metodo di richiesta.<br>
 Tramite la chiamata di tipo GET verranno visualizzate le città di preferenza su cui è possibile effettuare le ricerche dei lavori e il calcolo delle statistiche.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2015.23.47.png"></img><br>
 La chiamata invece di tipo POST darà la possibilità di modificare le città di preferenza.<br>
 Per effettuare la modifica bisognerà fornire i parametri di autenticazione nel body della richiesta e inserire le località con cui sostituire le preferenze.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.02.18.png"></img><br>
 Le credenziali da inserire nel body di tipo <u>raw</u> su postman per avere accesso a tale funzionalità sono <b>admin,root</b>.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/preferences/Schermata%202021-09-16%20alle%2016.04.22.png"></img><br>
 <p>
+
 <h3>ROTTA PER LA RICERCA DI LAVORI</h3>
 
 La rotta in questo caso usa solo il metodo GET e viene referenziata dall'url: <b>localhost:8080/cities</b><br>
 Possibili casi di utilizzo:
-- Senza inserimento di locazioni o parametri di filtraggio verrano restituiti i lavori di tipo java presenti nelle città di preferenza.
-- Con l'inserimento solo di parametri di filtraggio verrano restituiti i lavori presenti nelle città di preferenza oppurtunamente filtrati.
-- Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verrano restituiti i lavori presenti in tali locazioni.
+- Senza inserimento di locazioni o parametri di filtraggio verrano restituiti i lavori di tipo java presenti nelle città di preferenza.<br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.25.16.png"></img><br>
+- Con l'inserimento solo di parametri di filtraggio verrano restituiti i lavori presenti nelle città di preferenza oppurtunamente filtrati.<br>
+<img src=""></img><br>
+- Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verrano restituiti i lavori presenti in tali locazioni.<br>
+- <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/cities/Schermata%202021-09-16%20alle%2016.27.30.png"></img><br>
 
 <h3>ROTTA PER IL CALCOLO DELLE STATISTICHE</h3>
 
