@@ -10,7 +10,7 @@ import it.univpm.FindWorkApp.Model.Preference;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
-import org.json.simple.JSONObject;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,10 +98,9 @@ public class StatsController {
 	 * @return <code>Object</code> Oggetto dove viene descritto l'errore.
 	 */
 	@ExceptionHandler(OverflowCityException.class)
-	public static JSONObject OverflowCity(OverflowCityException e) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("Errore 400", e.getMessage());
-		JSONObject overFlowCity = new JSONObject();
+	public static Object OverflowCity(OverflowCityException e) {
+		HashMap<String, String> overFlowCity = new HashMap<String, String>();
+		overFlowCity.put("Errore 400", e.getMessage());
 		return overFlowCity;
 	}
 
