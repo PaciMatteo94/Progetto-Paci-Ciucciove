@@ -98,7 +98,7 @@ Di seguito invece è riportato un semplice risultato della rotta delle statistic
 
 # Diagrammi UML
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/NewModel%20Sequence%20Diagram.jpg"></img>
-
+<br>
 
 # Rotte
 <h2>ROTTA PREFERENZE</h2><br>
