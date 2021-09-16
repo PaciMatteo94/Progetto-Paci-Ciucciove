@@ -133,7 +133,7 @@ Possibili casi di utilizzo:<br>
 - Senza inserimento di locazioni o parametri di filtraggio verranno restituite le statistiche delle città di preferenza.<br><br>
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/stats/Schermata%202021-09-16%20alle%2015.30.44.png"></img><br>
 - Con l'inserimento solo di parametri di filtraggio verrano restituite le statistiche filtrate delle città di preferenza.
-<img src=""></img><br>
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/stats/Schermata%202021-09-16%20alle%2016.55.58.png"></img><br>
 - Con l'inserimento di locazioni, con possibilità di filtrare o meno i lavori tramite i parametri descritti sopra, verranno restituite le statistiche per tali locazioni.
 <img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/images/stats/Schermata%202021-09-16%20alle%2015.38.05.png"></img><br>
 # Gestione Eccezioni
