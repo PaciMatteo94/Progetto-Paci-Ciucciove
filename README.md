@@ -54,7 +54,7 @@ Qui di seguito viene riportata una chiamata alla rotta <i>cities</i> che vedremo
 }
 ```
 # Diagrammi UML
-
+<img src="https://github.com/PaciMatteo94/Progetto-Paci-Ciucciove/blob/main/NewModel%20Sequence%20Diagram.jpg">
 # Rotte
 
 # Gestione Eccezioni
