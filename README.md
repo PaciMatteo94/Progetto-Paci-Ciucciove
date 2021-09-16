@@ -5,18 +5,18 @@ Il seguente applicativo ha come scopo la raccolta, il filtraggio e l'analisi di 
 Il lavoro è incentrato nel visualizzare in formato **JSON** gli annunci e le statistiche dei lavori sottoposti a filtri preimpostati richiamando e interfacciandosi con lo schema d'uso dell'API Web.<br>
 I filtri per i lavori sono:
 <ul>
-  <li>**location** che specifica, fino ad un massimo di 5, le città per cui si vogliono ricercare lavori</li>
-  <li>**remote** indica se il lavoro in questione può essere svolto da remoto</li>
-  <li>**employmentType** che indica il tempo di lavoro</li>
+  <li><b>location</b> che specifica, fino ad un massimo di 5, le città per cui si vogliono ricercare lavori</li>
+  <li><b>remote</b> indica se il lavoro in questione può essere svolto da remoto</li>
+  <li><b>employmentType</b> che indica il tempo di lavoro</li>
 </ul>
 Esempio di link di Findowork: https://findwork.dev/api/jobs/?location=Moscow&remote=true&employment_type=full+time<br>
-Link ricostruito: https://localhost:8080/cities?location=Moscow&remote=yes&emplyementType=full+time<br>
+Link ricostruito: <b>https://localhost:8080/cities?location=Moscow&remote=yes&emplyementType=full+time</b><br>
 
 I filtri per le statistiche riguardanti i lavori sono:
 <ul>
-  <li>**location** che specifica, fino ad un massimo di 5, le città per cui si vogliono ricercare lavori</li>
-  <li>**remote** indica se il lavoro in questione può essere svolto da remoto</li>
-  <li>**date** che indica la data di inizio da cui selezionare i lavori su cui calcolare le statistiche</li>
+  <li><b>location</b> che specifica, fino ad un massimo di 5, le città per cui si vogliono ricercare lavori</li>
+  <li><b>remote</b> indica se il lavoro in questione può essere svolto da remoto</li>
+  <li><b>date</b> che indica la data di inizio da cui selezionare i lavori su cui calcolare le statistiche</li>
 </ul>
 Esempio di chiamata per ottenere le statistiche di una città:<br>
 https://localhost:8080/stats?location=Berlin&remote=yes&date=2021-09-01<br>
